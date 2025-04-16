@@ -9,15 +9,18 @@
 
             <!-- Enlaces de navegación -->
             <div class="flex space-x-6">
-                <a href="/home" class="text-gray-700 hover:text-blue-600 text-lg font-medium transition duration-200">
+                <button routerLink="/home"
+                    class="text-gray-700 hover:text-blue-600 text-lg font-medium transition duration-200">
                     Home
-                </a>
-                <a href="/about" class="text-gray-700 hover:text-blue-600 text-lg font-medium transition duration-200">
+                </button>
+                <button routerLink="/about"
+                    class="text-gray-700 hover:text-blue-600 text-lg font-medium transition duration-200">
                     About
-                </a>
-                <a href="/login" class="text-gray-700 hover:text-red-500 text-lg font-medium transition duration-200">
+                </button>
+                <button routerLink="/login"
+                    class="text-gray-700 hover:text-red-500 text-lg font-medium transition duration-200">
                     Login/Register
-                </a>
+                </button>
                 <button (click)="onLogout()"
                     class="text-gray-700 hover:text-red-500 text-lg font-medium transition duration-200">
                     Logout
