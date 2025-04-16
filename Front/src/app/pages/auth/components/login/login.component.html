@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="space-y-6 bg-gray-800 p-6 rounded-lg">
+    <h2 class="text-xl font-semibold text-center text-white">Iniciar sesión</h2>
+    <form class="space-y-4" (ngSubmit)="login()">
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-300">Usuario</label>
+            <input type="text" id="username" placeholder="Usuario" [(ngModel)]="username" name="username"
+                class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400" />
+        </div>
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-300">Contraseña</label>
+            <input type="password" id="password" placeholder="Contraseña" [(ngModel)]="password" name="password"
+                class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-400" />
+        </div>
+        <button type="submit"
+            class="w-full py-2 bg-transparent text-blue-400 border border-blue-400 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-400">
+            Iniciar sesión
+        </button>
+    </form>
+</div>

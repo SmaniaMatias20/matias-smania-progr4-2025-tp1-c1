@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Necesitamos Router para redirigir
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @Component({
   selector: 'app-auth',
+  imports: [LoginComponent, RegisterComponent],
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']  // Corregí la propiedad `styleUrls` (no `styleUrl`)
+  styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
-  // Variable para simular si el usuario está logueado
-  private loggedIn = false;
+  isLoginVisible: boolean = true;
 
-  constructor(private router: Router) { }
-
-  onLogin() {
-    // Simulamos el login (sin hacer ninguna validación real)
-    this.loggedIn = true;
-
-    // Redirigimos al Home después del login
-    this.router.navigate(['/home']);
+  showLogin() {
+    this.isLoginVisible = true;
   }
 
-
+  showRegister() {
+    this.isLoginVisible = false;
+  }
 }
