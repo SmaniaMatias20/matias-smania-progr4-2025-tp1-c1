@@ -12,9 +12,7 @@ export class NavbarComponent {
   constructor(private router: Router) { }
 
   onLogout(): void {
-
     this.router.navigate(['/login']);
-
   }
 
 }
