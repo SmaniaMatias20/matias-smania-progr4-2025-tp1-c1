@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DatabaseService } from '../../../../services/database/database.service';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../../services/auth/auth.service'; // Asegurate de que el path sea correcto
 
 @Component({
   selector: 'app-register',
@@ -15,26 +15,23 @@ export class RegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private db: DatabaseService) { }
+  constructor(private authService: AuthService) { }
 
   async register() {
+    this.errorMessage = '';
+    this.successMessage = '';
+
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'Las contraseñas no coinciden.';
-      this.successMessage = '';
       return;
     }
 
-    const { error } = await this.db.supabase.auth.signUp({
-      email: this.email,
-      password: this.password
-    });
-
-    if (error) {
-      this.errorMessage = error.message;
-      this.successMessage = '';
-    } else {
-      this.successMessage = 'Registro exitoso. Revisa tu correo para confirmar.';
-      this.errorMessage = '';
+    try {
+      await this.authService.register(this.email, this.password);
+      this.successMessage = '¡Registro exitoso!';
+    } catch (error: any) {
+      this.errorMessage = 'Ocurrió un error al registrarse.';
+      console.error(error);
     }
   }
 }
