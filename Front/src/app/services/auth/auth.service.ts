@@ -17,13 +17,13 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (session === null) {
         this.user.set(null);
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/home');
         return;
       }
 
       this.supabase.auth.getUser().then(({ data, error }) => {
         this.user.set(data.user);
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/home');
       });
     });
   }
