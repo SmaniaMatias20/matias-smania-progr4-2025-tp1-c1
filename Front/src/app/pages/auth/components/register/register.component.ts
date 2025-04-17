@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../../services/auth/auth.service'; // Asegurate de que el path sea correcto
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-register',

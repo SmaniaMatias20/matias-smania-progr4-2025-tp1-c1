@@ -1,14 +1,11 @@
-<!-- navbar.component.html -->
 <nav class="bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
 
-            <!-- Logo -->
             <div class="flex-shrink-0 text-blue-600 dark:text-blue-300 text-xl font-bold">
                 MiApp
             </div>
 
-            <!-- Enlaces -->
             <div class="flex space-x-6 items-center">
 
                 <button routerLink="/home"
@@ -21,21 +18,21 @@
                     About
                 </button>
 
+                @if (!user()) {
                 <button routerLink="/login"
                     class="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 text-lg font-medium transition duration-200">
                     Login/Register
                 </button>
+                } @else {
+                <span class="text-gray-700 dark:text-gray-300 text-sm">
+                    {{ user()?.email }}
+                </span>
 
                 <button (click)="onLogout()"
                     class="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 text-lg font-medium transition duration-200">
                     Logout
                 </button>
-
-                <!-- Botón de modo oscuro con ícono y accesibilidad -->
-                <!-- <button (click)="toggleDarkMode()"
-                    class="text-gray-700 dark:text-gray-300 hover:text-yellow-500 dark:hover:text-yellow-300 text-2xl transition duration-200">
-                    {{ isDarkMode() ? '🌞' : '🌙' }}
-                </button> -->
+                }
 
             </div>
         </div>
