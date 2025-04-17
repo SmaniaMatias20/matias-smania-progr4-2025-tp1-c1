@@ -33,7 +33,6 @@
 
                 <!-- Botón de modo oscuro con ícono y accesibilidad -->
                 <button (click)="toggleDarkMode()"
-                    [attr.aria-label]="isDarkMode() ? 'Activar modo claro' : 'Activar modo oscuro'"
                     class="text-gray-700 dark:text-gray-300 hover:text-yellow-500 dark:hover:text-yellow-300 text-2xl transition duration-200">
                     {{ isDarkMode() ? '🌞' : '🌙' }}
                 </button>

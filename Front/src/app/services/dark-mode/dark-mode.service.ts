@@ -22,6 +22,7 @@ export class DarkModeService {
 
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
+    console.log(this.isDarkMode);
     localStorage.setItem('darkMode', this.isDarkMode.toString());
     this.applyMode();
   }
