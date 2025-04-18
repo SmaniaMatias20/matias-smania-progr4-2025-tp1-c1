@@ -1,25 +1,32 @@
 <app-navbar></app-navbar>
 
 <div
-    class="flex flex-col min-h-screen w-full px-4 py-8 text-center bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
-    <h1 class="text-3xl font-bold mb-6">Sobre mí</h1>
+    class="flex flex-col min-h-screen w-full px-4 py-10 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
+
+    <h1 class="text-2xl font-semibold text-center mb-8">Sobre mí</h1>
 
     @if (error) {
-    <p class="text-red-500">{{ error }}</p>
+    <p class="text-red-500 text-center">{{ error }}</p>
     } @else {
     @if (user) {
-    <div class="flex flex-col items-center gap-4">
+    <div class="flex flex-col items-center gap-3 text-sm sm:text-base">
         <img [src]="user.avatar_url" alt="Avatar de usuario"
-            class="rounded-full w-32 h-32 shadow-md border-4 border-gray-300 dark:border-gray-700" />
+            class="rounded-full w-24 h-24 shadow border border-gray-300 dark:border-gray-600" />
 
-        <p class="text-xl"><strong>Nombre:</strong> {{ user.name || 'No disponible' }}</p>
-        <p><strong>Usuario:</strong> {{ user.login }}</p>
-        <p><strong>Bio:</strong> {{ user.bio || 'Sin biografía' }}</p>
-        <p><strong>Ubicación:</strong> {{ user.location || 'No especificada' }}</p>
-        <p><strong>Repos públicos:</strong> {{ user.public_repos }}</p>
+        <p><span class="font-medium">Nombre:</span> {{ user.name || 'No disponible' }}</p>
+        <p><span class="font-medium">Usuario:</span> {{ user.login }}</p>
+        <p><span class="font-medium">Bio:</span> {{ user.bio || 'Sin biografía' }}</p>
+        <p><span class="font-medium">Ubicación:</span> {{ user.location || 'No especificada' }}</p>
+        <p><span class="font-medium">Repos públicos:</span> {{ user.public_repos }}</p>
+        <p><span class="font-medium">Seguidores:</span> {{ user.followers }} | <span
+                class="font-medium">Siguiendo:</span> {{ user.following }}</p>
+
+        <div class="mt-4 text-center text-gray-600 dark:text-gray-400">
+            Explicación de juego propio
+        </div>
     </div>
     } @else {
-    <p>Cargando datos...</p>
+    <p class="text-center text-gray-500">Cargando datos...</p>
     }
     }
 </div>
