@@ -11,19 +11,13 @@ import { User } from '@supabase/supabase-js';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  user!: Signal<any>; // sin interfaz, entonces usamos `any`
+  user!: Signal<any>;
 
 
   constructor(
     private authService: AuthService
   ) {
     this.user = this.authService.user;
-  }
-
-  ngOnInit(): void {
-    // Aquí va la lógica que quieres ejecutar cuando se carga el componente
-    console.log(this.user());
-    console.log('Componente inicializado');
   }
 
   async onLogout(): Promise<void> {

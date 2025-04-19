@@ -40,7 +40,6 @@ export class AuthService {
           return;
         }
 
-        console.log(user);
         this.user.set(user);
         this.router.navigateByUrl('/home');
       });
