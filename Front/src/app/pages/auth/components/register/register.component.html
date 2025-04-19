@@ -1,39 +1,59 @@
-<div class="space-y-6 bg-gray-800 p-6 rounded-lg">
+<div class="space-y-6 bg-gray-800 p-6 rounded-lg max-w-md w-full mx-auto">
     <h2 class="text-xl font-semibold text-center text-white">Registrarse</h2>
 
     <form class="space-y-4" (ngSubmit)="register()" #registerForm="ngForm">
+        <!-- Email -->
         <div>
-            <label for="new-username" class="block text-sm font-medium text-gray-300">Email</label>
-            <input type="email" id="new-username" placeholder="Correo electrónico" required [(ngModel)]="email"
-                name="email"
+            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+            <input type="email" id="email" name="email" placeholder="Correo electrónico" required [(ngModel)]="email"
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
         </div>
 
+        <!-- Nombre -->
         <div>
-            <label for="new-password" class="block text-sm font-medium text-gray-300">Contraseña</label>
-            <input type="password" id="new-password" placeholder="Contraseña" required [(ngModel)]="password"
-                name="password"
+            <label for="firstName" class="block text-sm font-medium text-gray-300">Nombre</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Tu nombre" required [(ngModel)]="firstName"
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
         </div>
 
+        <!-- Apellido -->
         <div>
-            <label for="confirm-password" class="block text-sm font-medium text-gray-300">Confirmar Contraseña</label>
-            <input type="password" id="confirm-password" placeholder="Confirmar Contraseña" required
-                [(ngModel)]="confirmPassword" name="confirmPassword"
+            <label for="lastName" class="block text-sm font-medium text-gray-300">Apellido</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Tu apellido" required [(ngModel)]="lastName"
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
         </div>
 
+        <!-- Edad -->
+        <div>
+            <label for="age" class="block text-sm font-medium text-gray-300">Edad</label>
+            <input type="number" id="age" name="age" placeholder="Tu edad" required min="1" [(ngModel)]="age"
+                class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-300">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required
+                [(ngModel)]="password"
+                class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+        </div>
+
+        <!-- Confirmar Contraseña -->
+        <div>
+            <label for="confirmPassword" class="block text-sm font-medium text-gray-300">Confirmar Contraseña</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña"
+                required [(ngModel)]="confirmPassword"
+                class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+        </div>
+
+        <!-- Botón -->
         <button type="submit"
-            class="w-full py-2 bg-transparent text-green-400 border border-green-400 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-green-400">
+            class="w-full py-2 bg-transparent text-white border border-white rounded-lg hover:bg-white hover:text-gray-900 transition focus:outline-none focus:ring-1 focus:ring-white">
             Registrarse
         </button>
 
-        <!-- Mensajes de error o éxito -->
-        @if(errorMessage){
-        <p class="text-red-400 text-sm text-center mt-2">{{ errorMessage }}</p>
-        } @else if (successMessage) {
-        <p class="text-green-400 text-sm text-center mt-2">{{ successMessage }}</p>
-        }
-
+        <!-- Mensajes -->
+        <p class="text-red-400 text-sm text-center mt-2" [hidden]="!errorMessage">{{ errorMessage }}</p>
+        <p class="text-green-400 text-sm text-center mt-2" [hidden]="!successMessage">{{ successMessage }}</p>
     </form>
 </div>

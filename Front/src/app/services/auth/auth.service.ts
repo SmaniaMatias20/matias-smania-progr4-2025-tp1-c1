@@ -28,18 +28,59 @@ export class AuthService {
     });
   }
 
-  async register(email: string, password: string): Promise<{ success: boolean; message: string }> {
+  // async register(email: string, password: string): Promise<{ success: boolean; message: string }> {
+  //   const { data, error } = await this.supabase.auth.signUp({
+  //     email: email,
+  //     password: password,
+  //   });
+
+  //   if (error) {
+  //     return { success: false, message: error.message };
+  //   }
+
+  //   return { success: true, message: 'Registro exitoso. Revisa tu correo para confirmar.' };
+  // }
+
+  async register(
+    email: string,
+    password: string,
+    extraData: { firstName: string; lastName: string; age: number }
+  ): Promise<{ success: boolean; message: string }> {
     const { data, error } = await this.supabase.auth.signUp({
-      email: email,
-      password: password,
+      email,
+      password
     });
 
     if (error) {
       return { success: false, message: error.message };
     }
 
-    return { success: true, message: 'Registro exitoso. Revisa tu correo para confirmar.' };
+    const user = data.user;
+    console.log(user);
+
+    if (!user) {
+      return { success: false, message: 'No se pudo obtener el usuario después del registro.' };
+    }
+
+    const { error: insertError } = await this.supabase.from('usuarios').insert([
+      {
+        id: user.id,
+        nombre: extraData.firstName,
+        apellido: extraData.lastName,
+        edad: extraData.age
+      }
+    ]);
+
+    if (insertError) {
+      return { success: false, message: 'Registro fallido al guardar los datos.' };
+    }
+
+    return {
+      success: true,
+      message: 'Registro exitoso. Verifica tu correo para confirmar tu cuenta.'
+    };
   }
+
 
   async login(email: string, password: string): Promise<{ success: boolean; message: string }> {
     const { data, error } = await this.supabase.auth.signInWithPassword({

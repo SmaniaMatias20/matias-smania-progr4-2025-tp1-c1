@@ -1,19 +1,19 @@
-<div class="flex flex-col w-96 mx-auto p-2 bg-gray-800 border border-gray-600 rounded-lg shadow-sm">
+<div class="flex flex-col w-full max-w-sm mx-auto p-6 bg-gray-800 rounded-xl shadow-md text-white">
 
-    @if(isLoginVisible){
-    <app-login></app-login>
-    } @else if (!isLoginVisible) {
-    <app-register></app-register>
-    }
+    <!-- Mostrar login -->
+    <app-login [hidden]="!isLoginVisible"></app-login>
 
+    <!-- Mostrar register -->
+    <app-register [hidden]="isLoginVisible"></app-register>
 
-    <div class="flex justify-between mt-6 space-x-4">
+    <!-- Botones -->
+    <div class="flex justify-center mt-8 gap-4">
         <button (click)="showLogin()"
-            class="px-4 py-2 bg-transparent text-blue-400 border border-blue-400 rounded-lg hover:bg-blue-700 focus:outline-none">
+            class="px-5 py-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition">
             Iniciar sesión
         </button>
         <button (click)="showRegister()"
-            class="px-4 py-2 bg-transparent text-green-400 border border-green-400 rounded-lg hover:bg-green-700 focus:outline-none">
+            class="px-5 py-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition">
             Registrarse
         </button>
     </div>
