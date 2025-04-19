@@ -21,25 +21,32 @@ export class AuthService {
         return;
       }
 
-      this.supabase.auth.getUser().then(({ data, error }) => {
-        this.user.set(data.user);
+      this.supabase.auth.getUser().then(async ({ data, error }) => {
+        if (error) {
+          console.error('Error al obtener el usuario autenticado:', error.message);
+          return;
+        }
+
+        const userId = data.user.id;
+
+        const { data: user, error: userError } = await this.supabase
+          .from('usuarios')
+          .select('*')
+          .eq('id', userId)
+          .single();
+
+        if (userError) {
+          console.error('Error al obtener datos del usuario desde la tabla usuarios:', userError.message);
+          return;
+        }
+
+        console.log(user);
+        this.user.set(user);
         this.router.navigateByUrl('/home');
       });
+
     });
   }
-
-  // async register(email: string, password: string): Promise<{ success: boolean; message: string }> {
-  //   const { data, error } = await this.supabase.auth.signUp({
-  //     email: email,
-  //     password: password,
-  //   });
-
-  //   if (error) {
-  //     return { success: false, message: error.message };
-  //   }
-
-  //   return { success: true, message: 'Registro exitoso. Revisa tu correo para confirmar.' };
-  // }
 
   async register(
     email: string,
@@ -56,7 +63,6 @@ export class AuthService {
     }
 
     const user = data.user;
-    console.log(user);
 
     if (!user) {
       return { success: false, message: 'No se pudo obtener el usuario después del registro.' };
@@ -64,15 +70,14 @@ export class AuthService {
 
     const { error: insertError } = await this.supabase.from('usuarios').insert([
       {
-        id: user.id, // casteamos UUID como número hexadecimal a bigint
+        id: user.id,
         nombre: extraData.firstName,
         apellido: extraData.lastName,
-        edad: extraData.age // casteamos a int
+        edad: extraData.age
       }
     ]);
 
     if (insertError) {
-      console.log(insertError);
       return { success: false, message: 'Registro fallido al guardar los datos.' };
     }
 
