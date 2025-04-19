@@ -4,20 +4,31 @@
 <p class="text-red-500 text-center">{{ error }}</p>
 } @else {
 @if (user) {
-<div class="flex flex-col items-center gap-3 text-sm sm:text-base">
-    <img [src]="user.avatar_url" alt="Avatar de usuario"
-        class="rounded-full w-24 h-24 shadow border border-gray-300 dark:border-gray-600" />
+<div class="flex items-center justify-center gap-8">
+    <!-- Información a la izquierda -->
+    <div class="flex flex-col gap-3 text-sm sm:text-base max-w-md">
+        <p class="font-medium">Nombre:</p>
+        <p>{{ user.name || 'No disponible' }}</p>
+        <p class="font-medium">Usuario:</p>
+        <p>{{ user.login }}</p>
+        <p class="font-medium">Bio:</p>
+        <p>{{ user.bio || 'Sin biografía' }}</p>
+        <p class="font-medium">Ubicación:</p>
+        <p>{{ user.location || 'No especificada' }}</p>
+        <p class="font-medium">Repos públicos:</p>
+        <p>{{ user.public_repos }}</p>
+        <p class="font-medium">Seguidores:</p>
+        <p>{{ user.followers }} | <span class="font-medium">Siguiendo:</span> {{ user.following }}</p>
 
-    <p><span class="font-medium">Nombre:</span> {{ user.name || 'No disponible' }}</p>
-    <p><span class="font-medium">Usuario:</span> {{ user.login }}</p>
-    <p><span class="font-medium">Bio:</span> {{ user.bio || 'Sin biografía' }}</p>
-    <p><span class="font-medium">Ubicación:</span> {{ user.location || 'No especificada' }}</p>
-    <p><span class="font-medium">Repos públicos:</span> {{ user.public_repos }}</p>
-    <p><span class="font-medium">Seguidores:</span> {{ user.followers }} | <span class="font-medium">Siguiendo:</span>
-        {{ user.following }}</p>
+        <div class="mt-4 text-center text-gray-600 dark:text-gray-400">
+            Explicación de juego propio
+        </div>
+    </div>
 
-    <div class="mt-4 text-center text-gray-600 dark:text-gray-400">
-        Explicación de juego propio
+    <!-- Imagen a la derecha -->
+    <div class="flex justify-center items-center">
+        <img [src]="user.avatar_url" alt="Avatar de usuario"
+            class="rounded-full w-36 h-36 shadow-lg border border-gray-300 dark:border-gray-600" />
     </div>
 </div>
 } @else {
