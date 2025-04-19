@@ -1,34 +1,28 @@
-<h1 class="text-2xl font-semibold text-center mb-8">Sobre mí</h1>
+<h1 class="text-3xl font-semibold text-center mb-6">{{ user.name || 'No disponible' }}</h1>
 
+<!-- Mensaje de error -->
 @if (error) {
 <p class="text-red-500 text-center">{{ error }}</p>
 } @else {
 @if (user) {
-<div class="flex items-center justify-center gap-8">
-    <!-- Información a la izquierda -->
-    <div class="flex flex-col gap-3 text-sm sm:text-base max-w-md">
-        <p class="font-medium">Nombre:</p>
-        <p>{{ user.name || 'No disponible' }}</p>
-        <p class="font-medium">Usuario:</p>
-        <p>{{ user.login }}</p>
-        <p class="font-medium">Bio:</p>
-        <p>{{ user.bio || 'Sin biografía' }}</p>
-        <p class="font-medium">Ubicación:</p>
-        <p>{{ user.location || 'No especificada' }}</p>
-        <p class="font-medium">Repos públicos:</p>
-        <p>{{ user.public_repos }}</p>
-        <p class="font-medium">Seguidores:</p>
-        <p>{{ user.followers }} | <span class="font-medium">Siguiendo:</span> {{ user.following }}</p>
+<div class="flex flex-col sm:flex-row justify-around items-center gap-16 p-6 w-screen">
 
-        <div class="mt-4 text-center text-gray-600 dark:text-gray-400">
-            Explicación de juego propio
-        </div>
+    <!-- Información del usuario -->
+    <div class="flex flex-col gap-6 max-w-md text-gray-800 dark:text-gray-200">
+        <p class="font-semibold text-lg">Usuario: <span class="font-normal">{{ user.login }}</span></p>
+        <p class="font-semibold text-lg">Bio: <span class="font-normal">{{ user.bio || 'Sin biografía' }}</span></p>
+        <p class="font-semibold text-lg">Ubicación: <span class="font-normal">{{ user.location || 'No especificada'
+                }}</span></p>
+        <p class="font-semibold text-lg">Repos públicos: <span class="font-normal">{{ user.public_repos }}</span></p>
+        <p class="font-semibold text-lg">Seguidores: <span class="font-normal">{{ user.followers }}</span> |
+            <span class="font-semibold">Siguiendo: </span> <span class="font-normal">{{ user.following }}</span>
+        </p>
     </div>
 
-    <!-- Imagen a la derecha -->
-    <div class="flex justify-center items-center">
+    <!-- Imagen de perfil -->
+    <div class="flex justify-center items-center mt-6 sm:mt-0">
         <img [src]="user.avatar_url" alt="Avatar de usuario"
-            class="rounded-full w-36 h-36 shadow-lg border border-gray-300 dark:border-gray-600" />
+            class="rounded-full w-72 h-72 shadow-lg border-2 border-gray-300 dark:border-gray-600" />
     </div>
 </div>
 } @else {
