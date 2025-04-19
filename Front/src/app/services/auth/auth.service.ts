@@ -64,14 +64,15 @@ export class AuthService {
 
     const { error: insertError } = await this.supabase.from('usuarios').insert([
       {
-        id: user.id,
+        id: user.id, // casteamos UUID como número hexadecimal a bigint
         nombre: extraData.firstName,
         apellido: extraData.lastName,
-        edad: extraData.age
+        edad: extraData.age // casteamos a int
       }
     ]);
 
     if (insertError) {
+      console.log(insertError);
       return { success: false, message: 'Registro fallido al guardar los datos.' };
     }
 
