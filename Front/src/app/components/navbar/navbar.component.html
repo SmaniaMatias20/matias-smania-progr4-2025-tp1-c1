@@ -16,6 +16,11 @@
                         About
                     </button>
 
+                    <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
+                        class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
+                        Chat
+                    </button>
+
                     <!-- Login/Register -->
                     @if (!user()) {
                     <button routerLink="/login" routerLinkActive="border-b-4 border-green-500 "
@@ -24,7 +29,7 @@
                     </button>
                     } @else {
                     <!-- Logout as route (to activate border) -->
-                    <button routerLink="/logout" routerLinkActive="border-b-4 border-red-500"
+                    <button routerLink="/home" (click)="onLogout()" routerLinkActive="border-b-4 border-red-500"
                         class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 cursor-pointer pb-1">
                         Logout
                     </button>
