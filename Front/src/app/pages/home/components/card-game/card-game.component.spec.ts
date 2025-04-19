@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AhorcadoPageComponent } from './ahorcado-page.component';
+import { CardGameComponent } from './card-game.component';
 
-describe('AhorcadoPageComponent', () => {
-  let component: AhorcadoPageComponent;
-  let fixture: ComponentFixture<AhorcadoPageComponent>;
+describe('CardGameComponent', () => {
+  let component: CardGameComponent;
+  let fixture: ComponentFixture<CardGameComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AhorcadoPageComponent]
+      imports: [CardGameComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AhorcadoPageComponent);
+    fixture = TestBed.createComponent(CardGameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

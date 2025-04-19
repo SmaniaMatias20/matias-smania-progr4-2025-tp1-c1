@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MayorMenorPageComponent } from './mayor-menor-page.component';
+import { RulesDialogComponent } from './rules-dialog.component';
 
-describe('MayorMenorPageComponent', () => {
-  let component: MayorMenorPageComponent;
-  let fixture: ComponentFixture<MayorMenorPageComponent>;
+describe('RulesDialogComponent', () => {
+  let component: RulesDialogComponent;
+  let fixture: ComponentFixture<RulesDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MayorMenorPageComponent]
+      imports: [RulesDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MayorMenorPageComponent);
+    fixture = TestBed.createComponent(RulesDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

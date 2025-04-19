@@ -1,0 +1,20 @@
+<div class="relative bg-gray-900 text-white p-6 rounded-xl shadow-2xl w-full max-w-2xl">
+    <!-- Botón de cerrar (X) -->
+    <button class="absolute top-4 right-4 text-red-500 hover:text-red-600 text-2xl font-bold transition"
+        (click)="close()" aria-label="Cerrar">
+        &times;
+    </button>
+
+    <!-- Título -->
+    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">
+        {{ data.title }}
+        <span class="text-sm text-gray-400 font-normal">— Reglas del juego</span>
+    </h2>
+
+    <!-- Contenido sin scroll -->
+    <div class="pr-2">
+        <p class="text-base leading-relaxed text-gray-300 whitespace-pre-line">
+            {{ data.rules }}
+        </p>
+    </div>
+</div>

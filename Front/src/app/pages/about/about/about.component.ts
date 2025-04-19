@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubService } from '../../../services/github/github.service';
-import { NavbarComponent } from '../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-about',
-  standalone: true, // solo si estás usando Angular standalone components
-  imports: [NavbarComponent],
+  standalone: true,
+  imports: [],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })

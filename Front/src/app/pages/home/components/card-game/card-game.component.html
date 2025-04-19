@@ -1,0 +1,27 @@
+<!-- <mat-card class="bg-gray-800 text-white shadow-lg h-96 flex flex-col justify-between">
+    <img mat-card-image [src]="image" [alt]="title" class="h-40 object-cover" />
+
+    <div class="bg-gray-800 p-4 flex-grow">
+        <h2 class="text-xl font-semibold mt-2">{{ title }}</h2>
+        <p class="text-gray-300 mt-1">{{ description }}</p>
+    </div>
+
+    <mat-card-actions class="bg-gray-800 p-4 pt-0">
+        <button class="text-gray-800 bg-white p-2 rounded-full w-20" [routerLink]="link">Jugar</button>
+    </mat-card-actions>
+</mat-card> -->
+
+
+<mat-card class="bg-gray-800 text-white shadow-lg h-96 flex flex-col justify-between">
+    <img mat-card-image [src]="image" [alt]="title" class="h-40 object-cover" />
+
+    <div class="bg-gray-800 p-4 flex-grow">
+        <h2 class="text-xl font-semibold mt-2">{{ title }}</h2>
+        <p class="text-gray-300 mt-1">{{ description }}</p>
+    </div>
+
+    <mat-card-actions class="bg-gray-800 p-4 pt-0 flex justify-between">
+        <button mat-raised-button color="primary" [routerLink]="link">Jugar</button>
+        <button mat-stroked-button color="accent" (click)="openRules()">Reglas</button>
+    </mat-card-actions>
+</mat-card>

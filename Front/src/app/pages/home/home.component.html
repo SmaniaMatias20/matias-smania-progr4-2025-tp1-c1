@@ -1,42 +1,33 @@
-<app-navbar></app-navbar>
+<h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+    Bienvenido/a al Home
+</h1>
 
-<div
-    class="flex flex-col min-h-screen w-full px-4 py-8 text-center bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-    <h1 class="text-3xl font-bold mb-4">Bienvenido al Home</h1>
+    <app-card-game title="Ahorcado"
+        description="Adivina la palabra antes de que se complete el dibujo. ¡Pon a prueba tu vocabulario!"
+        image="assets/images/ahorcado.jpg" link="/ahorcado" rules="El objetivo del juego es adivinar una palabra secreta letra por letra.
+      Cada letra incorrecta suma una parte del dibujo del ahorcado.
+      Tenés 6 intentos antes de perder el juego.
+      ¡Usá tu lógica y vocabulario para ganar!"></app-card-game>
 
-    <!-- Mostrar si NO está logueado -->
-    <div *ngIf="!isLoggedIn" class="space-x-4 mb-6">
-        <button routerLink="/register" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-            Registrarse
-        </button>
-        <button routerLink="/login" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
-            Iniciar Sesión
-        </button>
-    </div>
+    <app-card-game title="Preguntados" description="Responde preguntas de cultura general y demuestra cuánto sabes."
+        image="assets/images/preguntados.jpg" link="/preguntados" rules="El juego te presentará una serie de preguntas de opción múltiple.
+      Cada respuesta correcta suma puntos.
+      El objetivo es acertar la mayor cantidad posible de preguntas.
+      ¡Demostrá tu conocimiento en distintas categorías!"></app-card-game>
 
-    <!-- Mostrar si está logueado -->
-    <div *ngIf="isLoggedIn" class="mb-6">
-        <p class="text-lg mb-4">
-            Hola, <span class="font-semibold">{{ username }}</span> 👋
-        </p>
-        <button (click)="logout()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
-            Cerrar sesión
-        </button>
-    </div>
+    <app-card-game title="Mayor o Menor" description="¿El próximo número será mayor o menor? Apuesta y gana puntos."
+        image="assets/images/mayor-menor.jpg" link="/mayor-menor" rules="Se muestra un número al azar entre 1 y 100.
+      Debés predecir si el siguiente número será mayor o menor.
+      Si acertás, sumás puntos. Si fallás, perdés puntos.
+      ¡Confiá en tu intuición y arriesgá!"></app-card-game>
 
-    <!-- Acceso a juegos y listados -->
-    <div class="mt-auto space-x-4 pt-8">
-        <button routerLink="/juego1"
-            class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded">
-            Juego 1
-        </button>
-        <button routerLink="/juego2"
-            class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded">
-            Juego 2
-        </button>
-        <button routerLink="/listado" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded">
-            Ver Listado
-        </button>
-    </div>
+    <app-card-game title="Mi Juego" description="Un juego único diseñado especialmente para esta web. ¡Descúbrelo!"
+        image="assets/images/mi-juego.jpg" link="/mi-juego" rules="Este juego fue creado exclusivamente para esta plataforma.
+      Las reglas pueden variar según el nivel o la mecánica implementada.
+      Explorá, experimentá y divertite con esta propuesta original.
+      ¡Descubrí todos sus secretos mientras jugás!"></app-card-game>
+
+
 </div>
