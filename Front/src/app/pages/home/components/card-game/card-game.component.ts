@@ -21,6 +21,7 @@ export class CardGameComponent {
   @Input() image!: string;
   @Input() link!: string;
   @Input() rules!: string;
+  @Input() user!: string;
 
   constructor(private dialog: MatDialog) { }
 

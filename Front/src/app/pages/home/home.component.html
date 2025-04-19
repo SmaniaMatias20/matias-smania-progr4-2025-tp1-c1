@@ -1,30 +1,30 @@
 <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-    Bienvenido/a al Home
+  Bienvenido/a al Home
 </h1>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-    <app-card-game title="Ahorcado"
-        description="Adivina la palabra antes de que se complete el dibujo. ¡Pon a prueba tu vocabulario!"
-        image="assets/images/ahorcado.jpg" link="/ahorcado" rules="El objetivo del juego es adivinar una palabra secreta letra por letra.
+  <app-card-game title="Ahorcado"
+    description="Adivina la palabra antes de que se complete el dibujo. ¡Pon a prueba tu vocabulario!"
+    image="assets/images/ahorcado.jpg" link="/ahorcado" rules="El objetivo del juego es adivinar una palabra secreta letra por letra.
       Cada letra incorrecta suma una parte del dibujo del ahorcado.
       Tenés 6 intentos antes de perder el juego.
-      ¡Usá tu lógica y vocabulario para ganar!"></app-card-game>
+      ¡Usá tu lógica y vocabulario para ganar!" [user]="user().nombre"></app-card-game>
 
-    <app-card-game title="Preguntados" description="Responde preguntas de cultura general y demuestra cuánto sabes."
-        image="assets/images/preguntados.jpg" link="/preguntados" rules="El juego te presentará una serie de preguntas de opción múltiple.
+  <app-card-game title="Preguntados" description="Responde preguntas de cultura general y demuestra cuánto sabes."
+    image="assets/images/preguntados.jpg" link="/preguntados" rules="El juego te presentará una serie de preguntas de opción múltiple.
       Cada respuesta correcta suma puntos.
       El objetivo es acertar la mayor cantidad posible de preguntas.
       ¡Demostrá tu conocimiento en distintas categorías!"></app-card-game>
 
-    <app-card-game title="Mayor o Menor" description="¿El próximo número será mayor o menor? Apuesta y gana puntos."
-        image="assets/images/mayor-menor.jpg" link="/mayor-menor" rules="Se muestra un número al azar entre 1 y 100.
+  <app-card-game title="Mayor o Menor" description="¿El próximo número será mayor o menor? Apuesta y gana puntos."
+    image="assets/images/mayor-menor.jpg" link="/mayor-menor" rules="Se muestra un número al azar entre 1 y 100.
       Debés predecir si el siguiente número será mayor o menor.
       Si acertás, sumás puntos. Si fallás, perdés puntos.
       ¡Confiá en tu intuición y arriesgá!"></app-card-game>
 
-    <app-card-game title="Mi Juego" description="Un juego único diseñado especialmente para esta web. ¡Descúbrelo!"
-        image="assets/images/mi-juego.jpg" link="/mi-juego" rules="Este juego fue creado exclusivamente para esta plataforma.
+  <app-card-game title="Mi Juego" description="Un juego único diseñado especialmente para esta web. ¡Descúbrelo!"
+    image="assets/images/mi-juego.jpg" link="/mi-juego" rules="Este juego fue creado exclusivamente para esta plataforma.
       Las reglas pueden variar según el nivel o la mecánica implementada.
       Explorá, experimentá y divertite con esta propuesta original.
       ¡Descubrí todos sus secretos mientras jugás!"></app-card-game>
