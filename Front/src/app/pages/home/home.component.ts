@@ -11,6 +11,9 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class HomeComponent {
   user!: Signal<any>;
+  ahorcadoImage = 'assets/images/ahorcado/ahorcado.jpg';
+  preguntadosImage = 'assets/images/preguntados/preguntados.png';
+  mayorMenorImage = 'assets/images/mayor-menor/mayor-menor.jpg';
 
   constructor(
     private authService: AuthService
