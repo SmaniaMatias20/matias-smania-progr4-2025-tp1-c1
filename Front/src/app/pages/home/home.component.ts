@@ -1,6 +1,7 @@
 import { Component, Signal } from '@angular/core';
 import { CardGameComponent } from './components/card-game/card-game.component';
 import { AuthService } from '../../services/auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +12,19 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class HomeComponent {
   user!: Signal<any>;
-  ahorcadoImage = 'assets/images/ahorcado/ahorcado.jpg';
-  preguntadosImage = 'assets/images/preguntados/preguntados.png';
-  mayorMenorImage = 'assets/images/mayor-menor/mayor-menor.jpg';
+  games: any[] = [];
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {
     this.user = this.authService.user;
+  }
+
+
+  ngOnInit(): void {
+    this.http.get<any[]>('assets/data/games.json').subscribe((data) => {
+      this.games = data;
+    });
   }
 }

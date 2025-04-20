@@ -2,18 +2,21 @@
     <div class="flex mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex w-full justify-between h-16 items-center">
             <div class="flex w-full justify-between">
-                <h1 class="mr-6 text-blue-600 dark:text-blue-300 text-xl">MiApp</h1>
+                <h1 class="mr-6 text-blue-600 dark:text-blue-300 text-xl">Sala de Juegos</h1>
                 <div class="flex gap-6">
-                    <!-- Home -->
                     <button routerLink="/home" routerLinkActive="border-b-4 border-white"
                         class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Home
+                        Inicio
                     </button>
 
-                    <!-- About -->
                     <button routerLink="/about" routerLinkActive="border-b-4 border-white"
                         class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        About
+                        Sobre Mi
+                    </button>
+
+                    <button routerLink="/results" routerLinkActive="border-b-4 border-white"
+                        class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
+                        Resultados
                     </button>
 
                     <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
@@ -21,17 +24,16 @@
                         Chat
                     </button>
 
-                    <!-- Login/Register -->
                     @if (!user()) {
                     <button routerLink="/login" routerLinkActive="border-b-4 border-green-500 "
                         class="text-gray-300 hover:text-green-400 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Login/Register
+                        Iniciar sesion/Registrarse
                     </button>
                     } @else {
-                    <!-- Logout as route (to activate border) -->
+
                     <button routerLink="/home" (click)="onLogout()"
                         class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Logout
+                        Cerrar sesion
                     </button>
                     }
                 </div>
