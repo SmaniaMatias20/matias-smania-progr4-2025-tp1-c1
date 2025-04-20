@@ -7,14 +7,15 @@
     </div>
 
     <mat-card-actions class="bg-gray-800 p-4 pt-0 flex justify-between">
-        <!-- Botón Jugar (equivalente a mat-raised-button) -->
-        <button class="bg-white text-gray-800 py-2 px-6 rounded-full shadow-lg cursor-pointer"
-            [routerLink]="link">Jugar</button>
 
-        <!-- Botón Reglas (equivalente a mat-stroked-button) -->
+        <button
+            class="bg-white text-gray-800 py-2 px-6 rounded-full shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            [routerLink]="link" [disabled]="!user">
+            Jugar
+        </button>
+
         <button class="border-2 border-white text-white py-2 px-6 rounded-full cursor-pointer"
             (click)="openRules()">Reglas</button>
-
 
     </mat-card-actions>
 </mat-card>

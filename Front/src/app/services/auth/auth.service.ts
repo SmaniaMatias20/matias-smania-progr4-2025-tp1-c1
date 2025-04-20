@@ -8,7 +8,7 @@ import { DatabaseService } from '../database/database.service';
 })
 export class AuthService {
   private supabase: SupabaseClient;
-  user = signal<User | null>(null);
+  user = signal<User | Boolean>(false);
   router = inject(Router);
 
   constructor(private db: DatabaseService) {
@@ -16,7 +16,7 @@ export class AuthService {
 
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (session === null) {
-        this.user.set(null);
+        this.user.set(false);
         this.router.navigateByUrl('/home');
         return;
       }
