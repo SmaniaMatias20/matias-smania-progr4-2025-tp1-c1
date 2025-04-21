@@ -1,31 +1,79 @@
-<h1 class="text-3xl font-semibold text-center mb-6">{{ user.name || 'No disponible' }}</h1>
+<div class="flex flex-col items-center w-full px-4 py-8 bg-gray-50 dark:bg-gray-900">
 
-<!-- Mensaje de error -->
-@if (error) {
-<p class="text-red-500 text-center">{{ error }}</p>
-} @else {
-@if (user) {
-<div class="flex flex-col sm:flex-row justify-around items-center gap-16 p-6 w-screen">
 
-    <!-- Información del usuario -->
-    <div class="flex flex-col gap-6 max-w-md text-gray-800 dark:text-gray-200">
-        <p class="font-semibold text-lg">Usuario: <span class="font-normal">{{ user.login }}</span></p>
-        <p class="font-semibold text-lg">Bio: <span class="font-normal">{{ user.bio || 'Sin biografía' }}</span></p>
-        <p class="font-semibold text-lg">Ubicación: <span class="font-normal">{{ user.location || 'No especificada'
-                }}</span></p>
-        <p class="font-semibold text-lg">Repos públicos: <span class="font-normal">{{ user.public_repos }}</span></p>
-        <p class="font-semibold text-lg">Seguidores: <span class="font-normal">{{ user.followers }}</span> |
-            <span class="font-semibold">Siguiendo: </span> <span class="font-normal">{{ user.following }}</span>
+
+    @if (error) {
+    <p class="text-red-500 text-center">{{ error }}</p>
+    } @else {
+    @if (user) {
+    <div
+        class="w-full max-w-5xl bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-12 flex flex-col sm:flex-row gap-12 border border-gray-200 dark:border-gray-700">
+
+        <!-- Imagen de perfil -->
+        <div class="flex justify-center sm:justify-start">
+            <img [src]="user.avatar_url" alt="Avatar de usuario"
+                class="rounded-xl w-52 h-65 object-cover shadow-md border border-gray-200 dark:border-gray-600" />
+        </div>
+
+        <!-- Información del usuario -->
+        <div class="flex flex-col justify-center text-gray-700 dark:text-gray-200 gap-5">
+            <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                {{ user.name || 'No disponible' }}
+            </h1>
+            <p>
+                <i class="material-icons align-middle mr-2 text-gray-500">alternate_email</i>
+                <span class="font-medium text-gray-600 dark:text-gray-400">Usuario:</span> {{ user.login }}
+            </p>
+            <p>
+                <i class="material-icons align-middle mr-2 text-gray-500">info</i>
+                <span class="font-medium text-gray-600 dark:text-gray-400">Bio:</span> {{ user.bio || 'Sin biografía' }}
+            </p>
+            <p>
+                <i class="material-icons align-middle mr-2 text-gray-500">location_on</i>
+                <span class="font-medium text-gray-600 dark:text-gray-400">Ubicación:</span> {{ user.location || 'No
+                especificada' }}
+            </p>
+            <p>
+                <i class="material-icons align-middle mr-2 text-gray-500">folder</i>
+                <span class="font-medium text-gray-600 dark:text-gray-400">Repos públicos:</span> {{ user.public_repos
+                }}
+            </p>
+            <p>
+                <i class="material-icons align-middle mr-2 text-gray-500">group</i>
+                <span class="font-medium text-gray-600 dark:text-gray-400">Seguidores:</span> {{ user.followers }} |
+                <span class="font-medium text-gray-600 dark:text-gray-400">Siguiendo:</span> {{ user.following }}
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Descripción del juego -->
+    <div
+        class="w-full max-w-5xl mt-10 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Adivinar la bandera del país</h2>
+        <p class="text-gray-700 dark:text-gray-300 text-lg mb-4">
+            Este es un divertido juego educativo donde se pone a prueba tu conocimiento sobre las banderas del mundo.
+            Verás una bandera al azar y tendrás que elegir a qué país pertenece entre varias opciones. ¡Poné a prueba tu
+            memoria geográfica y aprendé mientras jugás!
         </p>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Reglas del juego:</h3>
+        <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-base">
+            <li class="flex items-center gap-2">
+                <i class="material-icons text-blue-500">schedule</i> Tiempo límite: <strong>3 minutos</strong>
+            </li>
+            <li class="flex items-center gap-2">
+                <i class="material-icons text-red-500">favorite</i> Disponés de <strong>3 vidas</strong>
+            </li>
+            <li class="flex items-center gap-2">
+                <i class="material-icons text-yellow-500">flag</i> Aparecerán <strong>10 banderas aleatorias</strong>
+            </li>
+        </ul>
     </div>
 
-    <!-- Imagen de perfil -->
-    <div class="flex justify-center items-center mt-6 sm:mt-0">
-        <img [src]="user.avatar_url" alt="Avatar de usuario"
-            class="rounded-full w-72 h-72 shadow-lg border-2 border-gray-300 dark:border-gray-600" />
-    </div>
+
+
+    } @else {
+    <p class="text-center text-gray-500 dark:text-gray-400">Cargando datos...</p>
+    }
+    }
 </div>
-} @else {
-<p class="text-center text-gray-500">Cargando datos...</p>
-}
-}

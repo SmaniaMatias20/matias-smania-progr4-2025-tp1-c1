@@ -14,9 +14,9 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  firstName: string = '';  // Cambié "name" a "firstName"
-  lastName: string = '';   // Cambié "lastName" a "lastName"
-  age: number | null = null; // Cambié "edad" a "age"
+  firstName: string = '';
+  lastName: string = '';
+  age: number | null = null;
 
   errorMessage: string = '';
   successMessage: string = '';
