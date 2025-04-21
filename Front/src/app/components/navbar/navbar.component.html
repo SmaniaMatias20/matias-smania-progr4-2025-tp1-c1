@@ -1,11 +1,11 @@
-<nav class="bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
+<nav class="bg-gray-900 shadow-md transition-colors duration-300">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
-            <h1 class="text-blue-600 dark:text-blue-300 text-xl font-semibold">Sala de Juegos</h1>
+            <h1 class="text-blue-300 text-xl font-semibold">Sala de Juegos</h1>
 
             <!-- Botón hamburguesa (visible solo en móviles) -->
-            <button (click)="toggleMenu()" class="sm:hidden text-gray-500 dark:text-gray-300 focus:outline-none">
+            <button (click)="toggleMenu()" class="sm:hidden text-gray-300 focus:outline-none">
                 <span class="material-icons text-3xl">menu</span>
             </button>
 
@@ -39,7 +39,7 @@
             <!-- Saludo -->
             <div class="hidden sm:block">
                 @if (user()) {
-                <span class="text-gray-700 dark:text-gray-300 text-sm">Hola, {{ user().nombre }}!</span>
+                <span class="text-gray-300 text-sm">Hola, {{ user().nombre }}!</span>
                 }
             </div>
         </div>

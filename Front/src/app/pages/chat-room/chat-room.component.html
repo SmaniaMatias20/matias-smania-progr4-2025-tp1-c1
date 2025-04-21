@@ -1,1 +1,42 @@
-<p>chat-room works!</p>
+<div class="flex flex-col items-center h-screen w-screen p-4 bg-gray-900 text-gray-100">
+
+    <div class="flex flex-col w-3/4 h-screen">
+        <!-- Título -->
+        <h2 class="text-2xl font-bold mb-4 text-center">Sala de Chat Global</h2>
+
+        <!-- Lista de mensajes -->
+        <div class="flex-1 overflow-y-auto bg-gray-800 p-4 rounded shadow-inner space-y-3">
+            @for (msg of messages; track msg) {
+            <div class="{{ isMyMessage(msg) ? 'text-right' : 'text-left' }}">
+                <div class="{{ isMyMessage(msg) 
+                              ? 'bg-gray-700 text-white text-left'
+                              : 'bg-gray-700 text-gray-100 text-left' }}
+                          inline-block px-4 py-2 rounded-xl max-w-[80%] break-words">
+
+                    @if (!isMyMessage(msg)) {
+                    <p class="text-sm font-semibold mb-1">
+                        {{ this.user.nombre }}
+                    </p>
+                    }
+
+                    <p>{{ msg.message }}</p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        {{ formatTime(msg.created_at) }}
+                    </p>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- Input para escribir mensaje -->
+        <form (ngSubmit)="sendMessage()" class="mt-4 flex gap-2">
+            <input type="text" [(ngModel)]="message" name="message" placeholder="Escribe tu mensaje..." class="flex-1 px-4 py-2 rounded border border-gray-600 
+                   bg-gray-700 text-white
+                   focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-blue-500 transition">
+                Enviar
+            </button>
+        </form>
+
+    </div>
+</div>

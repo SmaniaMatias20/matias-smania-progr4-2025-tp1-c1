@@ -47,6 +47,10 @@ export class AuthService {
     });
   }
 
+  getUser() {
+    return this.user();
+  }
+
   async register(
     email: string,
     password: string,
