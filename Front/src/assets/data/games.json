@@ -9,7 +9,7 @@
     {
         "title": "Preguntados",
         "description": "Responde preguntas de cultura general y demuestra cuánto sabes.",
-        "image": "assets/images/preguntados/preguntados.png",
+        "image": "assets/images/preguntados/preguntados.jpg",
         "link": "/preguntados",
         "rules": "El juego te presentará una serie de preguntas de opción múltiple. Cada respuesta correcta suma puntos. ¡Demostrá tu conocimiento en distintas categorías!"
     },
@@ -21,9 +21,9 @@
         "rules": "Se muestra un número al azar entre 1 y 100. Debés predecir si el siguiente número será mayor o menor. Si acertás, sumás puntos. Si fallás, perdés puntos."
     },
     {
-        "title": "Mi Juego",
+        "title": "Adivinar el Pais",
         "description": "Un juego único diseñado especialmente para esta web. ¡Descúbrelo!",
-        "image": "assets/images/mayor-menor/mayor-menor.jpg",
+        "image": "assets/images/adivinar-pais/adivinar-pais.jpg",
         "link": "/mi-juego",
         "rules": "Este juego fue creado exclusivamente para esta plataforma. Las reglas pueden variar según el nivel o la mecánica implementada. Explorá, experimentá y divertite con esta propuesta original."
     }

@@ -17,7 +17,6 @@ export const routes: Routes = [
     { path: 'mayor-menor', component: MayorMenorPageComponent },
     { path: 'ahorcado', component: AhorcadoPageComponent },
     { path: 'preguntados', component: PreguntadosPageComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: "**", redirectTo: "error", pathMatch: "full" },
 ];
 
