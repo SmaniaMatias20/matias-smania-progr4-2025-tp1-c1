@@ -1,4 +1,4 @@
-<div class="relative bg-gray-900 text-white p-6 rounded-xl shadow-2xl w-full max-w-2xl">
+<div class="relative bg-gray-800 text-white p-6 rounded-xl shadow-2xl w-full max-w-2xl">
     <!-- Botón de cerrar (X) -->
     <button class="absolute top-4 right-4 text-red-500 hover:text-red-600 text-2xl font-bold transition"
         (click)="close()" aria-label="Cerrar">
@@ -7,14 +7,38 @@
 
     <!-- Título -->
     <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">
-        {{ data.title }}
-        <span class="text-sm text-gray-400 font-normal">— Reglas del juego</span>
+        {{ data.title }} - <span class="text-sm text-gray-400 font-normal">Reglas del juego</span>
     </h2>
 
-    <!-- Contenido sin scroll -->
-    <div class="pr-2">
-        <p class="text-base leading-relaxed text-gray-300 whitespace-pre-line">
-            {{ data.rules }}
-        </p>
+    <!-- Contenido -->
+    <div class="space-y-4 text-gray-300">
+
+        <!-- Descripción -->
+        <div class="flex items-start gap-2">
+            <span class="material-icons text-yellow-400">info</span>
+            <p class="text-base leading-relaxed whitespace-pre-line">
+                {{ data.rules }}
+            </p>
+        </div>
+
+        <!-- Vidas -->
+        <div class="flex items-center gap-2">
+            <span class="material-icons text-red-400">favorite</span>
+            <p class="text-base">Vidas disponibles: <span class="font-medium">{{ data.lifes }}</span></p>
+        </div>
+
+        <!-- Tiempo -->
+        <div class="flex items-center gap-2">
+            <span class="material-icons text-blue-400">timer</span>
+            <p class="text-base">Tiempo total: <span class="font-medium">{{ data.time }}</span></p>
+        </div>
+
+        <!-- Elementos a adivinar (opcional) -->
+        <!--
+        <div class="flex items-center gap-2">
+            <span class="material-icons text-green-400">flag</span>
+            <p class="text-base">Elementos a adivinar: <span class="font-medium">{{ data.total }}</span></p>
+        </div>
+        -->
     </div>
 </div>

@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 export class RulesDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<RulesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string; rules: string }
+    @Inject(MAT_DIALOG_DATA) public data: { title: string; rules: string; lifes: string; time: string }
   ) { }
 
   close(): void {

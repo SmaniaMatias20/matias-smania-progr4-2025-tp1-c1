@@ -21,6 +21,8 @@ export class CardGameComponent {
   @Input() image!: string;
   @Input() link!: string;
   @Input() rules!: string;
+  @Input() lifes!: string;
+  @Input() time!: string;
   @Input() user!: string;
 
   constructor(private dialog: MatDialog) { }
@@ -29,7 +31,9 @@ export class CardGameComponent {
     this.dialog.open(RulesDialogComponent, {
       data: {
         title: this.title,
-        rules: this.rules
+        rules: this.rules,
+        lifes: this.lifes,
+        time: this.time
       }
     });
   }
