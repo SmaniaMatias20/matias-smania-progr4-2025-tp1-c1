@@ -12,25 +12,26 @@
             <!-- Menú principal (visible en pantallas grandes) -->
             <div class="hidden sm:flex items-center gap-6">
                 <button routerLink="/home" routerLinkActive="border-b-4 border-white"
-                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Inicio</button>
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Inicio</button>
 
                 <button routerLink="/about" routerLinkActive="border-b-4 border-white"
-                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Sobre Mi</button>
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Sobre
+                    Mi</button>
 
                 <button routerLink="/results" routerLinkActive="border-b-4 border-white"
-                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Resultados</button>
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Resultados</button>
 
                 <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
-                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Chat</button>
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Chat</button>
 
                 @if (!user()) {
                 <button routerLink="/login" routerLinkActive="border-b-4 border-green-500"
-                    class="text-gray-300 hover:text-green-400 text-lg font-medium transition duration-200 pb-1">
+                    class="text-gray-300 hover:text-green-400 text-lg font-medium transition duration-200 pb-1 cursor-pointer">
                     Iniciar sesión / Registrarse
                 </button>
                 } @else {
                 <button routerLink="/home" (click)="onLogout()"
-                    class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 pb-1">
+                    class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 pb-1 cursor-pointer">
                     Cerrar sesión
                 </button>
                 }
@@ -47,10 +48,11 @@
         <!-- Menú desplegable para móviles -->
         @if(isOpen()) {
         <div class="sm:hidden mt-2 space-y-2">
-            <button routerLink="/home" class="block w-full text-left text-gray-300">Inicio</button>
-            <button routerLink="/about" class="block w-full text-left text-gray-300">Sobre Mi</button>
-            <button routerLink="/results" class="block w-full text-left text-gray-300">Resultados</button>
-            <button routerLink="/chat" class="block w-full text-left text-gray-300">Chat</button>
+            <button routerLink="/home" class="block w-full text-left text-gray-300 cursor-pointer">Inicio</button>
+            <button routerLink="/about" class="block w-full text-left text-gray-300 cursor-pointer">Sobre Mi</button>
+            <button routerLink="/results"
+                class="block w-full text-left text-gray-300 cursor-pointer">Resultados</button>
+            <button routerLink="/chat" class="block w-full text-left text-gray-300 cursor-pointer">Chat</button>
 
             @if (!user()) {
             <button routerLink="/login" class="block w-full text-left text-green-400 hover:text-green-500">Iniciar

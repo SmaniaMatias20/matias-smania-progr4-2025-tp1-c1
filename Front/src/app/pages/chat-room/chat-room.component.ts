@@ -19,7 +19,7 @@ export class ChatRoomComponent implements OnInit {
 
   async ngOnInit() {
     this.user = await this.authService.getUser();
-    console.log(this.user);
+    console.log(this.user.nombre);
     this.messages = await this.chatService.getMessages();
 
     this.chatService.listenToMessages((msg) => {
@@ -29,7 +29,7 @@ export class ChatRoomComponent implements OnInit {
 
   async sendMessage() {
     if (this.message.trim()) {
-      await this.chatService.sendMessage(this.user.id, this.user, this.message);
+      await this.chatService.sendMessage(this.user.id, this.user.nombre, this.message);
       this.message = '';
     }
   }
