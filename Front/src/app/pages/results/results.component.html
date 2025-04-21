@@ -1,1 +1,43 @@
-<p>results works!</p>
+<div class="flex items-center justify-center gap-4 w-screen p-4">
+
+    <div class="flex flex-col w-3/4">
+
+        <!-- Usando la nueva directiva @if -->
+        @if(currentPage === 1) {
+        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Ahorcado</h1>
+        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
+        } @else if(currentPage === 2) {
+        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Preguntados
+        </h1>
+        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
+        } @else if(currentPage === 3) {
+        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Mayor Menor
+        </h1>
+        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
+        } @else if(currentPage === 4) {
+        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Juego propio
+        </h1>
+        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
+        }
+
+        <!-- Controles de paginación -->
+        <div class="flex justify-center items-center gap-4 mt-4 text-sm">
+            <!-- Botón de 'Anterior' con icono de flecha hacia la izquierda -->
+            <button (click)="changePage(-1)" [disabled]="currentPage === 1"
+                class="px-3 py-2 bg-transparent border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="material-icons">navigate_before</span>
+            </button>
+
+            <!-- Texto para la página actual -->
+            <span class="text-lg text-gray-600">{{ currentPage }} de 4</span>
+
+            <!-- Botón de 'Siguiente' con icono de flecha hacia la derecha -->
+            <button (click)="changePage(1)" [disabled]="currentPage === 4"
+                class="px-3 py-2 bg-transparent border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="material-icons">navigate_next</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>
