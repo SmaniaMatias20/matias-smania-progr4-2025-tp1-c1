@@ -4,8 +4,8 @@
         "description": "Adivina la palabra antes de que se complete el dibujo. ¡Pon a prueba tu vocabulario!",
         "image": "assets/images/ahorcado/ahorcado.jpg",
         "link": "/ahorcado",
-        "rules": "El objetivo del juego es adivinar una palabra secreta letra por letra. Cada letra incorrecta suma una parte del dibujo del ahorcado. Tenés 6 intentos antes de perder el juego. ¡Usá tu lógica y vocabulario para ganar!",
-        "lifes": "3",
+        "rules": "El objetivo del juego es adivinar una palabra secreta letra por letra. Cada letra incorrecta suma una parte del dibujo del ahorcado y cada palabra completa suma 100 puntos.  ¡Usá tu lógica y vocabulario para ganar!",
+        "lifes": "6",
         "time": "3:00"
     },
     {
@@ -13,7 +13,7 @@
         "description": "Responde preguntas de cultura general y demuestra cuánto sabes.",
         "image": "assets/images/preguntados/preguntados.jpg",
         "link": "/preguntados",
-        "rules": "El juego te presentará una serie de preguntas de opción múltiple. Cada respuesta correcta suma puntos. ¡Demostrá tu conocimiento en distintas categorías!",
+        "rules": "El juego te presentará una serie de 10 preguntas de opción múltiple. Cada respuesta correcta suma 10 puntos. ¡Demostrá tu conocimiento en distintas categorías!",
         "lifes": "3",
         "time": "3:00"
     },
@@ -30,7 +30,7 @@
         "title": "Adivinar el Pais",
         "description": "Un juego único diseñado especialmente para esta web. ¡Descúbrelo!",
         "image": "assets/images/adivinar-pais/adivinar-pais.jpg",
-        "link": "/mi-juego",
+        "link": "/adivinar-pais",
         "rules": "Este es un juego educativo en el que deberás adivinar a qué país pertenece cada bandera que se te muestra. Tendrás un total de 12 banderas aleatorias para adivinar. Contás con 3 vidas: perderás una por cada error que cometas. Disponés de 3 minutos para completar el desafío. Cada vez que aciertes, avanzarás automáticamente a la siguiente bandera. El juego termina si se te acaban las vidas o el tiempo. ¡Poné a prueba tus conocimientos de geografía y aprendé jugando!",
         "lifes": "3",
         "time": "3:00"
