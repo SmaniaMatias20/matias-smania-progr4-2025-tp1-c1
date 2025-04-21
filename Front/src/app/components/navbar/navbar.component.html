@@ -1,51 +1,66 @@
 <nav class="bg-white dark:bg-gray-900 shadow-md transition-colors duration-300">
-    <div class="flex mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex w-full justify-between h-16 items-center">
-            <div class="flex w-full justify-between">
-                <h1 class="mr-6 text-blue-600 dark:text-blue-300 text-xl">Sala de Juegos</h1>
-                <div class="flex gap-6">
-                    <button routerLink="/home" routerLinkActive="border-b-4 border-white"
-                        class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Inicio
-                    </button>
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <h1 class="text-blue-600 dark:text-blue-300 text-xl font-semibold">Sala de Juegos</h1>
 
-                    <button routerLink="/about" routerLinkActive="border-b-4 border-white"
-                        class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Sobre Mi
-                    </button>
+            <!-- Botón hamburguesa (visible solo en móviles) -->
+            <button (click)="toggleMenu()" class="sm:hidden text-gray-500 dark:text-gray-300 focus:outline-none">
+                <span class="material-icons text-3xl">menu</span>
+            </button>
 
-                    <button routerLink="/results" routerLinkActive="border-b-4 border-white"
-                        class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Resultados
-                    </button>
+            <!-- Menú principal (visible en pantallas grandes) -->
+            <div class="hidden sm:flex items-center gap-6">
+                <button routerLink="/home" routerLinkActive="border-b-4 border-white"
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Inicio</button>
 
-                    <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
-                        class="text-gray-300 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Chat
-                    </button>
+                <button routerLink="/about" routerLinkActive="border-b-4 border-white"
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Sobre Mi</button>
 
-                    @if (!user()) {
-                    <button routerLink="/login" routerLinkActive="border-b-4 border-green-500 "
-                        class="text-gray-300 hover:text-green-400 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Iniciar sesion/Registrarse
-                    </button>
-                    } @else {
+                <button routerLink="/results" routerLinkActive="border-b-4 border-white"
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Resultados</button>
 
-                    <button routerLink="/home" (click)="onLogout()"
-                        class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 cursor-pointer pb-1">
-                        Cerrar sesion
-                    </button>
-                    }
-                </div>
+                <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1">Chat</button>
 
-                <div class="flex">
-                    @if (user()) {
-                    <span class="text-gray-700 dark:text-gray-300 text-sm">
-                        Hola, {{ user().nombre }} !
-                    </span>
-                    }
-                </div>
+                @if (!user()) {
+                <button routerLink="/login" routerLinkActive="border-b-4 border-green-500"
+                    class="text-gray-300 hover:text-green-400 text-lg font-medium transition duration-200 pb-1">
+                    Iniciar sesión / Registrarse
+                </button>
+                } @else {
+                <button routerLink="/home" (click)="onLogout()"
+                    class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 pb-1">
+                    Cerrar sesión
+                </button>
+                }
+            </div>
+
+            <!-- Saludo -->
+            <div class="hidden sm:block">
+                @if (user()) {
+                <span class="text-gray-700 dark:text-gray-300 text-sm">Hola, {{ user().nombre }}!</span>
+                }
             </div>
         </div>
+
+        <!-- Menú desplegable para móviles -->
+        @if(isOpen()) {
+        <div class="sm:hidden mt-2 space-y-2">
+            <button routerLink="/home" class="block w-full text-left text-gray-300">Inicio</button>
+            <button routerLink="/about" class="block w-full text-left text-gray-300">Sobre Mi</button>
+            <button routerLink="/results" class="block w-full text-left text-gray-300">Resultados</button>
+            <button routerLink="/chat" class="block w-full text-left text-gray-300">Chat</button>
+
+            @if (!user()) {
+            <button routerLink="/login" class="block w-full text-left text-green-400 hover:text-green-500">Iniciar
+                sesión / Registrarse</button>
+            } @else {
+            <button (click)="onLogout()" class="block w-full text-left text-red-400 hover:text-red-500">Cerrar
+                sesión</button>
+            <span class="block text-sm text-gray-400">Hola, {{ user().nombre }}!</span>
+            }
+        </div>
+        }
     </div>
 </nav>
