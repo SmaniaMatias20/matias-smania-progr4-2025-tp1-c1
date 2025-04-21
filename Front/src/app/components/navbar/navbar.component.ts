@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NavbarComponent {
   user!: Signal<any>;
-  isOpen = signal(false); // <-- menú hamburguesa
+  isOpen = signal(false);
 
   constructor(private authService: AuthService) {
     this.user = this.authService.user;
@@ -24,8 +24,7 @@ export class NavbarComponent {
   async onLogout(): Promise<void> {
     const { success, message } = await this.authService.logout();
     if (success) {
-      console.log(message);
-      this.isOpen.set(false); // <-- cerrar menú si estaba abierto
+      this.isOpen.set(false);
     } else {
       console.error('Error al cerrar sesión:', message);
     }

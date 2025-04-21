@@ -21,8 +21,6 @@
                 <button routerLink="/results" routerLinkActive="border-b-4 border-white"
                     class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Resultados</button>
 
-                <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
-                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Chat</button>
 
                 @if (!user()) {
                 <button routerLink="/login" routerLinkActive="border-b-4 border-green-500"
@@ -30,6 +28,8 @@
                     Iniciar sesión / Registrarse
                 </button>
                 } @else {
+                <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
+                    class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Chat</button>
                 <button routerLink="/home" (click)="onLogout()"
                     class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 pb-1 cursor-pointer">
                     Cerrar sesión
