@@ -45,7 +45,7 @@ export class RegisterComponent {
       });
 
       this.successMessage = 'Registration successful!';
-      this.router.navigate(['/home']); // Redirect to home
+      this.router.navigate(['/']);
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         this.errorMessage = 'This email is already registered.';
