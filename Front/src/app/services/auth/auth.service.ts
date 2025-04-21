@@ -41,7 +41,7 @@ export class AuthService {
         }
 
         this.user.set(user);
-        this.router.navigateByUrl('/home');
+        //this.router.navigateByUrl('/');
       });
 
     });
@@ -101,6 +101,7 @@ export class AuthService {
       return { success: false, message: 'Credenciales invalidas.' };
     }
 
+    this.router.navigateByUrl('/home');
     return { success: true, message: 'Inicio de sesión exitoso.' };
   }
 

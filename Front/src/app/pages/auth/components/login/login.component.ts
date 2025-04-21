@@ -28,9 +28,9 @@ export class LoginComponent {
     this.message = result.message;
     this.isError = !result.success;
 
-    if (result.success) {
-      // Redireccionar si querés
-      this.router.navigateByUrl('/');
-    }
+    // if (result.success) {
+    //   // Redireccionar si querés
+    //   this.router.navigateByUrl('/');
+    // }
   }
 }

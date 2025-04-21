@@ -39,13 +39,13 @@ export class RegisterComponent {
 
     try {
       await this.authService.register(this.email, this.password, {
-        firstName: this.firstName,  // Cambié "name" a "firstName"
-        lastName: this.lastName,    // Cambié "lastName" a "lastName"
-        age: this.age               // Cambié "edad" a "age"
+        firstName: this.firstName,
+        lastName: this.lastName,
+        age: this.age
       });
 
       this.successMessage = 'Registration successful!';
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         this.errorMessage = 'This email is already registered.';
