@@ -1,7 +1,7 @@
-<div class="overflow-y-auto max-h-96">
+<div class="overflow-y-auto max-h-96 rounded-xl">
     <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm table-auto">
         <thead class="bg-gray-100 sticky top-0 z-10">
-            <tr class="text-left text-sm font-medium text-gray-900">
+            <tr class="text-center text-sm font-medium text-gray-900">
                 @for (column of columns; track column.label) {
                 <th class="px-6 py-3 text-sm font-semibold text-gray-700 uppercase border-b border-gray-300">
                     {{
@@ -11,20 +11,16 @@
                 }
             </tr>
         </thead>
-    </table>
-    <div class="overflow-y-auto max-h-96">
-        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm table-auto">
-            <tbody>
-                @for (row of data; track row.name) {
-                <tr class="hover:bg-gray-50">
-                    @for (column of columns; track column.field) {
-                    <td class="px-6 py-3 text-sm text-gray-700 border-t border-gray-200">
-                        {{ row[column.field] }}
-                    </td>
-                    }
-                </tr>
+        <tbody>
+            @for (row of data; track row.name) {
+            <tr class="hover:bg-blue-200 text-center">
+                @for (column of columns; track column.field) {
+                <td class="px-6 py-3 text-sm text-gray-700 border-t border-gray-200 ">
+                    {{ row[column.field] }}
+                </td>
                 }
-            </tbody>
-        </table>
-    </div>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>

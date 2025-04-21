@@ -4,18 +4,18 @@
 
         <!-- Usando la nueva directiva @if -->
         @if(currentPage === 1) {
-        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Ahorcado</h1>
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Ahorcado</h1>
         <app-results-table [columns]="columns" [data]="scores"></app-results-table>
         } @else if(currentPage === 2) {
-        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Preguntados
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Preguntados
         </h1>
         <app-results-table [columns]="columns" [data]="scores"></app-results-table>
         } @else if(currentPage === 3) {
-        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Mayor Menor
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Mayor Menor
         </h1>
         <app-results-table [columns]="columns" [data]="scores"></app-results-table>
         } @else if(currentPage === 4) {
-        <h1 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Juego propio
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Puntuaciones Juego propio
         </h1>
         <app-results-table [columns]="columns" [data]="scores"></app-results-table>
         }
