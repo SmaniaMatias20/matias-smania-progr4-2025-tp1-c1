@@ -34,9 +34,34 @@ export class LoginComponent {
     }
 
     const { email, password } = this.loginForm.value;
-    const result = await this.authService.login(email, password);
 
-    this.message = result.message;
-    this.isError = !result.success;
+    try {
+      const result = await this.authService.login(email, password);
+      this.message = result.message;
+      this.isError = !result.success;
+    } catch (error: any) {
+      this.message = 'Ocurrió un error inesperado.';
+      this.isError = true;
+      console.error('Error en login():', error);
+    }
   }
+
+  async loginTest(email: string, password: string) {
+    try {
+      const result = await this.authService.login(email, password);
+
+      if (!result.success) {
+        this.message = result.message;
+        this.isError = true;
+      } else {
+        this.message = result.message;
+        this.isError = false;
+      }
+    } catch (error: any) {
+      this.message = 'Ocurrió un error al intentar iniciar sesión.';
+      this.isError = true;
+      console.error('Error en loginTest():', error);
+    }
+  }
+
 }
