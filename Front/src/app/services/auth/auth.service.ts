@@ -17,7 +17,7 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (session === null) {
         this.user.set(false);
-        this.router.navigateByUrl('/home');
+        //this.router.navigateByUrl('/home');
         return;
       }
 
