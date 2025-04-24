@@ -1,53 +1,118 @@
-<div class="space-y-6 bg-gray-800 p-6 rounded-lg w-full mx-auto">
+<div class="space-y-6 bg-gray-800 rounded-lg w-full mx-auto">
     <h2 class="text-xl font-semibold text-center text-white">Registrarse</h2>
 
-    <form class="space-y-4 max-h-[60vh] overflow-y-auto pr-2" (ngSubmit)="register()" #registerForm="ngForm">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="space-y-4 max-h-[70vh] overflow-y-auto">
         <!-- Email -->
         <div>
             <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-            <input type="email" id="email" name="email" placeholder="Correo electrónico" required [(ngModel)]="email"
+            <input type="email" id="email" formControlName="email" placeholder="Correo electrónico" required
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                class="text-red-400 text-sm">
+                <div *ngIf="registerForm.get('email')?.hasError('required')">
+                    El correo electrónico es obligatorio.
+                </div>
+                <div *ngIf="registerForm.get('email')?.hasError('email')">
+                    El correo electrónico debe ser válido.
+                </div>
+            </div>
         </div>
 
         <!-- Nombre -->
         <div>
             <label for="firstName" class="block text-sm font-medium text-gray-300">Nombre</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Tu nombre" required [(ngModel)]="firstName"
+            <input type="text" id="firstName" formControlName="firstName" placeholder="Tu nombre" required
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+            <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                class="text-red-400 text-sm">
+                <div *ngIf="registerForm.get('firstName')?.hasError('required')">
+                    El nombre es obligatorio.
+                </div>
+                <div *ngIf="registerForm.get('firstName')?.hasError('minlength')">
+                    El nombre debe tener al menos 5 caracteres.
+                </div>
+                <div *ngIf="registerForm.get('firstName')?.hasError('maxlength')">
+                    El nombre no puede exceder los 15 caracteres.
+                </div>
+            </div>
         </div>
 
         <!-- Apellido -->
         <div>
             <label for="lastName" class="block text-sm font-medium text-gray-300">Apellido</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Tu apellido" required [(ngModel)]="lastName"
+            <input type="text" id="lastName" formControlName="lastName" placeholder="Tu apellido" required
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+            <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+                class="text-red-400 text-sm">
+                <div *ngIf="registerForm.get('lastName')?.hasError('required')">
+                    El apellido es obligatorio.
+                </div>
+                <div *ngIf="registerForm.get('lastName')?.hasError('minlength')">
+                    El apellido debe tener al menos 5 caracteres.
+                </div>
+                <div *ngIf="registerForm.get('lastName')?.hasError('maxlength')">
+                    El apellido no puede exceder los 15 caracteres.
+                </div>
+            </div>
         </div>
 
         <!-- Edad -->
         <div>
             <label for="age" class="block text-sm font-medium text-gray-300">Edad</label>
-            <input type="number" id="age" name="age" placeholder="Tu edad" required min="1" [(ngModel)]="age"
+            <input type="number" id="age" formControlName="age" placeholder="Tu edad" required min="18" max="99"
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+            <div *ngIf="registerForm.get('age')?.invalid && registerForm.get('age')?.touched"
+                class="text-red-400 text-sm">
+                <div *ngIf="registerForm.get('age')?.hasError('required')">
+                    La edad es obligatoria.
+                </div>
+                <div *ngIf="registerForm.get('age')?.hasError('min')">
+                    La edad debe ser al menos 18 años.
+                </div>
+                <div *ngIf="registerForm.get('age')?.hasError('max')">
+                    La edad no puede exceder los 99 años.
+                </div>
+            </div>
         </div>
 
         <!-- Contraseña -->
         <div>
             <label for="password" class="block text-sm font-medium text-gray-300">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="Contraseña" required
-                [(ngModel)]="password"
+            <input type="password" id="password" formControlName="password" placeholder="Contraseña" required
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                class="text-red-400 text-sm">
+                <div *ngIf="registerForm.get('password')?.hasError('required')">
+                    La contraseña es obligatoria.
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('minlength')">
+                    La contraseña debe tener al menos 8 caracteres.
+                </div>
+                <div *ngIf="registerForm.get('password')?.hasError('maxlength')">
+                    La contraseña no puede exceder los 15 caracteres.
+                </div>
+            </div>
         </div>
 
         <!-- Confirmar Contraseña -->
         <div>
             <label for="confirmPassword" class="block text-sm font-medium text-gray-300">Confirmar Contraseña</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña"
-                required [(ngModel)]="confirmPassword"
+            <input type="password" id="confirmPassword" formControlName="confirmPassword"
+                placeholder="Confirmar Contraseña" required
                 class="w-full px-4 py-2 border border-gray-600 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400" />
+            <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+                class="text-red-400 text-sm">
+                <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+                    La confirmación de la contraseña es obligatoria.
+                </div>
+                <div *ngIf="registerForm.get('confirmPassword')?.hasError('mustMatch')">
+                    La confirmación de la contraseña debe coincidir con la contraseña.
+                </div>
+            </div>
         </div>
 
         <!-- Botón -->
-        <button type="submit"
+        <button type="submit" [disabled]="registerForm.invalid"
             class="w-full py-2 bg-transparent text-white border border-white rounded-lg hover:bg-white hover:text-gray-900 transition focus:outline-none focus:ring-1 focus:ring-white cursor-pointer">
             Registrarse
         </button>

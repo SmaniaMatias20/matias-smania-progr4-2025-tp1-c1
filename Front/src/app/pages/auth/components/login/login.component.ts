@@ -1,36 +1,42 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, NgClass, NgIf],
+  imports: [ReactiveFormsModule, NgIf, NgClass],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
+  loginForm: FormGroup;
   message: string = '';
   isError: boolean = false;
 
   constructor(
-    private router: Router,
+    private fb: FormBuilder,
     private authService: AuthService
-  ) { }
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]]
+
+    });
+  }
 
   async login() {
-    const result = await this.authService.login(this.email, this.password);
+    if (this.loginForm.invalid) {
+      this.message = 'Completá todos los campos correctamente.';
+      this.isError = true;
+      return;
+    }
+
+    const { email, password } = this.loginForm.value;
+    const result = await this.authService.login(email, password);
 
     this.message = result.message;
     this.isError = !result.success;
-
-    // if (result.success) {
-    //   // Redireccionar si querés
-    //   this.router.navigateByUrl('/');
-    // }
   }
 }
