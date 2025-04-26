@@ -3,12 +3,10 @@
             sm:w-[calc(100vw-6rem)] sm:h-[calc(100vh-10rem)]
             md:w-[calc(100vw-10rem)] md:h-[calc(100vh-12rem)]
             lg:w-[calc(100vw-20rem)] lg:h-[calc(100vh-14rem)]">
-
-    <!-- HEADER: Cronómetro y Vidas -->
     <div class="flex w-full justify-between items-center p-4">
         <div class="flex-1 flex justify-center items-center gap-2">
             <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
-            <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span> <!-- Cronómetro -->
+            <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
         </div>
 
         <div class="flex items-center gap-1 md:gap-2">
@@ -22,7 +20,6 @@
 
     </div>
 
-    <!-- LETRAS -->
     <div class="p-2 sm:p-4 flex flex-col justify-center gap-2 mt-auto w-full">
         @for (row of rowsLetters; track row) {
         <div class="flex justify-center gap-1 sm:gap-2 mb-2 w-full">
