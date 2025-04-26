@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ahorcado-page',
@@ -18,7 +19,7 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   ];
 
-  constructor(public ahorcadoService: AhorcadoService) { }
+  constructor(public ahorcadoService: AhorcadoService, private router: Router) { }
 
   ngOnInit() {
     this.ahorcadoService.startTimer();
@@ -34,6 +35,10 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
 
   get livesArray(): any[] {
     return Array(this.ahorcadoService.getLives()).fill(0);
+  }
+
+  exit() {
+    this.router.navigate(['/']); // O la ruta donde esté tu Home
   }
 
 }
