@@ -17,7 +17,7 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (session === null) {
         this.user.set(false);
-        this.router.navigateByUrl('/home');
+        //this.router.navigateByUrl('/home');
         return;
       }
 
@@ -41,7 +41,6 @@ export class AuthService {
         }
 
         this.user.set(user);
-        //this.router.navigateByUrl('/');
       });
 
     });
@@ -58,7 +57,7 @@ export class AuthService {
   ): Promise<{ success: boolean; message: string }> {
     const { data, error } = await this.supabase.auth.signUp({
       email,
-      password
+      password,
     });
 
     if (error) {
@@ -76,19 +75,25 @@ export class AuthService {
         id: user.id,
         nombre: extraData.firstName,
         apellido: extraData.lastName,
-        edad: extraData.age
-      }
+        edad: extraData.age,
+      },
     ]);
 
     if (insertError) {
       return { success: false, message: 'Registro fallido al guardar los datos.' };
     }
 
+    const loginResult = await this.login(email, password);
+    if (!loginResult.success) {
+      return { success: false, message: 'Usuario registrado pero no pudo iniciar sesión automáticamente.' };
+    }
+
     return {
       success: true,
-      message: 'Registro exitoso. Verifica tu correo para confirmar tu cuenta.'
+      message: 'Registro y login exitoso.',
     };
   }
+
 
 
   async login(email: string, password: string): Promise<{ success: boolean; message: string }> {

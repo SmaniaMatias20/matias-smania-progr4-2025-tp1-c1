@@ -1,56 +1,51 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  age: number | null = null;
-
+  registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private fb: FormBuilder,) {
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      firstName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+      lastName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+      age: ['', [Validators.required, Validators.max(99), Validators.min(18)]]
+    });
+
+  }
 
   async register() {
     this.errorMessage = '';
     this.successMessage = '';
 
-    if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Passwords do not match.';
-      return;
-    }
-
-    if (!this.firstName || !this.lastName || !this.age) {
-      this.errorMessage = 'Please complete all fields.';
-      return;
-    }
-
     try {
-      await this.authService.register(this.email, this.password, {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        age: this.age
+
+      const { email, password, confirmPassword, firstName, lastName, age } = this.registerForm.value;
+      await this.authService.register(email, password, {
+        firstName: firstName,
+        lastName: lastName,
+        age: age
       });
 
-      this.successMessage = 'Registration successful!';
-      //this.router.navigate(['/']);
+      this.successMessage = 'Registro completo';
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        this.errorMessage = 'This email is already registered.';
+        this.errorMessage = 'El email registrado ya existe.';
       } else {
-        this.errorMessage = 'An error occurred during registration.';
+        this.errorMessage = 'Otro error.';
       }
       console.error(error);
     }
