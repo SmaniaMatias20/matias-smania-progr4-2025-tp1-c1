@@ -12,11 +12,14 @@
         </div>
 
         <div class="flex items-center gap-1 md:gap-2">
-            <!-- Iconos de vidas -->
-            <span class="material-icons text-red-500 text-xl md:text-2xl">favorite</span>
-            <span class="material-icons text-red-500 text-xl md:text-2xl">favorite</span>
-            <span class="material-icons text-red-500 text-xl md:text-2xl">favorite</span>
+            @for (life of livesArray; track $index) {
+            <span class="material-icons text-white text-xl md:text-2xl">
+                favorite
+            </span>
+            }
         </div>
+
+
     </div>
 
     <!-- LETRAS -->

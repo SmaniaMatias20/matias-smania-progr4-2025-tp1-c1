@@ -7,7 +7,8 @@ export class AhorcadoService {
 
   private timerInterval: any;
   private totalSeconds: number = 180;
-  public time: string = '03:00';
+  private lives: number = 3;
+  private time: string = '03:00';
 
   constructor() { }
 
@@ -35,6 +36,10 @@ export class AhorcadoService {
 
   getTime(): string {
     return this.time;
+  }
+
+  getLives(): number {
+    return this.lives;
   }
 
   private updateTimeString() {

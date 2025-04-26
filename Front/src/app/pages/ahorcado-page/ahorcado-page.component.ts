@@ -31,4 +31,9 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   get time(): string {
     return this.ahorcadoService.getTime();
   }
+
+  get livesArray(): any[] {
+    return Array(this.ahorcadoService.getLives()).fill(0);
+  }
+
 }
