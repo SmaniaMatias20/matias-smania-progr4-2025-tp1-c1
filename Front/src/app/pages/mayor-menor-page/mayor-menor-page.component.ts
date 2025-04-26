@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
+import { MayorMenorService } from '../../services/mayor-menor/mayor-menor.service';
 
 @Component({
   selector: 'app-mayor-menor-page',
@@ -9,22 +9,22 @@ import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
 })
 export class MayorMenorPageComponent {
 
-  constructor(public ahorcadoService: AhorcadoService) { }
+  constructor(public mayorMenorService: MayorMenorService) { }
 
   ngOnInit() {
-    this.ahorcadoService.startTimer();
+    this.mayorMenorService.startTimer();
   }
 
   ngOnDestroy() {
-    this.ahorcadoService.stopTimer();
+    this.mayorMenorService.stopTimer();
   }
 
   get time(): string {
-    return this.ahorcadoService.getTime();
+    return this.mayorMenorService.getTime();
   }
 
   get livesArray(): any[] {
-    return Array(this.ahorcadoService.getLives()).fill(0);
+    return Array(this.mayorMenorService.getLives()).fill(0);
   }
 
 }

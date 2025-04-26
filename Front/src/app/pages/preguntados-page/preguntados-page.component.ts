@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
+import { PreguntadosService } from '../../services/preguntados/preguntados.service';
 
 @Component({
   selector: 'app-preguntados-page',
@@ -9,22 +9,22 @@ import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
 })
 export class PreguntadosPageComponent {
 
-  constructor(public ahorcadoService: AhorcadoService) { }
+  constructor(public preguntadosService: PreguntadosService) { }
 
   ngOnInit() {
-    this.ahorcadoService.startTimer();
+    this.preguntadosService.startTimer();
   }
 
   ngOnDestroy() {
-    this.ahorcadoService.stopTimer();
+    this.preguntadosService.stopTimer();
   }
 
   get time(): string {
-    return this.ahorcadoService.getTime();
+    return this.preguntadosService.getTime();
   }
 
   get livesArray(): any[] {
-    return Array(this.ahorcadoService.getLives()).fill(0);
+    return Array(this.preguntadosService.getLives()).fill(0);
   }
 
 
