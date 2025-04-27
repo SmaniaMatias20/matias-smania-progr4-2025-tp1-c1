@@ -1,16 +1,14 @@
 <mat-card class="bg-gray-800 text-white shadow-lg flex flex-col h-full rounded-xl overflow-hidden">
-    <!-- Imagen redondeada arriba -->
+
     <div class="w-full h-48 sm:h-56 md:h-64 bg-white flex items-center justify-center">
         <img mat-card-image [src]="image" [alt]="title" class="max-h-full max-w-full object-contain" />
     </div>
 
-    <!-- Contenido -->
     <div class="bg-gray-800 p-4 flex-grow">
         <h2 class="text-lg sm:text-xl font-semibold mt-2">{{ title }}</h2>
         <p class="text-gray-300 mt-1 text-sm sm:text-base">{{ description }}</p>
     </div>
 
-    <!-- Acciones -->
     <mat-card-actions class="bg-gray-800 p-4 pt-0 flex flex-col sm:flex-row gap-2 justify-between">
         <button
             class="bg-white text-gray-800 py-2 px-4 rounded-full shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"

@@ -29,30 +29,36 @@ export const routes: Routes = [
             import('./pages/chat-room/chat-room.component').then((m) => m.ChatRoomComponent),
     },
     {
-        path: 'mayor-menor',
+        path: 'games',
         canActivate: [AuthGuard],
-        loadComponent: () =>
-            import('./pages/mayor-menor-page/mayor-menor-page.component').then(
-                (m) => m.MayorMenorPageComponent
-            ),
-    },
-    {
-        path: 'ahorcado',
-        canActivate: [AuthGuard],
-        loadComponent: () =>
-            import('./pages/ahorcado-page/ahorcado-page.component').then(
-                (m) => m.AhorcadoPageComponent
-            ),
-    },
-    {
-        path: 'preguntados',
-        canActivate: [AuthGuard],
-        loadComponent: () =>
-            import('./pages/preguntados-page/preguntados-page.component').then(
-                (m) => m.PreguntadosPageComponent
-            ),
+        children: [
+            {
+                path: 'mayor-menor',
+                loadComponent: () =>
+                    import('./pages/mayor-menor-page/mayor-menor-page.component').then(
+                        (m) => m.MayorMenorPageComponent
+                    ),
+            },
+            {
+                path: 'ahorcado',
+                loadComponent: () =>
+                    import('./pages/ahorcado-page/ahorcado-page.component').then(
+                        (m) => m.AhorcadoPageComponent
+                    ),
+            },
+            {
+                path: 'preguntados',
+                loadComponent: () =>
+                    import('./pages/preguntados-page/preguntados-page.component').then(
+                        (m) => m.PreguntadosPageComponent
+                    ),
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: '/home',
+            },
+        ],
     },
     { path: '**', redirectTo: 'home' },
 ];
-
-
