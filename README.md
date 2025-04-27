@@ -51,5 +51,5 @@ Proyecto desarrollado en **Angular** con **Supabase** como backend, y **Render**
 
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/tu-repo.git
+   git clone https://github.com/SmaniaMatias20/matias-smania-progr4-2025-tp1-c1
    cd Front
