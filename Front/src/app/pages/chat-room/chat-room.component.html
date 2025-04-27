@@ -14,7 +14,7 @@
                           inline-block px-4 py-2 rounded-xl max-w-[80%] break-words">
 
                     @if (!isMyMessage(msg)) {
-                    <p class="text-sm font-semibold mb-1">
+                    <p class="text-sm font-semibold mb-1" [style.color]="getUserColor(msg.username)">
                         {{ msg.username }}
                     </p>
                     }

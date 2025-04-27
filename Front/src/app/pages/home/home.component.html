@@ -1,12 +1,12 @@
 <h1 class="text-3xl font-bold text-center mb-8 text-white">
-  ¡Bienvenido/a a la sala de juegos{{user() ? " - " + this.user().nombre : ""}}!
+  ¡Bienvenido/a a la sala de juegos{{user() ? " - " + this.user().firstname : ""}}!
 </h1>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
   @for (game of games; track game.title) {
   <app-card-game [title]="game.title" [description]="game.description" [image]="game.image" [link]="game.link"
-    [rules]="game.rules" [lifes]="game.lifes" [time]="game.time" [user]="user().nombre">
+    [rules]="game.rules" [lifes]="game.lifes" [time]="game.time" [user]="user().firstname">
   </app-card-game>
   }
 

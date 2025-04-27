@@ -40,7 +40,7 @@
             <!-- Saludo -->
             <div class="hidden sm:block">
                 @if (user()) {
-                <span class="text-gray-300 text-sm">Hola, {{ user().nombre }}!</span>
+                <span class="text-gray-300 text-sm">Hola, {{ user().firstname }}!</span>
                 }
             </div>
         </div>
@@ -60,7 +60,7 @@
             } @else {
             <button (click)="onLogout()" class="block w-full text-left text-red-400 hover:text-red-500">Cerrar
                 sesión</button>
-            <span class="block text-sm text-gray-400">Hola, {{ user().nombre }}!</span>
+            <span class="block text-sm text-gray-400">Hola, {{ user().firstname }}!</span>
             }
         </div>
         }

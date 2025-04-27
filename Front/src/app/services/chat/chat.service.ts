@@ -15,11 +15,11 @@ export class ChatService {
     return data;
   }
 
-  async sendMessage(userId: string, userName: string, message: string) {
+  async sendMessage(userId: string, firstname: string, lastname: string, message: string) {
     const { error } = await this.db.client.from('messages').insert([
       {
         user_id: userId,
-        username: userName,
+        username: firstname + "-" + lastname,
         message
       }
     ]);

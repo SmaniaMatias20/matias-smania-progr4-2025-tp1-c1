@@ -17,7 +17,6 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (session === null) {
         this.user.set(false);
-        //this.router.navigateByUrl('/home');
         return;
       }
 
@@ -30,7 +29,7 @@ export class AuthService {
         const userId = data.user.id;
 
         const { data: user, error: userError } = await this.supabase
-          .from('usuarios')
+          .from('users')
           .select('*')
           .eq('id', userId)
           .single();
@@ -70,12 +69,12 @@ export class AuthService {
       return { success: false, message: 'No se pudo obtener el usuario después del registro.' };
     }
 
-    const { error: insertError } = await this.supabase.from('usuarios').insert([
+    const { error: insertError } = await this.supabase.from('users').insert([
       {
         id: user.id,
-        nombre: extraData.firstName,
-        apellido: extraData.lastName,
-        edad: extraData.age,
+        firstname: extraData.firstName,
+        lastname: extraData.lastName,
+        age: extraData.age,
       },
     ]);
 

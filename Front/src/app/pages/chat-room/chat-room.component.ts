@@ -13,13 +13,13 @@ export class ChatRoomComponent implements OnInit {
 
   user: any = null;
   messages: any[] = [];
+  userColors: { [username: string]: string } = {};
   message = '';
 
   constructor(private chatService: ChatService, private authService: AuthService) { }
 
   async ngOnInit() {
     this.user = await this.authService.getUser();
-    console.log(this.user.nombre);
     this.messages = await this.chatService.getMessages();
 
     this.chatService.listenToMessages((msg) => {
@@ -29,7 +29,7 @@ export class ChatRoomComponent implements OnInit {
 
   async sendMessage() {
     if (this.message.trim()) {
-      await this.chatService.sendMessage(this.user.id, this.user.nombre, this.message);
+      await this.chatService.sendMessage(this.user.id, this.user.firstname, this.user.lastname, this.message);
       this.message = '';
     }
   }
@@ -41,5 +41,21 @@ export class ChatRoomComponent implements OnInit {
   formatTime(date: string) {
     return new Date(date).toLocaleTimeString();
   }
+
+  getRandomColor(): string {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  getUserColor(username: string): string {
+    if (!this.userColors[username]) {
+      this.userColors[username] = this.getRandomColor();
+    }
+    return this.userColors[username];
+  }
+
+
 
 }
