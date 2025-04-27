@@ -34,20 +34,21 @@ export class RegisterComponent {
     try {
 
       const { email, password, confirmPassword, firstName, lastName, age } = this.registerForm.value;
-      await this.authService.register(email, password, {
+      const response = await this.authService.register(email, password, {
         firstName: firstName,
         lastName: lastName,
         age: age
       });
 
-      this.successMessage = 'Registro completo';
-    } catch (error: any) {
-      if (error.code === 'auth/email-already-in-use') {
-        this.errorMessage = 'El email registrado ya existe.';
+      if (response.success) {
+        this.successMessage = "Usuario registrado correctamente";
       } else {
-        this.errorMessage = 'Otro error.';
+        this.errorMessage = "El usuario ya se encuentra registrado";
       }
+
+    } catch (error: any) {
       console.error(error);
+      this.errorMessage = "Hubo otro error al registrarse";
     }
   }
 }
