@@ -53,12 +53,6 @@ export const routes: Routes = [
                         (m) => m.PreguntadosPageComponent
                     ),
             },
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: '/home',
-            },
         ],
     },
-    { path: '**', redirectTo: 'home' },
 ];

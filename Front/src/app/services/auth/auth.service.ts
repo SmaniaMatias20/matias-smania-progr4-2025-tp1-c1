@@ -141,7 +141,6 @@ export class AuthService {
       return { success: false, message: error.message };
     }
 
-    // Limpiar los datos del usuario al cerrar sesión
     localStorage.removeItem('user');
     this.user.set(false);
     this.router.navigateByUrl('/home');
