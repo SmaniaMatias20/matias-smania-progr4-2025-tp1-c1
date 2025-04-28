@@ -21,7 +21,6 @@
                 <button routerLink="/results" routerLinkActive="border-b-4 border-white"
                     class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Resultados</button>
 
-
                 @if (!user()) {
                 <button routerLink="/auth" routerLinkActive="border-b-4 border-green-500"
                     class="text-gray-300 hover:text-green-400 text-lg font-medium transition duration-200 pb-1 cursor-pointer">
@@ -30,7 +29,7 @@
                 } @else {
                 <button routerLink="/chat" routerLinkActive="border-b-4 border-white"
                     class="text-gray-300 text-lg font-medium transition duration-200 pb-1 cursor-pointer">Chat</button>
-                <button routerLink="/home" (click)="onLogout()"
+                <button routerLink="/home" (click)="requestLogout()"
                     class="text-gray-300 hover:text-red-400 text-lg font-medium transition duration-200 pb-1 cursor-pointer">
                     Cerrar sesión
                 </button>
@@ -55,10 +54,10 @@
             <button routerLink="/chat" class="block w-full text-left text-gray-300 cursor-pointer">Chat</button>
 
             @if (!user()) {
-            <button routerLink="/login" class="block w-full text-left text-green-400 hover:text-green-500">Iniciar
+            <button routerLink="/auth" class="block w-full text-left text-green-400 hover:text-green-500">Iniciar
                 sesión / Registrarse</button>
             } @else {
-            <button (click)="onLogout()" class="block w-full text-left text-red-400 hover:text-red-500">Cerrar
+            <button (click)="requestLogout()" class="block w-full text-left text-red-400 hover:text-red-500">Cerrar
                 sesión</button>
             <span class="block text-sm text-gray-400">Hola, {{ user().firstname }}!</span>
             }
@@ -66,3 +65,10 @@
         }
     </div>
 </nav>
+
+@if(showConfirmLogout()){
+<!-- Modal de confirmación -->
+<app-confirm-dialog title="¿Estás seguro que deseas cerrar la sesión?" message="Confirma o cancela para continuar."
+    (confirm)="confirmLogout()" (cancel)="cancelLogout()">
+</app-confirm-dialog>
+}
