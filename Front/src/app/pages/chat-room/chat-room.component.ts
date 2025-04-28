@@ -14,6 +14,7 @@ export class ChatRoomComponent implements OnInit {
   user: any = null;
   messages: any[] = [];
   userColors: { [username: string]: string } = {};
+  currentDate: string | null = null;
   message = '';
 
   constructor(private chatService: ChatService, private authService: AuthService) { }
@@ -40,6 +41,19 @@ export class ChatRoomComponent implements OnInit {
 
   formatTime(date: string) {
     return new Date(date).toLocaleTimeString();
+  }
+
+  formatDate(date: string) {
+    return new Date(date).toLocaleDateString();
+  }
+
+  showDate(date: string) {
+    let newDate: string = this.formatDate(date);
+    if (this.currentDate !== newDate) {
+      this.currentDate = newDate;
+      return true
+    }
+    return false
   }
 
   getRandomColor(): string {
