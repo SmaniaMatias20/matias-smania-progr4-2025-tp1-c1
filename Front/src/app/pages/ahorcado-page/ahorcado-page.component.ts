@@ -38,7 +38,7 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   exit() {
-    this.router.navigate(['/']); // O la ruta donde esté tu Home
+    this.router.navigate(['/home']); // O la ruta donde esté tu Home
   }
 
 }
