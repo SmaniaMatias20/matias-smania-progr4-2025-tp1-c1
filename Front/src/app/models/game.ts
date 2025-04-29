@@ -3,6 +3,7 @@ export class Game {
     protected totalSeconds: number = 180;
     protected lives: number = 3;
     protected time: string = '03:00';
+    protected isPause: boolean = false;
 
     constructor() { }
 
@@ -28,12 +29,35 @@ export class Game {
         }
     }
 
+    resumeTimer(callback?: () => void) {
+        if (this.timerInterval || this.totalSeconds <= 0) return;
+
+        this.timerInterval = setInterval(() => {
+            if (this.totalSeconds > 0) {
+                this.totalSeconds--;
+                this.updateTimeString();
+            } else {
+                this.stopTimer();
+                if (callback) callback();
+            }
+        }, 1000);
+    }
+
+
     getTime(): string {
         return this.time;
     }
 
     getLives(): number {
         return this.lives;
+    }
+
+    getPause(): boolean {
+        return this.isPause;
+    }
+
+    setPause(isPause: boolean) {
+        this.isPause = isPause;
     }
 
     loseLife() {

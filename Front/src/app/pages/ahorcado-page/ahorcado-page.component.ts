@@ -22,7 +22,7 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   constructor(public ahorcadoService: AhorcadoService, private router: Router) { }
 
   ngOnInit() {
-    this.ahorcadoService.newGame(); // aseguramos nueva partida al entrar
+    this.ahorcadoService.newGame();
     this.ahorcadoService.startTimer(() => {
       alert('¡Se acabó el tiempo! La palabra era: ' + this.ahorcadoService.getWord());
       this.ahorcadoService.newGame();
@@ -64,7 +64,13 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   pause() {
-    this.ahorcadoService.stopTimer();
+    if (this.ahorcadoService.getPause()) {
+      this.ahorcadoService.setPause(false);
+      this.ahorcadoService.resumeTimer();
+    } else {
+      this.ahorcadoService.setPause(true);
+      this.ahorcadoService.stopTimer();
+    }
   }
 
   exit() {
