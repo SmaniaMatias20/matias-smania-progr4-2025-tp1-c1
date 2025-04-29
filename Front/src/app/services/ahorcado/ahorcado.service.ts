@@ -68,4 +68,5 @@ export class AhorcadoService extends Game {
   isLetterUsed(letter: string): boolean {
     return this.guessedLetters.has(letter);
   }
+
 }

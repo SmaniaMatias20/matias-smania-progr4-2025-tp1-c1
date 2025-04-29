@@ -64,13 +64,11 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   pause() {
-    if (this.ahorcadoService.getPause()) {
-      this.ahorcadoService.setPause(false);
-      this.ahorcadoService.resumeTimer();
-    } else {
-      this.ahorcadoService.setPause(true);
-      this.ahorcadoService.stopTimer();
-    }
+    this.ahorcadoService.pause();
+  }
+
+  resume() {
+    this.ahorcadoService.resume();
   }
 
   exit() {

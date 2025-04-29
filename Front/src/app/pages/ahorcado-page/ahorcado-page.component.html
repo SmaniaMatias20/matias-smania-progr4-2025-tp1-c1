@@ -16,10 +16,17 @@
 
         <!-- Botones a la derecha -->
         <div class="flex gap-2">
+            @if (ahorcadoService.getPause()) {
+            <button (click)="resume()"
+                class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
+                <span class="material-icons text-sm">play_arrow</span>
+            </button>
+            } @else {
             <button (click)="pause()"
                 class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
                 <span class="material-icons text-sm">pause</span>
             </button>
+            }
 
             <!-- Botón Salir -->
             <button (click)="exit()"
@@ -27,6 +34,7 @@
                 <span class="material-icons text-sm">logout</span>
             </button>
         </div>
+
     </div>
 
     <!-- Contenedor imagen + palabra centrados -->

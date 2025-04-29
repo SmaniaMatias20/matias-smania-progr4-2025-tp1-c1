@@ -73,4 +73,14 @@ export class Game {
     protected padZero(num: number): string {
         return num < 10 ? `0${num}` : `${num}`;
     }
+
+    pause() {
+        this.setPause(true);
+        this.stopTimer();
+    }
+
+    resume() {
+        this.setPause(false);
+        this.resumeTimer();
+    }
 }
