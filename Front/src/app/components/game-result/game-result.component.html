@@ -1,0 +1,17 @@
+<div class="fixed inset-0 flex items-center justify-center bg-opacity-0 z-50 backdrop-blur-sm">
+    <div class="bg-gray-900 text-white rounded-lg p-6 text-center w-[90%] max-w-sm shadow-sm">
+
+        @if (isVictory) {
+        <h2 class="text-2xl font-semibold mb-4 text-green-400">¡Victoria!</h2>
+        } @else {
+        <h2 class="text-2xl font-semibold mb-4 text-red-400">Derrota</h2>
+        }
+        <p class="text-base mb-4">{{ message }}</p>
+
+        <!-- Botón de continuar -->
+        <button (click)="navigateToHome()"
+            class="bg-white text-gray-800 py-2 px-4 rounded-full shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto">
+            Continuar
+        </button>
+    </div>
+</div>
