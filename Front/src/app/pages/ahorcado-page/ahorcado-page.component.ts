@@ -22,7 +22,11 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   constructor(public ahorcadoService: AhorcadoService, private router: Router) { }
 
   ngOnInit() {
-    this.ahorcadoService.startTimer();
+    this.ahorcadoService.newGame(); // aseguramos nueva partida al entrar
+    this.ahorcadoService.startTimer(() => {
+      alert('¡Se acabó el tiempo! La palabra era: ' + this.ahorcadoService.getWord());
+      this.ahorcadoService.newGame();
+    });
   }
 
   ngOnDestroy() {
@@ -37,8 +41,34 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     return Array(this.ahorcadoService.getLives()).fill(0);
   }
 
-  exit() {
-    this.router.navigate(['/home']); // O la ruta donde esté tu Home
+  get displayedWord(): string[] {
+    return this.ahorcadoService.getDisplayedWord();
   }
 
+  guess(letter: string) {
+    if (!this.ahorcadoService.isLetterUsed(letter) && !this.ahorcadoService.isGameOver()) {
+      this.ahorcadoService.guessLetter(letter);
+
+      if (this.ahorcadoService.isGameWon()) {
+        alert('¡Ganaste!');
+        this.ahorcadoService.newGame();
+      } else if (this.ahorcadoService.isGameOver()) {
+        alert('¡Perdiste! La palabra era: ' + this.ahorcadoService.getWord());
+        this.ahorcadoService.newGame();
+      }
+    }
+  }
+
+  isLetterUsed(letter: string): boolean {
+    return this.ahorcadoService.isLetterUsed(letter);
+  }
+
+  pause() {
+    this.ahorcadoService.stopTimer();
+  }
+
+  exit() {
+    this.ahorcadoService.stopTimer();
+    this.router.navigate(['/home']);
+  }
 }

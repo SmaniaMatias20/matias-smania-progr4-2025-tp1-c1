@@ -36,6 +36,10 @@ export class Game {
         return this.lives;
     }
 
+    loseLife() {
+        this.lives = Math.max(0, this.lives - 1);
+    }
+
     protected updateTimeString() {
         const minutes = Math.floor(this.totalSeconds / 60);
         const seconds = this.totalSeconds % 60;

@@ -7,14 +7,33 @@
 
     <!-- Header superior -->
     <div class="flex w-full justify-between items-center p-4 relative">
-        <!-- Vidas a la izquierda -->
-        <div class="flex items-center gap-1 md:gap-2">
-            @for (life of livesArray; track $index) {
-            <span class="material-icons text-white text-xl md:text-2xl">
-                favorite
-            </span>
+
+        <!-- Vidas representadas como partes del ahorcado -->
+        <div class="flex items-center gap-1 md:gap-2 ">
+            @for (index of livesArray; track index) {
+            @switch(index) {
+            @case(0) {
+            <img src="assets/ahorcado/cabeza.svg" alt="Cabeza" class="w-6 h-6 md:w-8 md:h-8" />
+            }
+            @case(1) {
+            <img src="assets/ahorcado/torso.svg" alt="Torso" class="w-6 h-6 md:w-8 md:h-8" />
+            }
+            @case(2) {
+            <img src="assets/ahorcado/brazo-izq.svg" alt="Brazo Izquierdo" class="w-6 h-6 md:w-8 md:h-8" />
+            }
+            @case(3) {
+            <img src="assets/ahorcado/brazo-der.svg" alt="Brazo Derecho" class="w-6 h-6 md:w-8 md:h-8" />
+            }
+            @case(4) {
+            <img src="assets/ahorcado/pierna-izq.svg" alt="Pierna Izquierda" class="w-6 h-6 md:w-8 md:h-8" />
+            }
+            @case(5) {
+            <img src="assets/ahorcado/pierna-der.svg" alt="Pierna Derecha" class="w-6 h-6 md:w-8 md:h-8" />
+            }
+            }
             }
         </div>
+
 
         <!-- Timer al centro -->
         <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
@@ -22,9 +41,10 @@
             <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
         </div>
 
+        <!-- Botones a la derecha -->
         <div class="flex gap-2">
             <!-- Botón Pausa -->
-            <button (click)="exit()"
+            <button (click)="pause()"
                 class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
                 <span class="material-icons text-sm">pause</span>
             </button>
@@ -34,18 +54,29 @@
                 class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
                 <span class="material-icons text-sm">logout</span>
             </button>
-
-
         </div>
     </div>
 
-    <!-- Cuerpo del juego -->
+    <!-- Palabra a adivinar -->
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+        <div class="flex justify-center gap-2">
+            @for (char of displayedWord; track $index) {
+            <span class="text-white text-3xl font-mono border-b-2 px-2">
+                {{ char }}
+            </span>
+            }
+        </div>
+    </div>
+
+
+    <!-- Letras del teclado -->
     <div class="p-2 sm:p-4 flex flex-col justify-center gap-2 mt-auto w-full">
         @for (row of rowsLetters; track row) {
         <div class="flex justify-center gap-1 sm:gap-2 mb-2 w-full">
             @for (letter of row; track letter) {
-            <button
-                class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gray-700 hover:bg-gray-600 rounded text-white font-bold text-sm sm:text-base">
+            <button (click)="guess(letter)" [disabled]="isLetterUsed(letter) || ahorcadoService.isGameOver()" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 
+                   bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed 
+                   rounded text-white font-bold text-sm sm:text-base">
                 {{ letter }}
             </button>
             }
