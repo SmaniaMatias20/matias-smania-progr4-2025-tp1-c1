@@ -30,22 +30,23 @@
     </div>
 
     <!-- Contenedor imagen + palabra centrados -->
-    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-        <div class="flex flex-row items-center justify-center gap-6 sm:gap-8 md:gap-12">
+    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-6 md:gap-10">
             <!-- Imagen del ahorcado -->
             <img [src]="'assets/images/ahorcado/' + (7 - livesArray.length) + '.png'" alt="Estado del Ahorcado"
-                class="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 rounded-lg" />
+                class="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 rounded-lg" />
 
-            <!-- Palabra a adivinar -->
-            <div class="flex gap-2">
+            <!-- Palabra -->
+            <div class="flex gap-1 sm:gap-2 flex-wrap justify-center">
                 @for (char of displayedWord; track $index) {
-                <span class="text-white text-3xl font-mono border-b-2 px-2">
+                <span class="text-white text-2xl sm:text-3xl md:text-4xl font-mono border-b-2 px-1 sm:px-2">
                     {{ char }}
                 </span>
                 }
             </div>
         </div>
     </div>
+
 
     <!-- Letras del teclado -->
     <div class="p-2 sm:p-4 flex flex-col justify-center gap-2 mt-auto w-full">
