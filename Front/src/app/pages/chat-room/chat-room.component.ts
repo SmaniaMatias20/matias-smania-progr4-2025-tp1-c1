@@ -39,22 +39,17 @@ export class ChatRoomComponent implements OnInit {
     return msg.user_id === this.user.id;
   }
 
-  formatTime(date: string) {
-    return new Date(date).toLocaleTimeString();
+  formatTime(date: string): string {
+    const d = new Date(date);
+
+    const time = d.toLocaleTimeString('en-US', { hour12: false });
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+
+    return `${time} - ${year}/${month}/${day}`;
   }
 
-  formatDate(date: string) {
-    return new Date(date).toLocaleDateString();
-  }
-
-  showDate(date: string) {
-    let newDate: string = this.formatDate(date);
-    if (this.currentDate !== newDate) {
-      this.currentDate = newDate;
-      return true
-    }
-    return false
-  }
 
   getRandomColor(): string {
     const r = Math.floor(Math.random() * 256);

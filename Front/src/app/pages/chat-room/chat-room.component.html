@@ -6,11 +6,6 @@
         <div class="flex-1 overflow-y-auto bg-gray-800 p-4 rounded shadow-inner space-y-3">
             @for (msg of messages; track msg) {
 
-            @if(showDate(msg.created_at)){
-            <p>{{currentDate}}</p>
-            }
-
-
             <div class="{{ isMyMessage(msg) ? 'text-right' : 'text-left' }}">
                 <div class="{{ isMyMessage(msg) 
                               ? 'bg-gray-700 text-white text-left'
