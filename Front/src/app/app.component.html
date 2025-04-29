@@ -1,4 +1,6 @@
+@if(showNavbarAndFooter){
 <app-navbar></app-navbar>
+}
 
 <div class="min-h-screen flex flex-col bg-gray-900 text-white">
     <div class="flex-grow flex items-center justify-center p-4">
@@ -6,5 +8,6 @@
     </div>
 </div>
 
-
+@if(showNavbarAndFooter){
 <app-footer></app-footer>
+}
