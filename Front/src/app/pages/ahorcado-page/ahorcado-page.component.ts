@@ -16,9 +16,6 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   ];
 
-  gameFinished: boolean = false;
-  gameWon: boolean = false;
-
   constructor(public ahorcadoService: AhorcadoService, private router: Router) { }
 
   ngOnInit() {
@@ -42,13 +39,8 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   guess(letter: string) {
-    if (!this.ahorcadoService.isLetterUsed(letter) && !this.gameFinished) {
+    if (!this.ahorcadoService.isLetterUsed(letter) && !this.ahorcadoService.getFinished()) {
       this.ahorcadoService.guessLetter(letter);
-
-      if (this.ahorcadoService.getFinished()) {
-        this.gameFinished = true;
-        this.gameWon = this.ahorcadoService.getVictory();
-      }
     }
   }
 
@@ -75,13 +67,9 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
 
   private newGame() {
     this.ahorcadoService.newGame();
-    this.gameFinished = false;
-    this.gameWon = false;
 
     this.ahorcadoService.startTimer(() => {
       this.ahorcadoService.endGame(false);
-      this.gameFinished = true;
-      this.gameWon = false;
     });
   }
 
