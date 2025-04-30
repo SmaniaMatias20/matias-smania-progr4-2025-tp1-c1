@@ -72,7 +72,6 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   pause() {
-    console.log("log de page ahorcado");
     this.ahorcadoService.pause();
   }
 
