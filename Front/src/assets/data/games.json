@@ -4,7 +4,7 @@
         "description": "Adivina la palabra antes de que se complete el dibujo. ¡Pon a prueba tu vocabulario!",
         "image": "assets/images/ahorcado/ahorcado.jpg",
         "link": "/games/ahorcado",
-        "rules": "El objetivo del juego es adivinar una palabra secreta letra por letra. Cada letra incorrecta suma una parte del dibujo del ahorcado y cada palabra completa suma 1000 puntos.  ¡Usá tu lógica y vocabulario para ganar!",
+        "rules": "El objetivo del juego es adivinar una palabra secreta letra por letra. Cada letra incorrecta suma una parte del dibujo del ahorcado y cada palabra completa suma 1000 puntos. El juego consta de un total de 5 palabras. ¡Usá tu lógica y vocabulario para ganar!",
         "lifes": "6",
         "time": "3:00"
     },

@@ -84,7 +84,7 @@
 
     <!-- Mostrar resultado del juego -->
     @if (finished) {
-    <app-game-result [isVictory]="victory" message="holaaa" (playAgain)="playAgain()"
+    <app-game-result [isVictory]="victory" [score]="score" (playAgain)="playAgain()"
         class="absolute inset-0 z-20 bg-black bg-opacity-80 flex items-center justify-center rounded-lg">
     </app-game-result>
     }
