@@ -6,17 +6,10 @@
     relative">
 
     <!-- Header superior -->
-    <div class="flex w-full justify-between items-center p-4 relative">
+    <div class="flex w-full items-center justify-between p-4 relative">
 
-        <!-- Timer al centro -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
-            <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
-            <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
-            <span class="text-lg font-bold text-white md:text-2xl">{{ score }}</span>
-        </div>
-
-        <!-- Botones a la derecha -->
-        <div class="flex gap-2">
+        <!-- Botones a la izquierda -->
+        <div class="flex items-center gap-2">
             @if (paused) {
             <button (click)="resume()"
                 class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
@@ -36,7 +29,20 @@
             </button>
         </div>
 
+        <!-- Timer al centro -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
+            <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
+            <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
+        </div>
+
+        <!-- Score a la derecha -->
+        <div class="text-white text-sm md:text-base font-medium opacity-80">
+            {{ score }}
+        </div>
+
     </div>
+
+
 
     <!-- Contenedor imagen + palabra centrados -->
     <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
