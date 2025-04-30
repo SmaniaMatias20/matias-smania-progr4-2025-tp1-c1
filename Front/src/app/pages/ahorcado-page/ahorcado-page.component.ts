@@ -45,10 +45,9 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     if (!this.ahorcadoService.isLetterUsed(letter) && !this.gameFinished) {
       this.ahorcadoService.guessLetter(letter);
 
-      if (this.ahorcadoService.isGameWon()) {
-        this.endGame(true);
-      } else if (this.ahorcadoService.isGameOver()) {
-        this.endGame(false);
+      if (this.ahorcadoService.getFinished()) {
+        this.gameFinished = true;
+        this.gameWon = this.ahorcadoService.getVictory();
       }
     }
   }
@@ -80,17 +79,10 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     this.gameWon = false;
 
     this.ahorcadoService.startTimer(() => {
-      this.endGame(false, true);
+      this.ahorcadoService.endGame(false);
+      this.gameFinished = true;
+      this.gameWon = false;
     });
   }
 
-  private endGame(won: boolean, timeout: boolean = false) {
-    this.ahorcadoService.stopTimer();
-    this.gameFinished = true;
-    this.gameWon = won;
-
-    if (timeout && !won) {
-      console.log('¡Tiempo agotado!');
-    }
-  }
 }

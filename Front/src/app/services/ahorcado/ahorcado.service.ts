@@ -37,7 +37,7 @@ export class AhorcadoService extends Game {
   private loadNewWord(): void {
     const remainingWords = this.wordList.filter(word => !this.guessedWords.has(word));
     if (remainingWords.length === 0) {
-      this.winGame();
+      this.endGame(true);
       return;
     }
     this.word = this.getRandomWord();
@@ -65,7 +65,13 @@ export class AhorcadoService extends Game {
     if (this.isGameWon()) {
       this.setScore(this.getScore() + 100);
       this.guessedWords.add(this.word);
-      this.loadNewWord();
+
+      const allWordsGuessed = this.guessedWords.size === this.wordList.length;
+      if (allWordsGuessed) {
+        this.endGame(true);
+      } else {
+        this.loadNewWord();
+      }
     } else if (this.isGameOver()) {
       this.loseGame();
     }
@@ -91,5 +97,11 @@ export class AhorcadoService extends Game {
 
   isLetterUsed(letter: string): boolean {
     return this.guessedLetters.has(letter);
+  }
+
+  endGame(won: boolean) {
+    this.stopTimer();
+    this.finished = true;
+    this.victory = won;
   }
 }

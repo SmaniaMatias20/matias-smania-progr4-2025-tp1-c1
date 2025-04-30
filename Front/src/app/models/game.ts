@@ -66,12 +66,20 @@ export class Game {
         return this.isPause;
     }
 
+    getVictory(): boolean {
+        return this.victory;
+    }
+
+    getFinished(): boolean {
+        return this.finished;
+    }
+
     setPause(isPause: boolean) {
         this.isPause = isPause;
     }
 
     setScore(score: number) {
-        this.score += score;
+        this.score = score;
     }
 
     loseLife() {
