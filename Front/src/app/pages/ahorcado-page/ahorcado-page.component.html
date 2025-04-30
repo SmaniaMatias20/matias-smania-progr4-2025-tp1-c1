@@ -23,7 +23,7 @@
             }
 
             <!-- Botón Salir -->
-            <button (click)="exit()"
+            <button (click)="requestExit()"
                 class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
                 <span class="material-icons text-sm">logout</span>
             </button>
@@ -90,5 +90,10 @@
     </app-game-result>
     }
 
-
+    @if(showConfirmExit()){
+    <!-- Modal de confirmación -->
+    <app-confirm-dialog title="¿Estás seguro que deseas salir del juego?" message="Perderás la partida en curso."
+        (confirm)="confirmExit()" (cancel)="cancelExit()">
+    </app-confirm-dialog>
+    }
 </div>

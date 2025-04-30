@@ -1,15 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ahorcado-page',
-  imports: [GameResultComponent],
+  imports: [GameResultComponent, ConfirmDialogComponent],
   templateUrl: './ahorcado-page.component.html',
   styleUrls: ['./ahorcado-page.component.css']
 })
 export class AhorcadoPageComponent implements OnInit, OnDestroy {
+
+  showConfirmExit = signal(false);
 
   rowsLetters: string[][] = [
     ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'],
@@ -83,6 +86,19 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     this.ahorcadoService.startTimer(() => {
       this.ahorcadoService.endGame(false);
     });
+  }
+
+  requestExit() {
+    this.showConfirmExit.set(true);
+  }
+
+  confirmExit() {
+    this.showConfirmExit.set(false);
+    this.exit();
+  }
+
+  cancelExit() {
+    this.showConfirmExit.set(false);
   }
 
 }
