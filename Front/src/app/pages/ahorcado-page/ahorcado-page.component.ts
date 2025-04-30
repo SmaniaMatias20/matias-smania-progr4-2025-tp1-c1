@@ -22,7 +22,7 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   constructor(public ahorcadoService: AhorcadoService, private router: Router) { }
 
   ngOnInit() {
-    this.newGame();
+    this.ahorcadoService.newGame();
   }
 
   ngOnDestroy() {
@@ -58,7 +58,7 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   get victory(): boolean {
-    return this.ahorcadoService.isVictory();
+    return this.ahorcadoService.getVictory();
   }
 
   guess(letter: string) {
@@ -72,6 +72,7 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   pause() {
+    console.log("log de page ahorcado");
     this.ahorcadoService.pause();
   }
 
@@ -85,16 +86,9 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
   }
 
   playAgain() {
-    this.newGame();
-  }
-
-  private newGame() {
     this.ahorcadoService.newGame();
-
-    this.ahorcadoService.startTimer(() => {
-      this.ahorcadoService.endGame(false);
-    });
   }
+
 
   requestExit() {
     this.showConfirmExit.set(true);

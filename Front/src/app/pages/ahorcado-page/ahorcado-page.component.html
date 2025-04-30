@@ -8,7 +8,7 @@
     <!-- Header superior -->
     <div class="flex w-full items-center justify-between p-4 relative">
 
-        <!-- Botones a la izquierda -->
+        <!-- Botones play/pause -->
         <div class="flex items-center gap-2">
             @if (paused) {
             <button (click)="resume()"
@@ -29,13 +29,13 @@
             </button>
         </div>
 
-        <!-- Timer al centro -->
+        <!-- Timer  -->
         <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
             <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
             <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
         </div>
 
-        <!-- Score a la derecha -->
+        <!-- Score  -->
         <div
             class="text-white text-sm md:text-base font-medium opacity-80 border-2 rounded-lg p-2 flex items-center gap-1">
             <span class="material-icons text-white">star</span>
@@ -47,7 +47,7 @@
 
 
 
-    <!-- Contenedor imagen + palabra centrados -->
+    <!-- Contenedor imagenes ahorcado -->
     <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-6 md:gap-10">
             <!-- Imagen del ahorcado -->
