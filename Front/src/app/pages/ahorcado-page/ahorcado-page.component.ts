@@ -30,12 +30,24 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     return this.ahorcadoService.getTime();
   }
 
+  get score(): number {
+    return this.ahorcadoService.getScore();
+  }
+
+  get finished(): boolean {
+    return this.ahorcadoService.getFinished();
+  }
+
   get livesArray(): any[] {
     return Array(this.ahorcadoService.getLives()).fill(0);
   }
 
   get displayedWord(): string[] {
     return this.ahorcadoService.getDisplayedWord();
+  }
+
+  get paused(): boolean {
+    return this.ahorcadoService.getPause();
   }
 
   guess(letter: string) {

@@ -63,7 +63,7 @@ export class AhorcadoService extends Game {
     }
 
     if (this.isGameWon()) {
-      this.setScore(this.getScore() + 100);
+      this.setScore(this.getScore() + 1000);
       this.guessedWords.add(this.word);
 
       const allWordsGuessed = this.guessedWords.size === this.wordList.length;

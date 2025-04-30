@@ -12,12 +12,12 @@
         <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
             <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
             <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
-            <span class="text-lg font-bold text-white md:text-2xl">{{ this.ahorcadoService.getScore() }}</span>
+            <span class="text-lg font-bold text-white md:text-2xl">{{ score }}</span>
         </div>
 
         <!-- Botones a la derecha -->
         <div class="flex gap-2">
-            @if (ahorcadoService.getPause()) {
+            @if (paused) {
             <button (click)="resume()"
                 class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
                 <span class="material-icons text-sm">play_arrow</span>
@@ -74,7 +74,7 @@
 
 
     <!-- Mostrar resultado del juego -->
-    @if (ahorcadoService.getFinished()) {
+    @if (finished) {
     <app-game-result [isVictory]="ahorcadoService.getVictory()" [message]="ahorcadoService.getWord()"
         (playAgain)="playAgain()"
         class="absolute inset-0 z-20 bg-black bg-opacity-80 flex items-center justify-center rounded-lg">
