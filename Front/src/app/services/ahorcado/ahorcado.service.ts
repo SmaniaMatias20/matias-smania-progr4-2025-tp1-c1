@@ -9,6 +9,7 @@ export class AhorcadoService extends Game {
   private displayed: string[] = [];
   private guessedLetters: Set<string> = new Set();
   private wordList = ['ANGULAR', 'PROGRAMAR', 'DESARROLLO', 'AHORCADO'];
+  private guessedWords: Set<string> = new Set();
 
   constructor() {
     super();
@@ -16,20 +17,32 @@ export class AhorcadoService extends Game {
   }
 
   newGame() {
-    this.word = this.getRandomWord();
-    this.displayed = Array(this.word.length).fill('_');
-    this.guessedLetters.clear();
+    this.setScore(0);
     this.lives = 6;
     this.totalSeconds = 180;
     this.finished = false;
     this.victory = false;
-    this.isPause = false;
+    this.guessedWords.clear();
+    this.setPause(false);
     this.updateTimeString();
+    this.loadNewWord();
   }
 
   private getRandomWord(): string {
-    const index = Math.floor(Math.random() * this.wordList.length);
-    return this.wordList[index];
+    const remainingWords = this.wordList.filter(word => !this.guessedWords.has(word));
+    const index = Math.floor(Math.random() * remainingWords.length);
+    return remainingWords[index];
+  }
+
+  private loadNewWord(): void {
+    const remainingWords = this.wordList.filter(word => !this.guessedWords.has(word));
+    if (remainingWords.length === 0) {
+      this.winGame();
+      return;
+    }
+    this.word = this.getRandomWord();
+    this.displayed = Array(this.word.length).fill('_');
+    this.guessedLetters.clear();
   }
 
   guessLetter(letter: string): boolean {
@@ -50,7 +63,9 @@ export class AhorcadoService extends Game {
     }
 
     if (this.isGameWon()) {
-      this.winGame();
+      this.setScore(this.getScore() + 100);
+      this.guessedWords.add(this.word);
+      this.loadNewWord();
     } else if (this.isGameOver()) {
       this.loseGame();
     }

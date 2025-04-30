@@ -8,6 +8,7 @@ export class Game {
     protected isPause: boolean = false;
     protected victory: boolean = false;
     protected finished: boolean = false;
+    protected score: number = 0;
 
     constructor() { }
 
@@ -49,6 +50,10 @@ export class Game {
         }, 1000);
     }
 
+    getScore(): number {
+        return this.score;
+    }
+
     getTime(): string {
         return this.time;
     }
@@ -63,6 +68,10 @@ export class Game {
 
     setPause(isPause: boolean) {
         this.isPause = isPause;
+    }
+
+    setScore(score: number) {
+        this.score += score;
     }
 
     loseLife() {
