@@ -53,6 +53,14 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
     return this.ahorcadoService.getPause();
   }
 
+  get word(): string {
+    return this.ahorcadoService.getWord();
+  }
+
+  get victory(): boolean {
+    return this.ahorcadoService.isVictory();
+  }
+
   guess(letter: string) {
     if (!this.ahorcadoService.isLetterUsed(letter) && !this.ahorcadoService.getFinished()) {
       this.ahorcadoService.guessLetter(letter);

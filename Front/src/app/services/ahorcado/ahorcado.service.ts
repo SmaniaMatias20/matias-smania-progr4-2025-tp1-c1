@@ -62,7 +62,7 @@ export class AhorcadoService extends Game {
       this.loseLife();
     }
 
-    if (this.isGameWon()) {
+    if (this.isRoundWon()) {
       this.setScore(this.getScore() + 1000);
       this.guessedWords.add(this.word);
       this.lives = 6;
@@ -84,7 +84,7 @@ export class AhorcadoService extends Game {
     return this.displayed;
   }
 
-  isGameWon(): boolean {
+  isRoundWon(): boolean {
     return !this.displayed.includes('_');
   }
 

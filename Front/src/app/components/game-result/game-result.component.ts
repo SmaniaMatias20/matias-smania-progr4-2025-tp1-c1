@@ -12,7 +12,6 @@ export class GameResultComponent {
 
   constructor(private router: Router) { }
 
-  // Función para navegar al home
   navigateToHome() {
     this.router.navigate(['/home']);
   }
