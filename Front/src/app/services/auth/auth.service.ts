@@ -23,6 +23,18 @@ export class AuthService {
         return;
       }
 
+
+      if (session && session.expires_at) {
+        localStorage.setItem('session_expires_at', session.expires_at.toString());
+
+        const msUntilExpire = session.expires_at * 1000 - Date.now();
+        if (msUntilExpire > 0) {
+          setTimeout(() => {
+            this.logout();
+          }, msUntilExpire);
+        }
+      }
+
       this.supabase.auth.getUser().then(async ({ data, error }) => {
         if (error) {
           console.error('Error al obtener el usuario autenticado:', error.message);
@@ -49,6 +61,13 @@ export class AuthService {
 
   private checkSession() {
     const storedUser = localStorage.getItem('user');
+    const expiresAt = localStorage.getItem('session_expires_at');
+
+    if (expiresAt && Date.now() / 1000 > parseInt(expiresAt)) {
+      this.logout();
+      return;
+    }
+
     if (storedUser) {
       this.user.set(JSON.parse(storedUser));
     } else {
