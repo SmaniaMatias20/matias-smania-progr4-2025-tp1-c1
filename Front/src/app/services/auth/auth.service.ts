@@ -8,7 +8,7 @@ import { DatabaseService } from '../database/database.service';
 })
 export class AuthService {
   private supabase: SupabaseClient;
-  user = signal<User | Boolean>(false);
+  user = signal<User | boolean>(false);
   router = inject(Router);
 
   constructor(private db: DatabaseService) {

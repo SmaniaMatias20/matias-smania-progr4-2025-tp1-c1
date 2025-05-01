@@ -1,7 +1,10 @@
 import { DatabaseService } from '../services/database/database.service';
+import { AuthService } from '../services/auth/auth.service';
+import { User } from '@supabase/supabase-js';
 
 export class Game {
     protected supabase: DatabaseService = new DatabaseService();
+    protected authService: AuthService = new AuthService(this.supabase);
     protected timerInterval: any;
     protected totalSeconds: number = 180;
     protected lives: number = 3;
@@ -10,8 +13,14 @@ export class Game {
     protected victory: boolean = false;
     protected finished: boolean = false;
     protected score: number = 0;
+    protected user: User | boolean = this.authService.getUser();
+    protected userId = typeof this.user === 'object' && this.user !== null ? this.user.id : null;
+    // protected userFirstName = typeof this.user === 'object' && this.user !== null ? this.user.firstname : null;
+    // protected userLastName = typeof this.user === 'object' && this.user !== null ? this.user.lastname : null;
+
 
     constructor() {
+        console.log(this.user);
     }
 
     startTimer(callback?: () => void) {
@@ -84,6 +93,10 @@ export class Game {
         this.score = score;
     }
 
+    setVictory(victory: boolean) {
+        this.victory = victory;
+    }
+
     loseLife() {
         this.lives = Math.max(0, this.lives - 1);
     }
@@ -108,12 +121,14 @@ export class Game {
         this.resumeTimer();
     }
 
-    async saveResult(data: { id_user: number; id_game: number; score: number; victory: boolean }) {
+    async saveResult(data: { id_user: string | null; id_game: string; firstname: string | null; lastname: string | null; score: number; victory: boolean }) {
         if (!this.supabase) throw new Error('Supabase client not initialized');
 
         const { error } = await this.supabase.client.from('results').insert({
             id_user: data.id_user,
             id_game: data.id_game,
+            firstname: data.firstname,
+            lastname: data.lastname,
             score: data.score,
             victory: data.victory
         });
@@ -122,7 +137,7 @@ export class Game {
     }
 
     // Método que finaliza el juego y guarda el resultado
-    async endGame(won: boolean, gameName: string, userId: number): Promise<void> {
+    async endGame(won: boolean, gameName: string): Promise<void> {
         this.stopTimer();
         this.finished = true;
         this.victory = won;
@@ -130,16 +145,25 @@ export class Game {
         try {
             // Obtener el id_game usando el nombre del juego desde el servicio
             const idGame = await this.supabase.getGameIdByName(gameName);
+            const user = await this.supabase.getUserById(this.userId);
+
+            if (!user) {
+                console.error('No se encontró el usuario con ese id');
+                return;
+            }
 
             if (idGame === null) {
                 console.error('No se encontró el juego con ese nombre');
                 return;
             }
 
-            // Guardar en Supabase
+            const { firstname, lastname } = user;
+
             await this.saveResult({
-                id_user: userId,
+                id_user: this.userId,
                 id_game: idGame,
+                firstname: firstname,
+                lastname: lastname,
                 score: this.score,
                 victory: this.victory
             });

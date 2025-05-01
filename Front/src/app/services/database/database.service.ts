@@ -17,7 +17,7 @@ export class DatabaseService {
   }
 
 
-  async getGameIdByName(name: string): Promise<number | null> {
+  async getGameIdByName(name: string): Promise<string | null> {
     const { data, error } = await this.supabase
       .from('games')
       .select('id')
@@ -31,4 +31,20 @@ export class DatabaseService {
 
     return data ? data.id : null;
   }
+
+  async getUserById(userId: string | null): Promise<{ firstname: string, lastname: string } | null> {
+    const { data, error } = await this.supabase
+      .from('users')
+      .select('firstname, lastname')
+      .eq('id', userId)
+      .single();
+
+    if (error) {
+      console.error('Error al obtener datos del usuario:', error);
+      return null;
+    }
+
+    return data ? { firstname: data.firstname, lastname: data.lastname } : null;
+  }
+
 }
