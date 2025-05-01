@@ -15,9 +15,6 @@ export class Game {
     protected score: number = 0;
     protected user: User | boolean = this.authService.getUser();
     protected userId = typeof this.user === 'object' && this.user !== null ? this.user.id : null;
-    // protected userFirstName = typeof this.user === 'object' && this.user !== null ? this.user.firstname : null;
-    // protected userLastName = typeof this.user === 'object' && this.user !== null ? this.user.lastname : null;
-
 
     constructor() {
         console.log(this.user);
@@ -93,6 +90,10 @@ export class Game {
         this.score = score;
     }
 
+    setLives(lives: number) {
+        this.lives = lives
+    }
+
     setVictory(victory: boolean) {
         this.victory = victory;
     }
@@ -121,7 +122,7 @@ export class Game {
         this.resumeTimer();
     }
 
-    async saveResult(data: { id_user: string | null; id_game: string; firstname: string | null; lastname: string | null; score: number; victory: boolean }) {
+    private async saveResult(data: { id_user: string | null; id_game: string; firstname: string | null; lastname: string | null; score: number; victory: boolean }) {
         if (!this.supabase) throw new Error('Supabase client not initialized');
 
         const { error } = await this.supabase.client.from('results').insert({

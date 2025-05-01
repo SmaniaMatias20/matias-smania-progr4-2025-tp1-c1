@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class AhorcadoPageComponent implements OnInit, OnDestroy {
 
   showConfirmExit = signal(false);
-
   rowsLetters: string[][] = [
     ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'],
     ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -59,6 +58,10 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
 
   get victory(): boolean {
     return this.ahorcadoService.getVictory();
+  }
+
+  get roundVictory(): boolean {
+    return this.ahorcadoService.isRoundWon();
   }
 
   guess(letter: string) {

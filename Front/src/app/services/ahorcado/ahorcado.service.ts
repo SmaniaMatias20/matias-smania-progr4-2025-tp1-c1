@@ -11,6 +11,7 @@ export class AhorcadoService extends Game {
   private guessedLetters: Set<string> = new Set();
   private wordList = ['ANGULAR', 'PROGRAMAR', 'DESARROLLO', 'AHORCADO'];
   private guessedWords: Set<string> = new Set();
+  private roundPoints = 1000;
 
   constructor() {
     super();
@@ -18,7 +19,7 @@ export class AhorcadoService extends Game {
 
   newGame() {
     this.setScore(0);
-    this.lives = 6;
+    this.setLives(6);
     this.totalSeconds = 180;
     this.finished = false;
     this.victory = false;
@@ -67,9 +68,9 @@ export class AhorcadoService extends Game {
     }
 
     if (this.isRoundWon()) {
-      this.setScore(this.getScore() + 1000);
+      this.setScore(this.getScore() + this.roundPoints);
       this.guessedWords.add(this.word);
-      this.lives = 6;
+      this.setLives(6);
 
       const allWordsGuessed = this.guessedWords.size === this.wordList.length;
       if (allWordsGuessed) {
