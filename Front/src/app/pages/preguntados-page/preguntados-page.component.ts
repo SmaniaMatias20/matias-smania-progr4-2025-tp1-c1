@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { PreguntadosService } from '../../services/preguntados/preguntados.service';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { GameResultComponent } from '../../components/game-result/game-result.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preguntados-page',
-  imports: [],
+  standalone: true,
+  imports: [GameResultComponent, ConfirmDialogComponent],
   templateUrl: './preguntados-page.component.html',
-  styleUrl: './preguntados-page.component.css'
+  styleUrls: ['./preguntados-page.component.css']
 })
-export class PreguntadosPageComponent {
+export class PreguntadosPageComponent implements OnInit, OnDestroy {
 
-  constructor(public preguntadosService: PreguntadosService) { }
+  showConfirmExit = signal(false);
+  constructor(public preguntadosService: PreguntadosService, private router: Router) { }
 
   ngOnInit() {
-    this.preguntadosService.startTimer();
+    this.preguntadosService.newGame();
   }
 
   ngOnDestroy() {
@@ -23,9 +28,86 @@ export class PreguntadosPageComponent {
     return this.preguntadosService.getTime();
   }
 
+  get score(): number {
+    return this.preguntadosService.getScore();
+  }
+
+  get paused(): boolean {
+    return this.preguntadosService.getPause();
+  }
+
   get livesArray(): any[] {
     return Array(this.preguntadosService.getLives()).fill(0);
   }
 
+  get currentQuestion(): any {
+    return this.preguntadosService.getCurrentQuestion();
+  }
+
+  get currentOptions(): string[] {
+    return this.preguntadosService.getCurrentOptions();
+  }
+
+  get isGameOver(): boolean {
+    return this.preguntadosService.isGameOver();
+  }
+
+  get victory(): boolean {
+    return this.preguntadosService.getVictory();
+  }
+
+  get roundVictory(): boolean {
+    return this.preguntadosService.isRoundWon();
+  }
+
+  get finished(): boolean {
+    return this.preguntadosService.getFinished();
+  }
+
+  answer(option: string) {
+    const isCorrect = this.preguntadosService.answer(option);
+    if (isCorrect) {
+      this.preguntadosService.setRoundVictory(true);
+      setTimeout(() => {
+        this.preguntadosService.setRoundVictory(false);
+        this.preguntadosService.nextQuestion();
+      }, 2000);
+    } else if (this.preguntadosService.isGameOver()) {
+      this.preguntadosService.setFinished(true);
+      this.preguntadosService.setVictory(false);
+    }
+  }
+
+  pause() {
+    this.preguntadosService.pause();
+  }
+
+  resume() {
+    this.preguntadosService.resume();
+  }
+
+  requestExit() {
+    this.showConfirmExit.set(true);
+  }
+
+  confirmExit() {
+    this.showConfirmExit.set(false);
+    this.exit();
+  }
+
+  cancelExit() {
+    this.showConfirmExit.set(false);
+  }
+
+  exit() {
+    this.preguntadosService.stopTimer();
+    this.router.navigate(['/home']);
+  }
+
+  playAgain() {
+    this.preguntadosService.setFinished(false);
+    this.preguntadosService.setVictory(false);
+    this.preguntadosService.newGame();
+  }
 
 }

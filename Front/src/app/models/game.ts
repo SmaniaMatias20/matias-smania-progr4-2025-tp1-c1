@@ -1,6 +1,7 @@
 import { DatabaseService } from '../services/database/database.service';
 import { AuthService } from '../services/auth/auth.service';
 import { User } from '@supabase/supabase-js';
+import { findIndex } from 'rxjs';
 
 export class Game {
     protected supabase: DatabaseService = new DatabaseService();
@@ -12,6 +13,7 @@ export class Game {
     protected isPause: boolean = false;
     protected victory: boolean = false;
     protected finished: boolean = false;
+    protected roundVictory: boolean = false;
     protected score: number = 0;
     protected user: User | boolean = this.authService.getUser();
     protected userId = typeof this.user === 'object' && this.user !== null ? this.user.id : null;
@@ -81,6 +83,10 @@ export class Game {
         return this.finished;
     }
 
+    getRoundVictory(): boolean {
+        return this.roundVictory;
+    }
+
     setPause(isPause: boolean) {
         this.isPause = isPause;
     }
@@ -95,6 +101,14 @@ export class Game {
 
     setVictory(victory: boolean) {
         this.victory = victory;
+    }
+
+    setRoundVictory(roundVictory: boolean) {
+        this.roundVictory = roundVictory;
+    }
+
+    setFinished(finished: boolean) {
+        this.finished = finished;
     }
 
     loseLife() {
