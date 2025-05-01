@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class GameResultComponent {
   @Input() isVictory: boolean = false;
-  @Input() message: string = '';
   @Input() score: number = 0;
 
   constructor(private router: Router) { }

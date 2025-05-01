@@ -136,14 +136,12 @@ export class Game {
         if (error) throw error;
     }
 
-    // Método que finaliza el juego y guarda el resultado
     async endGame(won: boolean, gameName: string): Promise<void> {
         this.stopTimer();
         this.finished = true;
         this.victory = won;
 
         try {
-            // Obtener el id_game usando el nombre del juego desde el servicio
             const idGame = await this.supabase.getGameIdByName(gameName);
             const user = await this.supabase.getUserById(this.userId);
 
