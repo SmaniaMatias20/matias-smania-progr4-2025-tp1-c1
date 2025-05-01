@@ -17,7 +17,6 @@ export class Game {
     protected userId = typeof this.user === 'object' && this.user !== null ? this.user.id : null;
 
     constructor() {
-        console.log(this.user);
     }
 
     startTimer(callback?: () => void) {

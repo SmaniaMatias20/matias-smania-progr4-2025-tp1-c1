@@ -76,8 +76,11 @@ export class AhorcadoService extends Game {
       if (allWordsGuessed) {
         this.setVictory(true);
         this.endGame(this.victory, this.name);
+        this.displayed.push("_");
       } else {
-        this.loadNewWord();
+        setTimeout(() => {
+          this.loadNewWord();
+        }, 2000);
       }
     } else if (this.isGameOver()) {
       this.endGame(this.victory, this.name);
