@@ -1,7 +1,6 @@
 import { DatabaseService } from '../services/database/database.service';
 import { AuthService } from '../services/auth/auth.service';
 import { User } from '@supabase/supabase-js';
-import { findIndex } from 'rxjs';
 
 export class Game {
     protected supabase: DatabaseService = new DatabaseService();

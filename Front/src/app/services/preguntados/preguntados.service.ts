@@ -62,6 +62,7 @@ export class PreguntadosService extends Game {
   }
 
   nextQuestion() {
+    this.setRoundVictory(false);
     this.currentQuestionIndex++;
     if (this.currentQuestionIndex >= this.questions.length) {
       this.victory = true;
@@ -69,20 +70,23 @@ export class PreguntadosService extends Game {
     }
   }
 
+
   isGameOver(): boolean {
     return this.finished || this.getLives() <= 0;
   }
 
   isRoundWon(): boolean {
-    // Agregar logica para ronda ganada
-    return this.roundVictory == true;
+    return this.getRoundVictory();
   }
+
 
   answer(answer: string): boolean {
     const current = this.getCurrentQuestion();
     if (!current) return false;
 
     const isCorrect = current.correctAnswer === answer;
+    this.setRoundVictory(isCorrect); // ← usás el método del padre
+
     if (isCorrect) {
       this.score += this.roundPoints;
       this.nextQuestion();
@@ -92,6 +96,8 @@ export class PreguntadosService extends Game {
         this.endGame(false, this.name);
       }
     }
+
     return isCorrect;
   }
+
 }
