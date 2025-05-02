@@ -75,7 +75,7 @@ export class PreguntadosService extends Game {
 
   isRoundWon(): boolean {
     // Agregar logica para ronda ganada
-    return true;
+    return false;
   }
 
   answer(answer: string): boolean {
