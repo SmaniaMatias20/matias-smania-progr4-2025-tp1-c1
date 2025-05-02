@@ -14,8 +14,15 @@
             <tr class="hover:bg-gray-800 text-center bg-gray-700">
                 @for (column of columns; track column.field) {
                 <td class="px-6 py-3 text-sm text-white border-t border-gray-600">
+                    @if (typeof row[column.field] === 'boolean') {
+                    <span class="material-icons" [ngClass]="row[column.field] ? 'text-green-500' : 'text-red-500'">
+                        {{ row[column.field] ? 'check_circle' : 'cancel' }}
+                    </span>
+                    } @else {
                     {{ row[column.field] }}
+                    }
                 </td>
+
                 }
             </tr>
             }

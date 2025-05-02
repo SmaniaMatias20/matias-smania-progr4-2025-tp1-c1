@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultsTableComponent } from './components/results-table/results-table.component';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { DatabaseService } from '../../services/database/database.service';
 
 @Component({
   selector: 'app-results',
-  imports: [ResultsTableComponent],
+  imports: [ResultsTableComponent, SpinnerComponent],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })
 export class ResultsComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 4;
+  loading: boolean = true;
 
   columns = [
     { field: 'name', label: 'Nombre Completo' },
@@ -28,6 +30,7 @@ export class ResultsComponent implements OnInit {
     if (data) {
       this.groupResultsByGame(data);
     }
+    this.loading = false;
   }
 
   groupResultsByGame(data: any[]) {

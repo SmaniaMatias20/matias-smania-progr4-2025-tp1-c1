@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common'; // ⬅️ Importá esto
 
 @Component({
   selector: 'app-results-table',
+  imports: [CommonModule],
   templateUrl: './results-table.component.html',
   styleUrls: ['./results-table.component.css']
 })
