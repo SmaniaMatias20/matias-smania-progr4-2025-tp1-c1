@@ -13,7 +13,7 @@ export class ResultsComponent implements OnInit {
   totalPages: number = 4;
 
   columns = [
-    { field: 'name', label: 'Nombre' },
+    { field: 'name', label: 'Nombre Completo' },
     { field: 'score', label: 'Puntuación' },
     { field: 'victory', label: 'Victoria' },
     { field: 'date', label: 'Fecha' }
@@ -39,8 +39,6 @@ export class ResultsComponent implements OnInit {
       }
       this.resultsByGame[gameName].push(result);
     });
-
-    console.log(this.resultsByGame);
   }
 
   changePage(direction: number): void {

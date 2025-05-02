@@ -10,7 +10,5 @@ export class ResultsTableComponent {
   @Input() data: any[] = [];
 
   constructor() {
-    console.log(this.columns);
-    console.log(this.data);
   }
 }

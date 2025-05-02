@@ -66,14 +66,13 @@ export class DatabaseService {
   async getFormattedResults(): Promise<any[] | null> {
     const { data, error } = await this.supabase
       .from('results')
-      .select('firstname, lastname, score, victory, created_at, id_game');
+      .select('firstname, lastname, score, victory, created_at, id_game')
+      .order('score', { ascending: false });
 
     if (error) {
       console.error('Error al obtener resultados:', error);
       return null;
     }
-
-    console.log(data);
 
     const resultsWithGameNames = await Promise.all(
       data.map(async result => {
@@ -83,11 +82,11 @@ export class DatabaseService {
           score: result.score,
           victory: result.victory,
           gameName: gameName ?? 'Desconocido',
-          date: result.created_at
+          date: new Date(result.created_at).toLocaleDateString() + " - " + new Date(result.created_at).toLocaleTimeString()
         };
       })
     );
-    console.log(resultsWithGameNames)
+
     return resultsWithGameNames;
   }
 
