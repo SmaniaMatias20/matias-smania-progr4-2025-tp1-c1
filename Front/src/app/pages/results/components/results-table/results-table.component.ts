@@ -8,4 +8,9 @@ import { Component, Input } from '@angular/core';
 export class ResultsTableComponent {
   @Input() columns: { field: string, label: string }[] = [];
   @Input() data: any[] = [];
+
+  constructor() {
+    console.log(this.columns);
+    console.log(this.data);
+  }
 }

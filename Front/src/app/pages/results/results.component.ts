@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ResultsTableComponent } from './components/results-table/results-table.component';
+import { DatabaseService } from '../../services/database/database.service';
 
 @Component({
   selector: 'app-results',
@@ -7,30 +8,40 @@ import { ResultsTableComponent } from './components/results-table/results-table.
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })
-export class ResultsComponent {
+export class ResultsComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 4;
 
   columns = [
     { field: 'name', label: 'Nombre' },
     { field: 'score', label: 'Puntuación' },
+    { field: 'victory', label: 'Victoria' },
     { field: 'date', label: 'Fecha' }
   ];
 
-  scores = [
-    { name: 'Juan', score: 95, date: '2024-04-20' },
-    { name: 'Ana', score: 88, date: '2024-04-19' },
-    { name: 'Luis', score: 72, date: '2024-04-18' },
-    { name: 'Juan', score: 95, date: '2024-04-20' },
-    { name: 'Ana', score: 88, date: '2024-04-19' },
-    { name: 'Juan', score: 95, date: '2024-04-20' },
-    { name: 'Ana', score: 88, date: '2024-04-19' },
-    { name: 'Luis', score: 72, date: '2024-04-18' },
-    { name: 'Juan', score: 95, date: '2024-04-20' },
-    { name: 'Ana', score: 88, date: '2024-04-19' },
-    { name: 'Luis', score: 72, date: '2024-04-18' }
-  ];
+  resultsByGame: { [key: string]: any[] } = {};
 
+  constructor(private database: DatabaseService) { }
+
+  async ngOnInit() {
+    const data = await this.database.getFormattedResults();
+    if (data) {
+      this.groupResultsByGame(data);
+    }
+  }
+
+  groupResultsByGame(data: any[]) {
+    this.resultsByGame = {};
+    data.forEach(result => {
+      const gameName = result.gameName ?? 'Desconocido';
+      if (!this.resultsByGame[gameName]) {
+        this.resultsByGame[gameName] = [];
+      }
+      this.resultsByGame[gameName].push(result);
+    });
+
+    console.log(this.resultsByGame);
+  }
 
   changePage(direction: number): void {
     this.currentPage += direction;
@@ -41,6 +52,4 @@ export class ResultsComponent {
       this.currentPage = this.totalPages;
     }
   }
-
-
 }

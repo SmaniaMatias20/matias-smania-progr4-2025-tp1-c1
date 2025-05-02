@@ -1,43 +1,37 @@
 <div class="flex items-center justify-center gap-4 w-screen p-4">
-
     <div class="flex flex-col w-3/4">
 
-        <!-- Usando la nueva directiva @if -->
-        @if(currentPage === 1) {
+        @switch(currentPage) {
+        @case(1) {
         <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Ahorcado</h1>
-        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
-        } @else if(currentPage === 2) {
-        <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Preguntados
-        </h1>
-        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
-        } @else if(currentPage === 3) {
-        <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Mayor Menor
-        </h1>
-        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
-        } @else if(currentPage === 4) {
-        <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Juego propio
-        </h1>
-        <app-results-table [columns]="columns" [data]="scores"></app-results-table>
+        <app-results-table [columns]="columns" [data]="resultsByGame['ahorcado'] || []"></app-results-table>
+        }
+        @case(2) {
+        <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Preguntados</h1>
+        <app-results-table [columns]="columns" [data]="resultsByGame['preguntados'] || []"></app-results-table>
+        }
+        @case(3) {
+        <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Mayor Menor</h1>
+        <app-results-table [columns]="columns" [data]="resultsByGame['mayor menor'] || []"></app-results-table>
+        }
+        @case(4) {
+        <h1 class="text-3xl font-bold text-center mb-8 text-white">Puntuaciones Juego propio</h1>
+        <app-results-table [columns]="columns" [data]="resultsByGame['Juego propio'] || []"></app-results-table>
+        }
         }
 
-        <!-- Controles de paginación -->
         <div class="flex justify-center items-center gap-4 mt-4 text-sm">
-            <!-- Botón de 'Anterior' con icono de flecha hacia la izquierda -->
             <button (click)="changePage(-1)" [disabled]="currentPage === 1"
                 class="px-3 py-2 bg-transparent border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                 <span class="material-icons">navigate_before</span>
             </button>
 
-            <!-- Texto para la página actual -->
-            <span class="text-lg text-gray-600">{{ currentPage }} de 4</span>
+            <span class="text-lg text-gray-600">{{ currentPage }} de {{ totalPages }}</span>
 
-            <!-- Botón de 'Siguiente' con icono de flecha hacia la derecha -->
-            <button (click)="changePage(1)" [disabled]="currentPage === 4"
+            <button (click)="changePage(1)" [disabled]="currentPage === totalPages"
                 class="px-3 py-2 bg-transparent border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                 <span class="material-icons">navigate_next</span>
             </button>
         </div>
-
     </div>
-
 </div>

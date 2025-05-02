@@ -1,12 +1,10 @@
 <div class="overflow-y-auto max-h-96 rounded-xl bg-gray-800">
     <table class="min-w-full border border-gray-700 bg-gray-800 rounded-lg shadow-sm table-auto">
         <thead class="bg-gray-800 sticky top-0 z-10">
-            <tr class="bg-gray-800 text-center text-sm font-medium text-white">
+            <tr class="text-center text-sm font-medium text-white">
                 @for (column of columns; track column.label) {
                 <th class="px-6 py-3 text-sm font-semibold text-white">
-                    {{
-                    column.label
-                    }}
+                    {{ column.label }}
                 </th>
                 }
             </tr>

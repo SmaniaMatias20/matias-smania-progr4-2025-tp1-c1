@@ -32,6 +32,22 @@ export class DatabaseService {
     return data ? data.id : null;
   }
 
+  async getGameNameById(gameId: string): Promise<string | null> {
+    const { data, error } = await this.supabase
+      .from('games')
+      .select('name')
+      .eq('id', gameId)
+      .single();
+
+    if (error) {
+      console.error('Error al obtener el nombre del juego:', error);
+      return null;
+    }
+
+    return data?.name ?? null;
+  }
+
+
   async getUserById(userId: string | null): Promise<{ firstname: string, lastname: string } | null> {
     const { data, error } = await this.supabase
       .from('users')
@@ -46,5 +62,38 @@ export class DatabaseService {
 
     return data ? { firstname: data.firstname, lastname: data.lastname } : null;
   }
+
+  async getFormattedResults(): Promise<any[] | null> {
+    const { data, error } = await this.supabase
+      .from('results')
+      .select('firstname, lastname, score, victory, created_at, id_game');
+
+    if (error) {
+      console.error('Error al obtener resultados:', error);
+      return null;
+    }
+
+    console.log(data);
+
+    const resultsWithGameNames = await Promise.all(
+      data.map(async result => {
+        const gameName = await this.getGameNameById(result.id_game);
+        return {
+          name: `${result.firstname} ${result.lastname}`,
+          score: result.score,
+          victory: result.victory,
+          gameName: gameName ?? 'Desconocido',
+          date: result.created_at
+        };
+      })
+    );
+    console.log(resultsWithGameNames)
+    return resultsWithGameNames;
+  }
+
+
+
+
+
 
 }
