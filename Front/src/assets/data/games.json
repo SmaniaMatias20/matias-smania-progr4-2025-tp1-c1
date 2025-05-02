@@ -13,7 +13,7 @@
         "description": "Responde preguntas de cultura general y demuestra cuánto sabes.",
         "image": "assets/images/preguntados/preguntados.jpg",
         "link": "/games/preguntados",
-        "rules": "El juego te presentará una serie de 10 preguntas de opción múltiple. Cada respuesta correcta suma 10 puntos. ¡Demostrá tu conocimiento en distintas categorías!",
+        "rules": "El juego te presentará una serie de 10 preguntas de opción múltiple. Cada respuesta correcta suma 1000 puntos. ¡Demostrá tu conocimiento en distintas categorías!",
         "lifes": "3",
         "time": "3:00"
     },
