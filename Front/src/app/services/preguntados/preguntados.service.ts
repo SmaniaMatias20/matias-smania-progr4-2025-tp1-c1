@@ -85,11 +85,15 @@ export class PreguntadosService extends Game {
     if (!current) return false;
 
     const isCorrect = current.correctAnswer === answer;
-    this.setRoundVictory(isCorrect); // ← usás el método del padre
+    this.setRoundVictory(isCorrect);
 
     if (isCorrect) {
       this.score += this.roundPoints;
-      this.nextQuestion();
+      // Mostramos feedback y luego pasamos de pregunta
+      setTimeout(() => {
+        this.setRoundVictory(false);
+        this.nextQuestion();
+      }, 2000);
     } else {
       this.loseLife();
       if (this.getLives() <= 0) {
@@ -99,5 +103,6 @@ export class PreguntadosService extends Game {
 
     return isCorrect;
   }
+
 
 }

@@ -66,17 +66,13 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
 
   answer(option: string) {
     const isCorrect = this.preguntadosService.answer(option);
-    if (isCorrect) {
-      this.preguntadosService.setRoundVictory(true);
-      setTimeout(() => {
-        this.preguntadosService.setRoundVictory(false);
-        this.preguntadosService.nextQuestion();
-      }, 2000);
-    } else if (this.preguntadosService.isGameOver()) {
+
+    if (!isCorrect && this.preguntadosService.isGameOver()) {
       this.preguntadosService.setFinished(true);
       this.preguntadosService.setVictory(false);
     }
   }
+
 
   pause() {
     this.preguntadosService.pause();

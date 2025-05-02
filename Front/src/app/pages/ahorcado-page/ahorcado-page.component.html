@@ -102,7 +102,7 @@
 
     @if(showConfirmExit()){
     <!-- Modal de confirmación -->
-    <app-confirm-dialog title="¿Estás seguro que deseas salir del juego?" message="Perderás la partida en curso."
+    <app-confirm-dialog title="¿Estás seguro que deseas salir del juego?" message="Perderás el progreso actual."
         (confirm)="confirmExit()" (cancel)="cancelExit()">
     </app-confirm-dialog>
     }
