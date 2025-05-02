@@ -25,11 +25,17 @@ export class PreguntadosService extends Game {
   async loadQuestions() {
     try {
       const data = await firstValueFrom(
-        this.http.get<Question[]>('assets/data/questions.json')
+        this.http.get<any>('https://opentdb.com/api.php?amount=10&type=multiple&language=es')
       );
-      this.questions = data;
+
+      this.questions = data.results.map((item: any) => ({
+        question: item.question,
+        options: [...item.incorrect_answers, item.correct_answer],
+        correctAnswer: item.correct_answer
+      }));
+
     } catch (error) {
-      console.error('Error cargando preguntas:', error);
+      console.error('Error cargando preguntas desde la API:', error);
     }
   }
 
@@ -48,6 +54,7 @@ export class PreguntadosService extends Game {
       this.endGame(this.victory, this.name);
     });
   }
+
   startGame() {
     this.newGame();
   }
@@ -70,7 +77,6 @@ export class PreguntadosService extends Game {
     }
   }
 
-
   isGameOver(): boolean {
     return this.finished || this.getLives() <= 0;
   }
@@ -78,7 +84,6 @@ export class PreguntadosService extends Game {
   isRoundWon(): boolean {
     return this.getRoundVictory();
   }
-
 
   answer(answer: string): boolean {
     const current = this.getCurrentQuestion();
@@ -103,6 +108,4 @@ export class PreguntadosService extends Game {
 
     return isCorrect;
   }
-
-
 }
