@@ -97,6 +97,17 @@
 
     }
 
+    <!-- Línea de tiempo / Barra de progreso -->
+    <div class="w-full px-6 py-2">
+        <div class="relative w-full bg-gray-700 rounded-full h-2">
+            <div class="absolute top-0 left-0 h-full bg-green-500 rounded-full" [ngStyle]="{ width: progressBarWidth }">
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <!-- Resultado final -->
     @if (finished) {

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PreguntadosService } from '../../services/preguntados/preguntados.service';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-preguntados-page',
   standalone: true,
-  imports: [GameResultComponent, ConfirmDialogComponent],
+  imports: [GameResultComponent, ConfirmDialogComponent, CommonModule],
   templateUrl: './preguntados-page.component.html',
   styleUrls: ['./preguntados-page.component.css']
 })
@@ -62,6 +63,11 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
 
   get finished(): boolean {
     return this.preguntadosService.getFinished();
+  }
+
+  // Getter para el progreso de la barra
+  get progressBarWidth(): string {
+    return this.preguntadosService.progressBarWidth;
   }
 
   answer(option: string) {

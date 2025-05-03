@@ -14,9 +14,10 @@ interface Question {
 })
 export class PreguntadosService extends Game {
   private questions: Question[] = [];
-  private currentQuestionIndex = 0;
+  private currentQuestionIndex: number = 0;
   private name = 'preguntados';
   private roundPoints = 1000;
+  private totalQuestions: number = 10;
 
   constructor(private http: HttpClient) {
     super();
@@ -26,10 +27,7 @@ export class PreguntadosService extends Game {
     try {
       const data = await firstValueFrom(
         this.http.get<any>('https://opentdb.com/api.php?amount=10&type=multiple&category=18&language=es')
-
       );
-
-      console.log(data);
 
       this.questions = data.results.map((item: any) => ({
         question: item.question,
@@ -61,6 +59,15 @@ export class PreguntadosService extends Game {
   startGame() {
     this.newGame();
   }
+
+  getCurrentQuestionIndex(): number {
+    return this.currentQuestionIndex;
+  }
+
+  getTotalQuestions(): number {
+    return this.totalQuestions;
+  }
+
 
   getCurrentQuestion(): Question | null {
     return this.questions[this.currentQuestionIndex] || null;
@@ -97,7 +104,6 @@ export class PreguntadosService extends Game {
 
     if (isCorrect) {
       this.score += this.roundPoints;
-      // Mostramos feedback y luego pasamos de pregunta
       setTimeout(() => {
         this.setRoundVictory(false);
         this.nextQuestion();
@@ -110,5 +116,9 @@ export class PreguntadosService extends Game {
     }
 
     return isCorrect;
+  }
+
+  get progressBarWidth(): string {
+    return `${((this.currentQuestionIndex + 1) / this.totalQuestions) * 100}%`;
   }
 }
