@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { MayorMenorService } from '../../services/mayor-menor/mayor-menor.service';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { SuccessMessageComponent } from '../../components/success-message/success-message.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mayor-menor-page',
-  imports: [GameResultComponent, ConfirmDialogComponent],
+  imports: [GameResultComponent, ConfirmDialogComponent, SuccessMessageComponent],
   templateUrl: './mayor-menor-page.component.html',
   styleUrls: ['./mayor-menor-page.component.css']
 })
