@@ -62,13 +62,13 @@
     </div>
 
     <!-- Botones -->
-    @if (!isFinished) {
+    @if (!finished || !paused) {
     <div class="flex gap-6 mt-10">
-        <button (click)="guess(true)"
+        <button (click)="guess(true)" [disabled]="paused"
             class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-200 px-6 py-2 rounded-full font-medium">
             Mayor
         </button>
-        <button (click)="guess(false)"
+        <button (click)="guess(false)" [disabled]="paused"
             class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 px-6 py-2 rounded-full font-medium">
             Menor
         </button>
@@ -80,10 +80,17 @@
         {{ message }}
     </div>
 
-    <!-- Fin del juego -->
-    @if (isFinished) {
-    <div class="mt-4 text-white text-lg font-semibold">
-        Juego finalizado. Puntaje final: {{ score }}
-    </div>
+    <!-- Resultado final -->
+    @if (finished) {
+    <app-game-result [isVictory]="victory" [score]="score"
+        class="absolute inset-0 z-20 bg-black bg-opacity-80 flex items-center justify-center rounded-lg">
+    </app-game-result>
+    }
+
+    <!-- Confirmar salida -->
+    @if (showConfirmExit()) {
+    <app-confirm-dialog title="¿Deseas salir del juego?" message="Perderás el progreso actual."
+        (confirm)="confirmExit()" (cancel)="cancelExit()">
+    </app-confirm-dialog>
     }
 </div>
