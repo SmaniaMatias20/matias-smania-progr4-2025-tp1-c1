@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class PreguntadosPageComponent implements OnInit, OnDestroy {
 
+  selectedOptions: string[] = [];
   showConfirmExit = signal(false);
   constructor(public preguntadosService: PreguntadosService, private router: Router) { }
 
@@ -72,6 +73,10 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
 
   answer(option: string) {
     const isCorrect = this.preguntadosService.answer(option);
+
+    if (!isCorrect) {
+      this.selectedOptions.push(option)
+    }
 
     if (!isCorrect && this.preguntadosService.isGameOver()) {
       this.preguntadosService.setFinished(true);
