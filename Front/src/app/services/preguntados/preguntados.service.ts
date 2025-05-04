@@ -15,8 +15,8 @@ interface Question {
 export class PreguntadosService extends Game {
   private questions: Question[] = [];
   private currentQuestionIndex: number = 0;
-  private name = 'preguntados';
-  private roundPoints = 1000;
+  private name: string = 'preguntados';
+  private roundPoints: number = 1000;
   private totalQuestions: number = 10;
 
   constructor(private http: HttpClient) {
@@ -44,9 +44,9 @@ export class PreguntadosService extends Game {
     await this.loadQuestions();
     this.setScore(0);
     this.setLives(3);
-    this.totalSeconds = 180;
-    this.finished = false;
-    this.victory = false;
+    this.setTotalSeconds(180);
+    this.setFinished(false);
+    this.setRoundVictory(false);
     this.setPause(false);
     this.currentQuestionIndex = 0;
     this.updateTimeString();
@@ -78,13 +78,13 @@ export class PreguntadosService extends Game {
     this.setRoundVictory(false);
     this.currentQuestionIndex++;
     if (this.currentQuestionIndex >= this.questions.length) {
-      this.victory = true;
+      this.setVictory(true);
       this.endGame(true, this.name);
     }
   }
 
   isGameOver(): boolean {
-    return this.finished || this.getLives() <= 0;
+    return this.getFinished() || this.getLives() <= 0;
   }
 
   isRoundWon(): boolean {
@@ -99,7 +99,7 @@ export class PreguntadosService extends Game {
     this.setRoundVictory(isCorrect);
 
     if (isCorrect) {
-      this.score += this.roundPoints;
+      this.setScore(this.getScore() + this.roundPoints);
       setTimeout(() => {
         this.setRoundVictory(false);
         this.nextQuestion();

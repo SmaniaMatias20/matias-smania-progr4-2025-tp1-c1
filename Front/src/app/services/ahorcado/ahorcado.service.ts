@@ -20,9 +20,9 @@ export class AhorcadoService extends Game {
   newGame() {
     this.setScore(0);
     this.setLives(6);
-    this.totalSeconds = 180;
-    this.finished = false;
-    this.victory = false;
+    this.setTotalSeconds(180);
+    this.setFinished(false);
+    this.setVictory(false);
     this.guessedWords.clear();
     this.setPause(false);
     this.updateTimeString();
@@ -51,7 +51,7 @@ export class AhorcadoService extends Game {
   }
 
   guessLetter(letter: string): boolean {
-    if (this.guessedLetters.has(letter) || this.finished) return false;
+    if (this.guessedLetters.has(letter) || this.getFinished()) return false;
 
     this.guessedLetters.add(letter);
 

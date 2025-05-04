@@ -110,6 +110,10 @@ export class Game {
         this.finished = finished;
     }
 
+    setTotalSeconds(totalSeconds: number) {
+        this.totalSeconds = totalSeconds;
+    }
+
     loseLife() {
         this.lives = Math.max(0, this.lives - 1);
     }

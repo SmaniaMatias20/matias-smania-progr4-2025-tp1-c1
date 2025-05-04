@@ -7,6 +7,8 @@ import { Game } from '../../models/game';
 export class MayorMenorService extends Game {
   private deck: number[] = [];
   private currentCard: number = 0;
+  private name: string = 'mayor menor';
+  private roundPoints: number = 1000;
 
   constructor() {
     super();
@@ -14,10 +16,15 @@ export class MayorMenorService extends Game {
   }
 
   newGame() {
-    this.resetGame();
+    this.setScore(0);
+    this.setLives(3);
+    this.totalSeconds = 180;
+    this.setFinished(false);
+    this.setVictory(false);
+    this.setRoundVictory(false);
     this.initializeDeck();
     this.drawInitialCard();
-    this.startTimer(() => this.endGame(false, 'mayor menor'));
+    this.startTimer(() => this.endGame(false, this.name));
   }
 
   private initializeDeck() {
@@ -49,18 +56,21 @@ export class MayorMenorService extends Game {
     const success = (higher && nextCard > this.currentCard) || (!higher && nextCard < this.currentCard);
 
     if (success) {
-      this.score += 1000;
-      this.roundVictory = true;
+      this.setScore(this.getScore() + this.roundPoints);
+      this.setRoundVictory(true);
+      setTimeout(() => {
+        this.setRoundVictory(false);
+      }, 2000);
     } else {
       this.loseLife();
-      this.roundVictory = false;
+      this.setRoundVictory(false);
     }
 
     this.currentCard = nextCard;
 
-    if (this.lives === 0) {
+    if (this.getLives() === 0) {
       this.setFinished(true);
-      this.endGame(false, 'mayor menor');
+      this.endGame(false, this.name);
     }
 
     return {
@@ -79,12 +89,4 @@ export class MayorMenorService extends Game {
     return this.roundVictory;
   }
 
-  private resetGame() {
-    this.setScore(0);
-    this.setLives(3);
-    this.totalSeconds = 180;
-    this.finished = false;
-    this.victory = false;
-    this.roundVictory = false;
-  }
 }
