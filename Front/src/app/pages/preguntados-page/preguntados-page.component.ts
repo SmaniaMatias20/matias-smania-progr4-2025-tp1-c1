@@ -65,7 +65,6 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
     return this.preguntadosService.getFinished();
   }
 
-  // Getter para el progreso de la barra
   get progressBarWidth(): string {
     return this.preguntadosService.progressBarWidth;
   }

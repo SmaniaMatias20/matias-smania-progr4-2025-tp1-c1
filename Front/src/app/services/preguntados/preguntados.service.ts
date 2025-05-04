@@ -56,10 +56,6 @@ export class PreguntadosService extends Game {
     });
   }
 
-  startGame() {
-    this.newGame();
-  }
-
   getCurrentQuestionIndex(): number {
     return this.currentQuestionIndex;
   }
