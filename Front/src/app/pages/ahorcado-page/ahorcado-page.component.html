@@ -46,16 +46,9 @@
     </div>
 
     @if (roundVictory) {
-    <!-- Adivinaste la palabra -->
-    <div
-        class="flex flex-col items-center gap-2 text-white text-sm md:text-base font-medium opacity-90 border-2 border-green-600 rounded-lg p-4 w-[90%] max-w-md mx-auto mt-4 bg-gray-800">
-        <h2 class="text-xl md:text-2xl font-bold text-green-500 text-center">¡Correcto, adivinaste!</h2>
-        <p class="text-gray-300 text-base md:text-lg text-center">
-            La palabra era: <strong class="text-white">{{ word }}</strong>
-        </p>
-    </div>
-    }
-
+    <app-success-message [title]="'¡Correcto, adivinaste!'" [message]="'La palabra era: ' + word">
+    </app-success-message>
+    } @else {
     <!-- Contenedor imagenes ahorcado -->
     <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-6 md:gap-10">
@@ -81,14 +74,16 @@
             @for (letter of row; track letter) {
             <button (click)="guess(letter)"
                 [disabled]="isLetterUsed(letter) || ahorcadoService.isGameOver() || paused || roundVictory" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 
-                               bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed 
-                               rounded text-white font-bold text-sm sm:text-base">
+                                   bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed 
+                                   rounded text-white font-bold text-sm sm:text-base">
                 {{ letter }}
             </button>
             }
         </div>
         }
     </div>
+    }
+
 
 
     <!-- Mostrar resultado del juego -->

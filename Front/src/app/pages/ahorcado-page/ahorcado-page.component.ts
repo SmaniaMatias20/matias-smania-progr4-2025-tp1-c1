@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { AhorcadoService } from '../../services/ahorcado/ahorcado.service';
+import { SuccessMessageComponent } from '../../components/success-message/success-message.component';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ahorcado-page',
-  imports: [GameResultComponent, ConfirmDialogComponent],
+  imports: [GameResultComponent, ConfirmDialogComponent, SuccessMessageComponent],
   templateUrl: './ahorcado-page.component.html',
   styleUrls: ['./ahorcado-page.component.css']
 })

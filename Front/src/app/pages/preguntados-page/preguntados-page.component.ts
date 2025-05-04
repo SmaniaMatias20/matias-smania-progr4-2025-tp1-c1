@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PreguntadosService } from '../../services/preguntados/preguntados.service';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { SuccessMessageComponent } from '../../components/success-message/success-message.component';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preguntados-page',
   standalone: true,
-  imports: [GameResultComponent, ConfirmDialogComponent, CommonModule],
+  imports: [GameResultComponent, ConfirmDialogComponent, SuccessMessageComponent, CommonModule],
   templateUrl: './preguntados-page.component.html',
   styleUrls: ['./preguntados-page.component.css']
 })
