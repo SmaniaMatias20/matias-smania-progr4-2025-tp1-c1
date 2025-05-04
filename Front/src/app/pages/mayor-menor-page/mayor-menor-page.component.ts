@@ -9,7 +9,6 @@ import { MayorMenorService } from '../../services/mayor-menor/mayor-menor.servic
 export class MayorMenorPageComponent implements OnInit, OnDestroy {
   currentCard: number = 0;
   message: string = '';
-  finished: boolean = false;
 
   constructor(public mayorMenorService: MayorMenorService) { }
 
@@ -38,13 +37,16 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
     return this.mayorMenorService.getFinished();
   }
 
+  get roundVictory(): boolean {
+    return this.mayorMenorService.isRoundWon();
+  }
+
   guess(higher: boolean): void {
     const result = this.mayorMenorService.guess(higher);
     this.currentCard = result.newCard;
 
     if (this.mayorMenorService.getFinished()) {
       this.message = '¡Fin del juego!';
-      this.finished = true;
       return;
     }
 

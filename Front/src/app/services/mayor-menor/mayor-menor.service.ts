@@ -5,7 +5,7 @@ import { Game } from '../../models/game';
   providedIn: 'root'
 })
 export class MayorMenorService extends Game {
-  private deck: number[] = []; // Cartas 1 a 13 (como si fueran valores de A a K)
+  private deck: number[] = [];
   private currentCard: number = 0;
 
   constructor() {
@@ -13,7 +13,6 @@ export class MayorMenorService extends Game {
     this.initializeDeck();
   }
 
-  // Inicializa el mazo de cartas (1 a 13) y saca la primera carta
   newGame() {
     this.resetGame();
     this.initializeDeck();
@@ -75,9 +74,14 @@ export class MayorMenorService extends Game {
     return this.currentCard;
   }
 
+  isRoundWon(): boolean {
+    return this.roundVictory;
+  }
+
   private resetGame() {
-    this.score = 0;
-    this.lives = 3;
+    this.setScore(0);
+    this.setLives(3);
+    this.totalSeconds = 180;
     this.finished = false;
     this.victory = false;
     this.roundVictory = false;
