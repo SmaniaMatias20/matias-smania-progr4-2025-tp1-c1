@@ -4,21 +4,57 @@
             md:w-[calc(100vw-10rem)] md:h-[calc(100vh-12rem)]
             lg:w-[calc(100vw-20rem)] lg:h-[calc(100vh-14rem)]">
 
+    <!-- Header: Tiempo y Vidas -->
     <div class="flex w-full justify-between items-center p-4">
+        <!-- Tiempo -->
         <div class="flex-1 flex justify-center items-center gap-2">
             <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
             <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
         </div>
 
+        <!-- Vidas -->
         <div class="flex items-center gap-1 md:gap-2">
             @for (life of livesArray; track $index) {
-            <span class="material-icons text-white text-xl md:text-2xl">
+            <span class="material-icons text-red-500 text-xl md:text-2xl">
                 favorite
             </span>
             }
         </div>
-
-
     </div>
+
+    <!-- Carta actual -->
+    <div class="flex flex-col items-center justify-center mt-8">
+        <p class="text-white text-lg md:text-xl mb-2">Carta actual</p>
+        <div class="bg-white rounded-md px-6 py-4 text-2xl font-bold text-gray-800 shadow">
+            {{ currentCard }}
+        </div>
+    </div>
+
+    <!-- Botones -->
+    @if(!isFinished) {
+    <div class="flex gap-4 mt-8">
+        <button (click)="guess(true)"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-semibold shadow">
+            Mayor
+        </button>
+        <button (click)="guess(false)"
+            class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md font-semibold shadow">
+            Menor
+        </button>
+    </div>
+
+    }
+
+    <!-- Mensaje -->
+    <div class="mt-6 text-white text-lg font-medium">
+        {{ message }}
+    </div>
+
+    <!-- Fin del juego -->
+    @if(isFinished) {
+    <div class="mt-4 text-white text-lg font-semibold">
+        Juego finalizado. Puntaje final: {{ score }}
+    </div>
+    }
 
 </div>

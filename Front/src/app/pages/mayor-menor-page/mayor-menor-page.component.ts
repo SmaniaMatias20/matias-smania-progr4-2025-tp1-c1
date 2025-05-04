@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MayorMenorService } from '../../services/mayor-menor/mayor-menor.service';
 
 @Component({
   selector: 'app-mayor-menor-page',
-  imports: [],
   templateUrl: './mayor-menor-page.component.html',
-  styleUrl: './mayor-menor-page.component.css'
+  styleUrls: ['./mayor-menor-page.component.css']
 })
-export class MayorMenorPageComponent {
+export class MayorMenorPageComponent implements OnInit, OnDestroy {
+  currentCard: number = 0;
+  message: string = '';
+  finished: boolean = false;
 
   constructor(public mayorMenorService: MayorMenorService) { }
 
-  ngOnInit() {
-    this.mayorMenorService.startTimer();
+  ngOnInit(): void {
+    this.mayorMenorService.newGame();
+    this.currentCard = this.mayorMenorService.getCurrentCard();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.mayorMenorService.stopTimer();
   }
 
@@ -27,4 +30,24 @@ export class MayorMenorPageComponent {
     return Array(this.mayorMenorService.getLives()).fill(0);
   }
 
+  get score(): number {
+    return this.mayorMenorService.getScore();
+  }
+
+  get isFinished(): boolean {
+    return this.mayorMenorService.getFinished();
+  }
+
+  guess(higher: boolean): void {
+    const result = this.mayorMenorService.guess(higher);
+    this.currentCard = result.newCard;
+
+    if (this.mayorMenorService.getFinished()) {
+      this.message = '¡Fin del juego!';
+      this.finished = true;
+      return;
+    }
+
+    this.message = result.success ? '¡Correcto!' : 'Incorrecto 😢';
+  }
 }
