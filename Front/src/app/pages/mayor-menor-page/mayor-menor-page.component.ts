@@ -25,7 +25,6 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
     return `assets/images/mayor-menor/${this.currentCard}.png`;
   }
 
-
   get time(): string {
     return this.mayorMenorService.getTime();
   }

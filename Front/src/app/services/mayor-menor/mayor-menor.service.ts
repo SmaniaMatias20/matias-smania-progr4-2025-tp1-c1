@@ -21,7 +21,7 @@ export class MayorMenorService extends Game {
   }
 
   private initializeDeck() {
-    this.deck = Array.from({ length: 9 }, (_, i) => i + 2); // 2 al 10
+    this.deck = Array.from({ length: 9 }, (_, i) => i + 2);
     this.shuffleDeck();
   }
 
