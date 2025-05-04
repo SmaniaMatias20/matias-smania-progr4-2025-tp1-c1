@@ -26,11 +26,8 @@ export class PreguntadosService extends Game {
   async loadQuestions() {
     try {
       const data = await firstValueFrom(
-        // this.http.get<any>('https://opentdb.com/api.php?amount=10&type=multiple&category=18&difficulty=easy')
         this.http.get<any>('https://api-questions-zjck.onrender.com/api/questions')
       );
-
-      console.log(data);
 
       this.questions = data.map((item: any) => ({
         question: item.question,
