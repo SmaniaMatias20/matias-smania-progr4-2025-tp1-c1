@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth/auth.service';
-import { NgClass, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -14,17 +14,22 @@ export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  isPasswordVisible: boolean = false;
 
   constructor(private authService: AuthService, private fb: FormBuilder,) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
-      firstName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
-      lastName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       age: ['', [Validators.required, Validators.max(99), Validators.min(18)]]
     });
 
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   async register() {

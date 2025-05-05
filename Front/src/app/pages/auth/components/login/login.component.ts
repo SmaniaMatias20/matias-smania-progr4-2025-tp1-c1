@@ -14,6 +14,8 @@ export class LoginComponent {
   loginForm: FormGroup;
   message: string = '';
   isError: boolean = false;
+  isPasswordVisible: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +26,10 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]]
 
     });
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   async login() {
