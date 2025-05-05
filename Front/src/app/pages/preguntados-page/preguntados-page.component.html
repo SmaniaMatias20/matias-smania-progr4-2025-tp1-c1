@@ -58,7 +58,7 @@
 
     <!-- Contenedor central que se adapta al espacio -->
     <div class="flex-1 flex flex-col items-center justify-center w-full">
-
+        @if(!loading){
         <!-- Resultado ronda -->
         @if (roundVictory) {
         <app-success-message [title]="'¡Respuesta correcta!'" [message]="'Muy bien, acertaste la pregunta.'">
@@ -77,10 +77,11 @@
                 @for (option of currentQuestion.options; track $index) {
                 <button (click)="answer(option)" [disabled]="paused || roundVictory || selectedOptions.includes(option)"
                     [ngClass]="{
-                  'bg-red-500 border-red-500 text-white': selectedOptions.includes(option),
-                  'border-gray-500 hover:border-white bg-transparent text-white hover:bg-white hover:text-gray-900':
-                    !selectedOptions.includes(option)
-                }" class="py-3 px-4 rounded-lg w-full transition-all duration-200 text-base cursor-pointer border-2">
+                      'bg-red-500 border-red-500 text-white': selectedOptions.includes(option),
+                      'border-gray-500 hover:border-white bg-transparent text-white hover:bg-white hover:text-gray-900':
+                        !selectedOptions.includes(option)
+                    }"
+                    class="py-3 px-4 rounded-lg w-full transition-all duration-200 text-base cursor-pointer border-2">
                     {{ option }}
                 </button>
                 }
@@ -100,7 +101,11 @@
 
         }
 
+        } @else {
+        <app-spinner> </app-spinner>
+        }
     </div>
+
 
 
     <!-- Resultado final -->

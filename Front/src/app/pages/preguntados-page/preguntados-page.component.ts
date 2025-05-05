@@ -4,12 +4,13 @@ import { PreguntadosService } from '../../services/preguntados/preguntados.servi
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { SuccessMessageComponent } from '../../components/success-message/success-message.component';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preguntados-page',
   standalone: true,
-  imports: [GameResultComponent, ConfirmDialogComponent, SuccessMessageComponent, CommonModule],
+  imports: [GameResultComponent, ConfirmDialogComponent, SuccessMessageComponent, SpinnerComponent, CommonModule],
   templateUrl: './preguntados-page.component.html',
   styleUrls: ['./preguntados-page.component.css']
 })
@@ -25,6 +26,10 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.preguntadosService.stopTimer();
+  }
+
+  get loading(): boolean {
+    return this.preguntadosService.getLoading();
   }
 
   get time(): string {

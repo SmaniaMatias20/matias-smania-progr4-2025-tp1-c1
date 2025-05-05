@@ -25,17 +25,17 @@ export class PreguntadosService extends Game {
 
   async loadQuestions() {
     try {
+      this.setLoading(true);
       const data = await firstValueFrom(
         this.http.get<any>('https://api-questions-zjck.onrender.com/api/questions')
       );
-
 
       this.questions = data.map((item: any) => ({
         question: item.question,
         options: this.shuffleArray([...item.incorrect_answers, item.correct_answer]),
         correctAnswer: item.correct_answer
       }));
-
+      this.setLoading(false);
     } catch (error) {
       console.error('Error cargando preguntas desde la API:', error);
     }

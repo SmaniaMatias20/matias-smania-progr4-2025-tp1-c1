@@ -16,6 +16,7 @@ export class Game {
     protected score: number = 0;
     protected user: User | boolean = this.authService.getUser();
     protected userId = typeof this.user === 'object' && this.user !== null ? this.user.id : null;
+    protected loading: boolean = false;
 
     constructor() {
     }
@@ -56,6 +57,10 @@ export class Game {
                 if (callback) callback();
             }
         }, 1000);
+    }
+
+    getLoading(): boolean {
+        return this.loading;
     }
 
     getScore(): number {
@@ -112,6 +117,10 @@ export class Game {
 
     setTotalSeconds(totalSeconds: number) {
         this.totalSeconds = totalSeconds;
+    }
+
+    setLoading(loading: boolean) {
+        this.loading = loading;
     }
 
     loseLife() {
