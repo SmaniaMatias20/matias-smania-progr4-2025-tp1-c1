@@ -14,10 +14,11 @@ interface Cell {
   providedIn: 'root'
 })
 export class BuscaminasService extends Game {
+  private name: string = "buscaminas";
   board: Cell[][] = [];
   rows = 10;
   cols = 10;
-  totalMines = 20;
+  totalMines = 10;
 
   constructor() {
     super();
@@ -30,6 +31,13 @@ export class BuscaminasService extends Game {
     this.calculateAdjacentNumbers();
     this.setTotalSeconds(180);
     this.setLives(3);
+    this.setFinished(false);
+    this.setVictory(false);
+    this.setPause(false);
+
+    this.startTimer(() => {
+      this.endGame(this.victory, this.name);
+    });
   }
 
   private createEmptyBoard(): Cell[][] {
@@ -99,12 +107,12 @@ export class BuscaminasService extends Game {
     if (cell.isMine) {
       this.loseLife();
       if (this.getLives() <= 0) {
-        this.endGame(false, 'Buscaminas');
+        this.endGame(this.getVictory(), this.name);
       }
       return;
     }
 
-    this.setScore(this.getScore() + 1);
+    this.setScore(this.getScore() + 100);
 
     if (cell.adjacentMines === 0) {
       this.getAdjacentCells(row, col).forEach(adj => {
@@ -127,7 +135,7 @@ export class BuscaminasService extends Game {
     if (unrevealed.length === mines.length) {
       this.setVictory(true);
       this.setRoundVictory(true);
-      this.endGame(true, 'Buscaminas');
+      this.endGame(this.getVictory(), this.name);
     }
   }
 }

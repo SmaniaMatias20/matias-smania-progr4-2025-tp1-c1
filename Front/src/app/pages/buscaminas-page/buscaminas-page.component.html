@@ -5,28 +5,57 @@
          lg:w-[calc(100vw-20rem)] lg:h-[calc(100vh-14rem)]
          relative">
 
-    <!-- Encabezado superior -->
+    <!-- Header superior -->
     <div class="flex w-full items-center justify-between p-4 relative">
-        <!-- Botones de control -->
+
+        <!-- Botones play/pause -->
         <div class="flex items-center gap-2">
+            @if (paused) {
+            <button (click)="resume()"
+                class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
+                <span class="material-icons text-sm">play_arrow</span>
+            </button>
+            } @else {
+            <button (click)="pause()"
+                class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
+                <span class="material-icons text-sm">pause</span>
+            </button>
+            }
+
+            <!-- Botón Salir -->
             <button (click)="requestExit()"
-                class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:text-gray-800 transition">
+                class="border-2 border-white text-white rounded-full p-2 flex items-center justify-center cursor-pointer hover:bg-white hover:border-white hover:text-gray-800 transition">
                 <span class="material-icons text-sm">logout</span>
             </button>
         </div>
 
-        <!-- Timer -->
+        <!-- Timer  -->
         <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
             <span class="material-icons text-white text-xl md:text-2xl">schedule</span>
             <span class="text-lg font-bold text-white md:text-2xl">{{ time }}</span>
         </div>
 
-        <!-- Puntaje -->
-        <div
-            class="text-white text-sm md:text-base font-medium opacity-80 border-2 rounded-lg p-2 flex items-center gap-1">
-            <span class="material-icons text-yellow-500">star</span>
-            {{ score }}
+
+        <!-- Vidas y Score -->
+        <div class="flex items-center gap-4">
+            <!-- Vidas -->
+            <div class="flex items-center gap-1 md:gap-2">
+                @for (life of livesArray; track $index) {
+                <span class="material-icons text-red-500 text-xl md:text-2xl">
+                    favorite
+                </span>
+                }
+            </div>
+
+            <!-- Score -->
+            <div
+                class="text-white text-sm md:text-base font-medium opacity-80 border-2 rounded-lg p-2 flex items-center gap-1">
+                <span class="material-icons text-yellow-500">star</span>
+                {{ score }}
+            </div>
         </div>
+
+
     </div>
 
     <!-- Tablero principal -->

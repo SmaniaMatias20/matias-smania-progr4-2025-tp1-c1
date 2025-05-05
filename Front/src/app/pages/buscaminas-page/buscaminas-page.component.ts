@@ -1,8 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BuscaminasService } from '../../services/buscaminas/buscaminas.service';
-import { SuccessMessageComponent } from '../../components/success-message/success-message.component';
-import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { BuscaminasService } from '../../services/buscaminas/buscaminas.service'; import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { GameResultComponent } from '../../components/game-result/game-result.component';
 import { Router } from '@angular/router';
 
@@ -17,22 +15,30 @@ interface Cell {
 
 @Component({
   selector: 'app-buscaminas-page',
-  imports: [GameResultComponent, ConfirmDialogComponent, SuccessMessageComponent, CommonModule],
-
+  imports: [GameResultComponent, ConfirmDialogComponent, CommonModule],
   templateUrl: './buscaminas-page.component.html',
   styleUrls: ['./buscaminas-page.component.css']
 })
 export class BuscaminasPageComponent implements OnInit {
   showConfirmExit = signal(false);
-  board: Cell[][] = [];
 
   constructor(public buscaminasService: BuscaminasService, private router: Router) { }
 
   ngOnInit(): void {
     this.buscaminasService.newGame()
-    this.board = this.buscaminasService.board;
   }
 
+  get livesArray(): any[] {
+    return Array(this.buscaminasService.getLives()).fill(0);
+  }
+
+  get paused(): boolean {
+    return this.buscaminasService.getPause();
+  }
+
+  get board(): Cell[][] {
+    return this.buscaminasService.board;
+  }
 
   get score(): number {
     return this.buscaminasService.getScore();
@@ -57,11 +63,6 @@ export class BuscaminasPageComponent implements OnInit {
   onRightClick(event: MouseEvent, cell: Cell): void {
     event.preventDefault();
     this.buscaminasService.toggleFlag(cell.row, cell.col);
-  }
-
-  resetGame(): void {
-    this.buscaminasService.newGame();
-    this.board = this.buscaminasService.board;
   }
 
   pause() {
