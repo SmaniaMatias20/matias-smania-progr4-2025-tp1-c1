@@ -55,33 +55,34 @@
         </div>
     </div>
 
-    <!-- Resultado ronda -->
-    @if (roundVictory) {
-    <app-success-message [title]="'¡Respuesta correcta!'" [message]="'Muy bien, acertaste la carta.'">
-    </app-success-message>
+    <!-- Contenedor central que se adapta al espacio -->
+    <div class="flex-1 flex flex-col items-center justify-center w-full">
 
-    } @else {
-    <!-- Carta actual -->
-    <div class="flex flex-col items-center justify-center mt-10">
+        <!-- Mensaje de éxito -->
+        @if (roundVictory) {
+        <app-success-message [title]="'¡Respuesta correcta!'" [message]="'Muy bien, acertaste la carta.'">
+        </app-success-message>
+        } @else {
+
+        <!-- Carta actual -->
         <img [src]="currentCardImage" alt="Carta actual"
-            class="w-56 md:w-72 h-auto rounded-3xl shadow-2xl border-4 border-white bg-white p-3" />
-    </div>
+            class="w-56 md:w-72 h-auto rounded-3xl shadow-2xl border-4 border-white bg-white p-3 mb-6" />
 
-    <!-- Botones -->
-    @if (!finished || !paused) {
-    <div class="flex gap-6 mt-10">
-        <button (click)="guess(true)" [disabled]="paused"
-            class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-200 px-6 py-2 rounded-full font-medium">
-            Mayor
-        </button>
-        <button (click)="guess(false)" [disabled]="paused"
-            class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 px-6 py-2 rounded-full font-medium">
-            Menor
-        </button>
+        <!-- Botones Mayor/Menor -->
+        @if (!finished || !paused) {
+        <div class="flex gap-6 mt-4">
+            <button (click)="guess(true)" [disabled]="paused"
+                class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-200 px-6 py-2 rounded-full font-medium">
+                Mayor
+            </button>
+            <button (click)="guess(false)" [disabled]="paused"
+                class="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 px-6 py-2 rounded-full font-medium">
+                Menor
+            </button>
+        </div>
+        }
+        }
     </div>
-    }
-    }
-
 
 
     <!-- Resultado final -->

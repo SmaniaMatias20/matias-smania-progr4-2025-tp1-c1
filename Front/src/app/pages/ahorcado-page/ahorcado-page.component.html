@@ -45,44 +45,49 @@
 
     </div>
 
-    @if (roundVictory) {
-    <app-success-message [title]="'¡Correcto, adivinaste!'" [message]="'La palabra era: ' + word">
-    </app-success-message>
-    } @else {
-    <!-- Contenedor imagenes ahorcado -->
-    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
-        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-6 md:gap-10">
-            <!-- Imagen del ahorcado -->
-            <img [src]="'assets/images/ahorcado/' + (7 - livesArray.length) + '.png'" alt="Estado del Ahorcado"
-                class="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 rounded-lg" />
+    <!-- Contenedor central que se adapta al espacio -->
+    <div class="flex-1 flex flex-col items-center justify-center w-full">
 
-            <!-- Palabra -->
-            <div class="flex gap-1 sm:gap-2 flex-wrap justify-center">
-                @for (char of displayedWord; track $index) {
-                <span class="text-white text-2xl sm:text-3xl md:text-4xl font-mono border-b-2 px-1 sm:px-2">
-                    {{ char }}
-                </span>
-                }
+        @if (roundVictory) {
+        <app-success-message [title]="'¡Correcto, adivinaste!'" [message]="'La palabra era: ' + word">
+        </app-success-message>
+        } @else {
+        <!-- Contenedor imagenes ahorcado -->
+        <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full px-4">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-6 md:gap-10">
+                <!-- Imagen del ahorcado -->
+                <img [src]="'assets/images/ahorcado/' + (7 - livesArray.length) + '.png'" alt="Estado del Ahorcado"
+                    class="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 rounded-lg" />
+
+                <!-- Palabra -->
+                <div class="flex gap-1 sm:gap-2 flex-wrap justify-center">
+                    @for (char of displayedWord; track $index) {
+                    <span class="text-white text-2xl sm:text-3xl md:text-4xl font-mono border-b-2 px-1 sm:px-2">
+                        {{ char }}
+                    </span>
+                    }
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Letras del teclado -->
-    <div class="p-2 sm:p-4 flex flex-col justify-center gap-2 mt-auto w-full">
-        @for (row of rowsLetters; track row) {
-        <div class="flex justify-center gap-1 sm:gap-2 mb-2 w-full">
-            @for (letter of row; track letter) {
-            <button (click)="guess(letter)"
-                [disabled]="isLetterUsed(letter) || ahorcadoService.isGameOver() || paused || roundVictory" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 
-                                   bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed 
-                                   rounded text-white font-bold text-sm sm:text-base">
-                {{ letter }}
-            </button>
+        <!-- Letras del teclado -->
+        <div class="p-2 sm:p-4 flex flex-col justify-center gap-2 mt-auto w-full">
+            @for (row of rowsLetters; track row) {
+            <div class="flex justify-center gap-1 sm:gap-2 mb-2 w-full">
+                @for (letter of row; track letter) {
+                <button (click)="guess(letter)"
+                    [disabled]="isLetterUsed(letter) || ahorcadoService.isGameOver() || paused || roundVictory" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 
+                                           bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed 
+                                           rounded text-white font-bold text-sm sm:text-base">
+                    {{ letter }}
+                </button>
+                }
+            </div>
             }
         </div>
         }
+
     </div>
-    }
 
 
 
