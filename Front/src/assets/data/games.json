@@ -11,7 +11,7 @@
     {
         "title": "Preguntados",
         "description": "Responde preguntas de cultura general y demuestra cuánto sabes.",
-        "image": "assets/images/preguntados/preguntados.jpg",
+        "image": "assets/images/preguntados/preguntados.png",
         "link": "/games/preguntados",
         "rules": "El juego te presentará una serie de 10 preguntas de opción múltiple. Cada respuesta correcta suma 1000 puntos. ¡Demostrá tu conocimiento en distintas categorías!",
         "lifes": "3",
@@ -20,18 +20,18 @@
     {
         "title": "Mayor o Menor",
         "description": "¿El próximo número será mayor o menor? Apuesta y gana puntos.",
-        "image": "assets/images/mayor-menor/mayor-menor.jpg",
+        "image": "assets/images/mayor-menor/mayor-menor.png",
         "link": "/games/mayor-menor",
         "rules": "Se te mostrarán cartas al azar y deberás adivinar si la siguiente será mayor o menor que la actual. Por cada acierto ganarás 1000 puntos. El juego finaliza si perdés las 3 vidas o se agotan los 3 minutos disponibles. La cantidad de cartas es infinita. Si acertás 10 veces se considera una victoria, aunque podés seguir jugando para sumar más puntos.",
         "lifes": "3",
         "time": "3:00"
     },
     {
-        "title": "Adivinar el Pais",
-        "description": "Un juego único diseñado especialmente para esta web. ¡Descúbrelo!",
-        "image": "assets/images/adivinar-pais/adivinar-pais.jpg",
+        "title": "Buscaminas",
+        "description": "Un clásico juego de lógica y estrategia adaptado especialmente para esta web. ¡Jugalo ahora!",
+        "image": "assets/images/buscaminas/buscaminas.png",
         "link": "/games/buscaminas",
-        "rules": "Este es un juego educativo en el que deberás adivinar a qué país pertenece cada bandera que se te muestra. Tendrás un total de 12 banderas aleatorias para adivinar. Contás con 3 vidas: perderás una por cada error que cometas. Disponés de 3 minutos para completar el desafío. Cada vez que aciertes, avanzarás automáticamente a la siguiente bandera. El juego termina si se te acaban las vidas o el tiempo. ¡Poné a prueba tus conocimientos de geografía y aprendé jugando!",
+        "rules": "El objetivo del juego es descubrir todas las celdas que no contienen minas. Si hacés clic en una celda con una mina, perdés una vida. Podés marcar las celdas sospechosas con una bandera. El juego termina cuando descubrís todas las celdas seguras, cuando explotás tres minas o cuando se termina el tiempo. ¡Poné a prueba tu ingenio y memoria!",
         "lifes": "3",
         "time": "3:00"
     }

@@ -18,7 +18,7 @@ export class BuscaminasService extends Game {
   board: Cell[][] = [];
   rows = 10;
   cols = 10;
-  totalMines = 10;
+  totalMines = 5;
 
   constructor() {
     super();
