@@ -24,7 +24,7 @@ export class MayorMenorService extends Game {
     this.setRoundVictory(false);
     this.initializeDeck();
     this.drawInitialCard();
-    this.startTimer(() => this.endGame(false, this.name));
+    this.startTimer(() => this.getScore() > 10000 ? this.endGame(true, this.name) : this.endGame(false, this.name));
   }
 
   private initializeDeck() {

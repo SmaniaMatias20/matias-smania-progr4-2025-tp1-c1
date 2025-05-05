@@ -22,7 +22,7 @@
         "description": "¿El próximo número será mayor o menor? Apuesta y gana puntos.",
         "image": "assets/images/mayor-menor/mayor-menor.jpg",
         "link": "/games/mayor-menor",
-        "rules": "Se mostrarán cartas al azar, y deberás adivinar si la siguiente carta es mayor o menor que la anterior. Por cada acierto ganarás 1000 puntos. El juego termina si pierdes las 3 vidas o si se agotan los 3 minutos disponibles. La cantidad de cartas es infinita.",
+        "rules": "Se te mostrarán cartas al azar y deberás adivinar si la siguiente será mayor o menor que la actual. Por cada acierto ganarás 1000 puntos. El juego finaliza si perdés las 3 vidas o se agotan los 3 minutos disponibles. La cantidad de cartas es infinita. Si acertás 10 veces se considera una victoria, aunque podés seguir jugando para sumar más puntos.",
         "lifes": "3",
         "time": "3:00"
     },

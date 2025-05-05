@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class MayorMenorPageComponent implements OnInit, OnDestroy {
   currentCard: number = 0;
-  message: string = '';
   showConfirmExit = signal(false);
 
   constructor(public mayorMenorService: MayorMenorService, private router: Router) { }
@@ -65,11 +64,9 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
     this.currentCard = result.newCard;
 
     if (this.mayorMenorService.getFinished()) {
-      this.message = '¡Fin del juego!';
       return;
     }
 
-    this.message = result.success ? '¡Correcto!' : 'Incorrecto 😢';
   }
 
 
