@@ -29,9 +29,10 @@ export class PreguntadosService extends Game {
         this.http.get<any>('https://api-questions-zjck.onrender.com/api/questions')
       );
 
+
       this.questions = data.map((item: any) => ({
         question: item.question,
-        options: [...item.incorrect_answers, item.correct_answer],
+        options: this.shuffleArray([...item.incorrect_answers, item.correct_answer]),
         correctAnswer: item.correct_answer
       }));
 
@@ -90,6 +91,15 @@ export class PreguntadosService extends Game {
   isRoundWon(): boolean {
     return this.getRoundVictory();
   }
+
+  shuffleArray(array: any[]): any[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
 
   answer(answer: string): boolean {
     const current = this.getCurrentQuestion();
