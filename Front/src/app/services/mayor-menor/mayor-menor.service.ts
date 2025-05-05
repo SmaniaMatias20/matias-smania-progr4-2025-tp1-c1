@@ -24,7 +24,7 @@ export class MayorMenorService extends Game {
     this.setRoundVictory(false);
     this.initializeDeck();
     this.drawInitialCard();
-    this.startTimer(() => this.getScore() > 10000 ? this.endGame(true, this.name) : this.endGame(false, this.name));
+    this.startTimer(() => this.getVictory() ? this.endGame(true, this.name) : this.endGame(false, this.name));
   }
 
   private initializeDeck() {
@@ -69,9 +69,12 @@ export class MayorMenorService extends Game {
     this.currentCard = nextCard;
 
     if (this.getLives() === 0) {
+      this.setVictory(false);
       this.setFinished(true);
-      this.endGame(false, this.name);
+      this.endGame(this.getVictory(), this.name);
     }
+
+    this.wonGame();
 
     return {
       success,
@@ -79,6 +82,12 @@ export class MayorMenorService extends Game {
       remainingLives: this.lives,
       score: this.score
     };
+  }
+
+  wonGame(): void {
+    if (this.getScore() >= 10000) {
+      this.setVictory(true);
+    }
   }
 
   getCurrentCard(): number {
