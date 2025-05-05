@@ -53,6 +53,13 @@ export const routes: Routes = [
                         (m) => m.PreguntadosPageComponent
                     ),
             },
+            {
+                path: 'buscaminas',
+                loadComponent: () =>
+                    import('./pages/buscaminas-page/buscaminas-page.component').then(
+                        (m) => m.BuscaminasPageComponent
+                    ),
+            },
         ],
     },
 

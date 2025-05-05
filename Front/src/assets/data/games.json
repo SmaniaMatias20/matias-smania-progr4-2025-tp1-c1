@@ -30,7 +30,7 @@
         "title": "Adivinar el Pais",
         "description": "Un juego único diseñado especialmente para esta web. ¡Descúbrelo!",
         "image": "assets/images/adivinar-pais/adivinar-pais.jpg",
-        "link": "/games/adivinar-pais",
+        "link": "/games/buscaminas",
         "rules": "Este es un juego educativo en el que deberás adivinar a qué país pertenece cada bandera que se te muestra. Tendrás un total de 12 banderas aleatorias para adivinar. Contás con 3 vidas: perderás una por cada error que cometas. Disponés de 3 minutos para completar el desafío. Cada vez que aciertes, avanzarás automáticamente a la siguiente bandera. El juego termina si se te acaban las vidas o el tiempo. ¡Poné a prueba tus conocimientos de geografía y aprendé jugando!",
         "lifes": "3",
         "time": "3:00"
