@@ -9,7 +9,12 @@ export class AhorcadoService extends Game {
   private word: string = '';
   private displayed: string[] = [];
   private guessedLetters: Set<string> = new Set();
-  private wordList = ['ANGULAR', 'PROGRAMAR', 'DESARROLLO', 'AHORCADO'];
+  private allWords = [
+    'ANGULAR', 'PROGRAMAR', 'DESARROLLO', 'AHORCADO', 'PREGUNTAS',
+    'JAVASCRIPT', 'VARIABLE', 'COMPONENTE', 'FUNCION', 'SERVICIO',
+    'MODULO', 'TYPESCRIPT', 'TEMPLATE', 'HTML', 'CSS', 'JUEGO', 'LOGICA'
+  ];
+  private wordList: string[] = [];
   private guessedWords: Set<string> = new Set();
   private roundPoints = 1000;
 
@@ -25,12 +30,18 @@ export class AhorcadoService extends Game {
     this.setVictory(false);
     this.guessedWords.clear();
     this.setPause(false);
+    this.fillRandomWords();
     this.updateTimeString();
     this.loadNewWord();
 
     this.startTimer(() => {
       this.endGame(this.victory, this.name);
     });
+  }
+
+  private fillRandomWords() {
+    const shuffled = [...this.allWords].sort(() => 0.5 - Math.random());
+    this.wordList = shuffled.slice(0, 5);
   }
 
   private getRandomWord(): string {
