@@ -53,6 +53,7 @@ export class PreguntadosService extends Game {
     this.updateTimeString();
 
     this.startTimer(() => {
+      console.log("fin del juego3");
       this.endGame(this.victory, this.name);
     });
   }
@@ -79,6 +80,7 @@ export class PreguntadosService extends Game {
     this.setRoundVictory(false);
     this.currentQuestionIndex++;
     if (this.currentQuestionIndex >= this.questions.length) {
+      console.log("fin del juego");
       this.setVictory(true);
       this.endGame(true, this.name);
     }
@@ -117,6 +119,7 @@ export class PreguntadosService extends Game {
     } else {
       this.loseLife();
       if (this.getLives() <= 0) {
+        console.log("fin del juego 2");
         this.endGame(false, this.name);
       }
     }
