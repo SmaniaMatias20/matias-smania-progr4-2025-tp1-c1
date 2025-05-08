@@ -18,7 +18,7 @@ export class BuscaminasService extends Game {
   board: Cell[][] = [];
   rows = 10;
   cols = 10;
-  totalMines = 5;
+  totalMines = 7;
 
   constructor() {
     super();
@@ -31,6 +31,7 @@ export class BuscaminasService extends Game {
     this.calculateAdjacentNumbers();
     this.setTotalSeconds(180);
     this.setLives(3);
+    this.setScore(0);
     this.setFinished(false);
     this.setVictory(false);
     this.setPause(false);
