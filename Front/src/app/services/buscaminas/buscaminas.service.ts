@@ -131,6 +131,8 @@ export class BuscaminasService extends Game {
   }
 
   private checkVictoryCondition(): void {
+    if (this.getFinished()) return;
+
     const unrevealed = this.board.flat().filter(c => !c.isRevealed);
     const mines = this.board.flat().filter(c => c.isMine);
     if (unrevealed.length === mines.length) {
