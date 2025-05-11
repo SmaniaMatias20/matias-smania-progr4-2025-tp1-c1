@@ -18,12 +18,13 @@ export class BuscaminasService extends Game {
   board: Cell[][] = [];
   rows = 10;
   cols = 10;
-  totalMines = 7;
+  totalMines = 10;
 
   constructor() {
     super();
 
   }
+
 
   newGame(): void {
     this.board = this.createEmptyBoard();
@@ -141,4 +142,7 @@ export class BuscaminasService extends Game {
       this.endGame(this.getVictory(), this.name);
     }
   }
+
+
+
 }

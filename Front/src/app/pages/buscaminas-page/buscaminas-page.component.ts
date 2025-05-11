@@ -56,6 +56,13 @@ export class BuscaminasPageComponent implements OnInit {
     return this.buscaminasService.getTime();
   }
 
+  get remainingMines(): number {
+    return this.buscaminasService.board
+      .flat()
+      .filter(c => c.isMine && !c.isRevealed)
+      .length;
+  }
+
   onCellClick(cell: Cell): void {
     this.buscaminasService.revealCell(cell.row, cell.col);
   }
