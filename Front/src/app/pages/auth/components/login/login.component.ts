@@ -17,6 +17,11 @@ export class LoginComponent {
   isPasswordVisible: boolean = false;
 
 
+  /**
+  * Constructor que inyecta el servicio de autenticación y el router.
+  * @param fb Servicio para construir formularios reactivos.
+  * @param authService Servicio para la gestión de autenticación.
+  */
   constructor(
     private fb: FormBuilder,
     private authService: AuthService
@@ -28,11 +33,22 @@ export class LoginComponent {
     });
   }
 
-  togglePasswordVisibility() {
+  /**
+  * Método que cambia la visibilidad de la contraseña.
+  * 
+  * @returns {void} - No retorna ningún valor, solo cambia el estado de visibilidad de la contraseña.
+  */
+  togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  async login() {
+  /**
+  * Método que maneja el inicio de sesión. Si el formulario es válido, intenta iniciar sesión con el servicio de autenticación.
+  * Si el formulario es inválido, muestra un mensaje de error.
+  * 
+  * @returns {Promise<void>} - Retorna una promesa que se resuelve cuando se completa el proceso de inicio de sesión.
+  */
+  async login(): Promise<void> {
     if (this.loginForm.invalid) {
       this.message = 'Completá todos los campos correctamente.';
       this.isError = true;
@@ -52,6 +68,15 @@ export class LoginComponent {
     }
   }
 
+  /**
+  * Método de prueba para el inicio de sesión con credenciales predefinidas.
+  * Se muestra un mensaje dependiendo si el inicio de sesión fue exitoso o no.
+  * 
+  * @param {string} email - Correo electrónico para iniciar sesión.
+  * @param {string} password - Contraseña para iniciar sesión.
+  * 
+  * @returns {Promise<void>} - Retorna una promesa que se resuelve cuando se completa el proceso de inicio de sesión.
+  */
   async loginTest(email: string, password: string) {
     try {
       const result = await this.authService.login(email, password);

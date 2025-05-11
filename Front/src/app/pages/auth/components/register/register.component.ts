@@ -16,6 +16,12 @@ export class RegisterComponent {
   successMessage: string = '';
   isPasswordVisible: boolean = false;
 
+
+  /**
+  * Constructor que inyecta el servicio de autenticación y el formulario.
+  * @param authService Servicio para la gestión de autenticación.
+  * @param fb Servicio para construir formularios reactivos.
+  */
   constructor(private authService: AuthService, private fb: FormBuilder,) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,11 +34,23 @@ export class RegisterComponent {
 
   }
 
-  togglePasswordVisibility() {
+
+  /**
+   * Método que cambia la visibilidad de la contraseña.
+   * 
+   * @returns {void} - No retorna ningún valor, solo cambia el estado de visibilidad de la contraseña.
+   */
+  togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  async register() {
+  /**
+   * Método que maneja el registro del usuario. Si el formulario es válido, intenta registrar al usuario con el servicio de autenticación.
+   * Si el formulario es inválido o el registro falla, muestra un mensaje de error.
+   * 
+   * @returns {Promise<void>} - Retorna una promesa que se resuelve cuando se completa el proceso de registro.
+   */
+  async register(): Promise<void> {
     this.errorMessage = '';
     this.successMessage = '';
 

@@ -13,8 +13,16 @@ export class AboutComponent implements OnInit {
   user: any;
   error: string = '';
 
+  /* 
+  * Constructor donde se inyecta el servicio de GithubService.
+  */
   constructor(private githubService: GithubService) { }
 
+  /* 
+  * Método que se ejecuta cuando se inicializa el componente.
+  * En este método se hace una llamada al servicio GithubService para obtener 
+  * los datos del usuario de GitHub y manejar posibles errores.
+  */
   ngOnInit(): void {
     this.githubService.getUser('SmaniaMatias20').subscribe({
       next: (data) => this.user = data,
