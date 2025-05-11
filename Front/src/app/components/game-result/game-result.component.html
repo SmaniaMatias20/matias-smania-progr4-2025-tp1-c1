@@ -10,12 +10,23 @@
             {{ isVictory ? 'Has ganado.' : 'Has perdido.' }}
         </p>
 
-        <p class="text-lg font-medium mb-4">Puntuación lograda: {{ score }}</p>
+        <p class="text-lg font-medium mb-4">Puntuación lograda: {{ score }}. {{message}}</p>
 
         <!-- Botón de continuar -->
+        @if(!resume){
         <button (click)="navigateToHome()"
             class="bg-transparent text-white border-2 border-white py-2 px-4 rounded-full hover:bg-white hover:text-gray-800 transition-colors duration-300 w-full sm:w-auto">
-            Continuar
+            Ir al Home
         </button>
+        } @else {
+        <button (click)="onClose()"
+            class="bg-transparent text-white border-2 border-white py-2 px-4 rounded-full hover:bg-white hover:text-gray-800 transition-colors duration-300 w-full sm:w-auto">
+            Seguir jugando
+        </button>
+        <button (click)="onEndGame()"
+            class="bg-transparent text-white border-2 border-white py-2 px-4 rounded-full hover:bg-white hover:text-gray-800 transition-colors duration-300 w-full sm:w-auto">
+            Terminar juego
+        </button>
+        }
     </div>
 </div>

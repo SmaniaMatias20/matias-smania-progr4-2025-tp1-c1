@@ -15,6 +15,10 @@ export class MayorMenorService extends Game {
     this.initializeDeck();
   }
 
+  getName(): string {
+    return this.name;
+  }
+
   newGame() {
     this.setScore(0);
     this.setLives(3);

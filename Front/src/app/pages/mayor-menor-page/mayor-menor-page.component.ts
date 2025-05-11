@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class MayorMenorPageComponent implements OnInit, OnDestroy {
   currentCard: number = 0;
   showConfirmExit = signal(false);
+  showGameResult: boolean = false;
 
   constructor(public mayorMenorService: MayorMenorService, private router: Router) { }
 
@@ -63,6 +64,10 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
     const result = this.mayorMenorService.guess(higher);
     this.currentCard = result.newCard;
 
+    if (result.score == 10000) {
+      this.showGameResult = true;
+    }
+
     if (this.mayorMenorService.getFinished()) {
       return;
     }
@@ -94,6 +99,16 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   exit() {
     this.mayorMenorService.stopTimer();
     this.router.navigate(['/home']);
+  }
+
+  onContinueGame() {
+    this.showGameResult = false;
+  }
+
+
+  onGameOver() {
+    this.mayorMenorService.endGame(this.mayorMenorService.getVictory(), this.mayorMenorService.getName());
+    this.exit();
   }
 
 }
