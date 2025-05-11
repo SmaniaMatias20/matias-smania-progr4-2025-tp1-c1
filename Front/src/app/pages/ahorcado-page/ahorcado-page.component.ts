@@ -96,7 +96,6 @@ export class AhorcadoPageComponent implements OnInit, OnDestroy {
    * 
    * @returns {void} - No retorna ningún valor, solo reanuda el juego.
    */
-
   resume(): void {
     this.ahorcadoService.resume();
   }

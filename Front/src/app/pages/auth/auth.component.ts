@@ -11,17 +11,24 @@ import { RegisterComponent } from './components/register/register.component';
 export class AuthComponent {
   isLoginVisible: boolean = true;
 
-  /* 
-  * Método que muestra el formulario de inicio de sesión al cambiar la variable isLoginVisible a true.
-  */
-  showLogin() {
+  /**
+   * Muestra el formulario de inicio de sesión.
+   * Establece `isLoginVisible` en `true`.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  showLogin(): void {
     this.isLoginVisible = true;
   }
 
-  /* 
-  * Método que muestra el formulario de registro al cambiar la variable isLoginVisible a false.
-  */
-  showRegister() {
+
+  /**
+   * Muestra el formulario de registro.
+   * Establece `isLoginVisible` en `false`.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  showRegister(): void {
     this.isLoginVisible = false;
   }
 }
