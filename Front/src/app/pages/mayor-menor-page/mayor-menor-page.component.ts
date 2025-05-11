@@ -16,50 +16,49 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   showConfirmExit = signal(false);
   showGameResult: boolean = false;
 
+  /**
+ * Constructor del componente MayorMenorPageComponent.
+ * 
+ * @param {MayorMenorService} mayorMenorService - Servicio que maneja la lógica del juego.
+ * @param {Router} router - Servicio de enrutamiento para navegar entre páginas.
+ */
   constructor(public mayorMenorService: MayorMenorService, private router: Router) { }
 
+  /**
+ * Método ngOnInit que se ejecuta cuando se inicializa el componente.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
   ngOnInit(): void {
     this.mayorMenorService.newGame();
     this.currentCard = this.mayorMenorService.getCurrentCard();
   }
 
+  /**
+ * Método ngOnDestroy que se ejecuta cuando el componente es destruido.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
   ngOnDestroy(): void {
     this.mayorMenorService.stopTimer();
   }
 
-  get currentCardImage(): string {
-    return `assets/images/mayor-menor/${this.currentCard}.png`;
-  }
+  // Getters
+  get currentCardImage(): string { return `assets/images/mayor-menor/${this.currentCard}.png`; }
+  get paused(): boolean { return this.mayorMenorService.getPause(); }
+  get time(): string { return this.mayorMenorService.getTime(); }
+  get livesArray(): any[] { return Array(this.mayorMenorService.getLives()).fill(0); }
+  get score(): number { return this.mayorMenorService.getScore(); }
+  get finished(): boolean { return this.mayorMenorService.getFinished(); }
+  get victory(): boolean { return this.mayorMenorService.getVictory(); }
+  get roundVictory(): boolean { return this.mayorMenorService.isRoundWon(); }
 
-  get paused(): boolean {
-    return this.mayorMenorService.getPause();
-  }
-
-
-  get time(): string {
-    return this.mayorMenorService.getTime();
-  }
-
-  get livesArray(): any[] {
-    return Array(this.mayorMenorService.getLives()).fill(0);
-  }
-
-  get score(): number {
-    return this.mayorMenorService.getScore();
-  }
-
-  get finished(): boolean {
-    return this.mayorMenorService.getFinished();
-  }
-
-  get victory(): boolean {
-    return this.mayorMenorService.getVictory();
-  }
-
-  get roundVictory(): boolean {
-    return this.mayorMenorService.isRoundWon();
-  }
-
+  /**
+ * Método para hacer una adivinanza en el juego.
+ * 
+ * @param {boolean} higher - Si 'true' adivina si la siguiente carta es mayor, si 'false' adivina si es menor.
+ * @returns {void} - No retorna ningún valor.
+ */
   guess(higher: boolean): void {
     const result = this.mayorMenorService.guess(higher);
     this.currentCard = result.newCard;
@@ -74,41 +73,78 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
 
   }
 
-
-  pause() {
+  /**
+ * Método para pausar el juego.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
+  pause(): void {
     this.mayorMenorService.pause();
   }
 
-  resume() {
+  /**
+ * Método para reanudar el juego.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
+  resume(): void {
     this.mayorMenorService.resume();
   }
 
-  requestExit() {
+  /**
+   * Método para solicitar la salida del juego.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  requestExit(): void {
     this.showConfirmExit.set(true);
   }
 
-  confirmExit() {
+  /**
+ * Método para confirmar la salida del juego.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
+  confirmExit(): void {
     this.showConfirmExit.set(false);
     this.exit();
   }
 
-  cancelExit() {
+  /**
+   * Método para cancelar la salida del juego.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  cancelExit(): void {
     this.showConfirmExit.set(false);
   }
 
-  exit() {
+  /**
+ * Método para salir del juego y redirigir al usuario a la página de inicio.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
+  exit(): void {
     this.mayorMenorService.stopTimer();
     this.router.navigate(['/home']);
   }
 
-  onContinueGame() {
+  /**
+ * Método que se ejecuta al continuar el juego después de ver el resultado.
+ * 
+ * @returns {void} - No retorna ningún valor.
+ */
+  onContinueGame(): void {
     this.showGameResult = false;
   }
 
-
-  onGameOver() {
+  /**
+   * Método que se ejecuta cuando el juego ha terminado.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  onGameOver(): void {
     this.mayorMenorService.endGame(this.mayorMenorService.getVictory(), this.mayorMenorService.getName());
     this.exit();
   }
-
 }

@@ -98,7 +98,4 @@ export class ChatRoomComponent implements OnInit {
     }
     return this.userColors[username];
   }
-
-
-
 }
