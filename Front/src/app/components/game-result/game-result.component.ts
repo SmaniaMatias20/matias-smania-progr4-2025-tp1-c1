@@ -14,16 +14,28 @@ export class GameResultComponent {
   @Output() closeModal = new EventEmitter<void>();
   @Output() endGame = new EventEmitter<void>();
 
+  /**
+  * Inyecta el servicio de navegación de Angular.
+  */
   constructor(private router: Router) { }
 
+  /**
+  * Cierra el modal de resultado.
+  */
   onClose() {
     this.closeModal.emit();
   }
 
+  /**
+  * Finaliza el juego y emite el evento correspondiente.
+  */
   onEndGame() {
     this.endGame.emit();
   }
 
+  /**
+  * Navega a la página de inicio del juego o aplicación.
+  */
   navigateToHome() {
     this.router.navigate(['/home']);
   }

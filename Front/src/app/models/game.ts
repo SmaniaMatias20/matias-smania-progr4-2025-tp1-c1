@@ -150,9 +150,6 @@ export class Game {
     calculateFinalScore(): void {
         if (!this.victory) return;
 
-        console.log("vidas", this.lives);
-        console.log("segundos", this.totalSeconds);
-
         const bonusFromLives = this.lives * 1000;
         const bonusFromTime = this.totalSeconds * 100;
         const totalBonus = bonusFromLives + bonusFromTime;
