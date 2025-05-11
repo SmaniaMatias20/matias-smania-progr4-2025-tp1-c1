@@ -13,16 +13,20 @@ export class ConfirmDialogComponent {
   /**
    * Método que se ejecuta cuando el usuario hace clic en "Confirmar".
    * Emite el evento `confirm` para notificar al componente padre.
+   * 
+   * @returns {void} - No retorna ningún valor.
    */
-  onConfirm() {
+  onConfirm(): void {
     this.confirm.emit();
   }
 
   /**
- * Método que se ejecuta cuando el usuario hace clic en "Cancelar".
- * Emite el evento `cancel` para notificar al componente padre.
- */
-  onCancel() {
+   * Método que se ejecuta cuando el usuario hace clic en "Cancelar".
+   * Emite el evento `cancel` para notificar al componente padre.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  onCancel(): void {
     this.cancel.emit();
   }
 }

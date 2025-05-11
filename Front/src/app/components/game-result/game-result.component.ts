@@ -15,28 +15,36 @@ export class GameResultComponent {
   @Output() endGame = new EventEmitter<void>();
 
   /**
-  * Inyecta el servicio de navegación de Angular.
-  */
+   * Inyecta el servicio de navegación de Angular.
+   * 
+   * @param router Servicio de enrutamiento para la navegación entre páginas.
+   */
   constructor(private router: Router) { }
 
   /**
-  * Cierra el modal de resultado.
-  */
-  onClose() {
+   * Cierra el modal de resultado.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  onClose(): void {
     this.closeModal.emit();
   }
 
   /**
-  * Finaliza el juego y emite el evento correspondiente.
-  */
-  onEndGame() {
+   * Finaliza el juego y emite el evento correspondiente.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  onEndGame(): void {
     this.endGame.emit();
   }
 
   /**
-  * Navega a la página de inicio del juego o aplicación.
-  */
-  navigateToHome() {
+   * Navega a la página de inicio del juego o aplicación.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  navigateToHome(): void {
     this.router.navigate(['/home']);
   }
 }

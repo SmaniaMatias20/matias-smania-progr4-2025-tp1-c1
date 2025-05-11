@@ -16,26 +16,31 @@ export class NavbarComponent {
   showConfirmLogout = signal(false);
 
   /**
-  * Constructor que inyecta el servicio de autenticación y el router.
-  * @param authService Servicio para la gestión de autenticación.
-  * @param router Servicio de navegación.
-  */
+   * Constructor que inyecta el servicio de autenticación y el router.
+   * 
+   * @param authService Servicio para la gestión de autenticación.
+   * @param router Servicio de navegación.
+   */
   constructor(private authService: AuthService, private router: Router) {
     this.user = this.authService.user;
   }
 
   /**
-  * Alterna el estado del menú (abre o cierra).
-  */
+   * Alterna el estado del menú (abre o cierra).
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   toggleMenu(): void {
     this.isOpen.update(open => !open);
   }
 
   /**
-  * Ejecuta el cierre de sesión del usuario.
-  * Si tiene éxito, cierra el menú.
-  * Si falla, muestra el mensaje de error en consola.
-  */
+   * Ejecuta el cierre de sesión del usuario.
+   * Si tiene éxito, cierra el menú.
+   * Si falla, muestra el mensaje de error en consola.
+   * 
+   * @returns {Promise<void>} - Promesa que indica la finalización del proceso de logout.
+   */
   async onLogout(): Promise<void> {
     const { success, message } = await this.authService.logout();
     if (success) {
@@ -46,24 +51,30 @@ export class NavbarComponent {
   }
 
   /**
-  * Muestra el diálogo de confirmación para cerrar sesión.
-  */
-  requestLogout() {
+   * Muestra el diálogo de confirmación para cerrar sesión.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  requestLogout(): void {
     this.showConfirmLogout.set(true);
   }
 
   /**
-  * Confirma el cierre de sesión y lo ejecuta.
-  */
-  confirmLogout() {
+   * Confirma el cierre de sesión y lo ejecuta.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  confirmLogout(): void {
     this.showConfirmLogout.set(false);
     this.onLogout();
   }
 
   /**
-  * Cancela el proceso de cierre de sesión.
-  */
-  cancelLogout() {
+   * Cancela el proceso de cierre de sesión.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
+  cancelLogout(): void {
     this.showConfirmLogout.set(false);
   }
 }
