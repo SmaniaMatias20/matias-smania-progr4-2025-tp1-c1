@@ -20,61 +20,27 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
   showConfirmExit = signal(false);
   constructor(public preguntadosService: PreguntadosService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.preguntadosService.newGame();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.preguntadosService.stopTimer();
   }
 
-  get loading(): boolean {
-    return this.preguntadosService.getLoading();
-  }
-
-  get time(): string {
-    return this.preguntadosService.getTime();
-  }
-
-  get score(): number {
-    return this.preguntadosService.getScore();
-  }
-
-  get paused(): boolean {
-    return this.preguntadosService.getPause();
-  }
-
-  get livesArray(): any[] {
-    return Array(this.preguntadosService.getLives()).fill(0);
-  }
-
-  get currentQuestion(): any {
-    return this.preguntadosService.getCurrentQuestion();
-  }
-
-  get currentOptions(): string[] {
-    return this.preguntadosService.getCurrentOptions();
-  }
-
-  get isGameOver(): boolean {
-    return this.preguntadosService.isGameOver();
-  }
-
-  get victory(): boolean {
-    return this.preguntadosService.getVictory();
-  }
-
-  get roundVictory(): boolean {
-    return this.preguntadosService.isRoundWon();
-  }
-
-  get finished(): boolean {
-    return this.preguntadosService.getFinished();
-  }
-
-  get progressBarWidth(): string {
-    return this.preguntadosService.progressBarWidth;
-  }
+  // Getters
+  get loading(): boolean { return this.preguntadosService.getLoading(); }
+  get time(): string { return this.preguntadosService.getTime(); }
+  get score(): number { return this.preguntadosService.getScore(); }
+  get paused(): boolean { return this.preguntadosService.getPause(); }
+  get livesArray(): any[] { return Array(this.preguntadosService.getLives()).fill(0); }
+  get currentQuestion(): any { return this.preguntadosService.getCurrentQuestion(); }
+  get currentOptions(): string[] { return this.preguntadosService.getCurrentOptions(); }
+  get isGameOver(): boolean { return this.preguntadosService.isGameOver(); }
+  get victory(): boolean { return this.preguntadosService.getVictory(); }
+  get roundVictory(): boolean { return this.preguntadosService.isRoundWon(); }
+  get finished(): boolean { return this.preguntadosService.getFinished(); }
+  get progressBarWidth(): string { return this.preguntadosService.progressBarWidth; }
 
   answer(option: string) {
     const isCorrect = this.preguntadosService.answer(option);
@@ -90,33 +56,33 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
   }
 
 
-  pause() {
+  pause(): void {
     this.preguntadosService.pause();
   }
 
-  resume() {
+  resume(): void {
     this.preguntadosService.resume();
   }
 
-  requestExit() {
+  requestExit(): void {
     this.showConfirmExit.set(true);
   }
 
-  confirmExit() {
+  confirmExit(): void {
     this.showConfirmExit.set(false);
     this.exit();
   }
 
-  cancelExit() {
+  cancelExit(): void {
     this.showConfirmExit.set(false);
   }
 
-  exit() {
+  exit(): void {
     this.preguntadosService.stopTimer();
     this.router.navigate(['/home']);
   }
 
-  playAgain() {
+  playAgain(): void {
     this.preguntadosService.setFinished(false);
     this.preguntadosService.setVictory(false);
     this.preguntadosService.newGame();
