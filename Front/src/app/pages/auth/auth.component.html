@@ -6,15 +6,26 @@
     <!-- Mostrar register -->
     <app-register [hidden]="isLoginVisible"></app-register>
 
-    <!-- Botones -->
-    <div class="flex justify-center mt-8 gap-4">
-        <button (click)="showLogin()"
-            class="px-5 py-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition cursor-pointer">
-            Iniciar sesión
-        </button>
-        <button (click)="showRegister()"
-            class="px-5 py-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition cursor-pointer">
-            Registrarse
-        </button>
+    <!-- Acción principal + link -->
+    <div class="flex justify-center mt-8 gap-4 items-center">
+
+        <!-- Vista: Registro -->
+        <div [hidden]="isLoginVisible" class="flex gap-2 items-center">
+            <span class="text-sm text-gray-300">
+                ¿Ya tienes una cuenta?
+                <a (click)="showLogin()" class="text-blue-400 hover:underline cursor-pointer ml-1">Inicia sesión</a>
+            </span>
+        </div>
+
+        <!-- Vista: Login -->
+        <div [hidden]="!isLoginVisible" class="flex gap-2 items-center">
+
+            <span class="text-sm text-gray-300">
+                ¿No tienes cuenta?
+                <a (click)="showRegister()" class="text-blue-400 hover:underline cursor-pointer ml-1">Regístrate</a>
+            </span>
+        </div>
+
     </div>
+
 </div>
