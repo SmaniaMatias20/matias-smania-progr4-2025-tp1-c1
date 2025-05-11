@@ -147,6 +147,19 @@ export class Game {
         this.resumeTimer();
     }
 
+    calculateFinalScore(): void {
+        if (!this.victory) return;
+
+        console.log("vidas", this.lives);
+        console.log("segundos", this.totalSeconds);
+
+        const bonusFromLives = this.lives * 1000;
+        const bonusFromTime = this.totalSeconds * 100;
+        const totalBonus = bonusFromLives + bonusFromTime;
+
+        this.score += totalBonus;
+    }
+
     private async saveResult(data: { id_user: string | null; id_game: string; firstname: string | null; lastname: string | null; score: number; victory: boolean }) {
         if (!this.supabase) throw new Error('Supabase client not initialized');
 
@@ -166,6 +179,10 @@ export class Game {
         this.stopTimer();
         this.finished = true;
         this.victory = won;
+
+        if (this.victory) {
+            this.calculateFinalScore();
+        }
 
         try {
             const idGame = await this.supabase.getGameIdByName(gameName);
