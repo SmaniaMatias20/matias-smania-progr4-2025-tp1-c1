@@ -14,9 +14,19 @@ import { filter } from 'rxjs';
 export class AppComponent {
   showNavbarAndFooter: boolean = true;
 
+  /**
+   * Constructor de la clase AppComponent.
+   * @param {Router} router - El servicio Router de Angular, utilizado para gestionar la navegación y los eventos de navegación en la aplicación.
+   */
   constructor(private router: Router) { }
 
-  ngOnInit() {
+  /**
+   * Método que se ejecuta al inicializar el componente.
+   * Nos suscribimos a los eventos de navegación para detectar cuando la navegación ha terminado.
+   * Dependiendo de la URL, decidimos si mostrar el Navbar y el Footer.
+   * @returns {void}
+   */
+  ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
