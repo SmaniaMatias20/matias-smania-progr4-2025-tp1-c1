@@ -11,6 +11,17 @@ export class AuthService {
   user = signal<User | boolean>(false);
   router = inject(Router);
 
+  /**
+   * Constructor del servicio de autenticación.
+   * 
+   * Este constructor inicializa el servicio de autenticación, configura el cliente de Supabase a través del servicio `DatabaseService`,
+   * y verifica si hay una sesión activa al invocar el método `checkSession()`.
+   * 
+   * Además, se suscribe a los cambios de estado de autenticación mediante `onAuthStateChange` para gestionar el estado del usuario
+   * y su sesión en el cliente (por ejemplo, si el usuario se desconecta o la sesión expira).
+   * 
+   * @param {DatabaseService} db - El servicio de base de datos que proporciona el cliente de Supabase.
+   */
   constructor(private db: DatabaseService) {
     this.supabase = this.db.client;
 
@@ -59,7 +70,19 @@ export class AuthService {
     });
   }
 
-  private checkSession() {
+  /**
+   * Verifica si hay una sesión activa al cargar la aplicación.
+   * 
+   * Este método comprueba si existe una sesión activa en `localStorage` al cargar el servicio. Si encuentra un usuario almacenado
+   * y la sesión no ha expirado, establece el estado del usuario en el servicio. Si la sesión ha expirado o no existe un usuario
+   * almacenado, cierra la sesión automáticamente y actualiza el estado del usuario.
+   * 
+   * Además, se asegura de que si la sesión ha expirado (basado en el valor de `session_expires_at` en `localStorage`), 
+   * se invoque el método de cierre de sesión `logout()` para mantener la seguridad de la aplicación.
+   * 
+   * @returns {void} No devuelve nada, solo actualiza el estado del usuario en función de la sesión almacenada.
+   */
+  private checkSession(): void {
     const storedUser = localStorage.getItem('user');
     const expiresAt = localStorage.getItem('session_expires_at');
 
@@ -75,10 +98,23 @@ export class AuthService {
     }
   }
 
-  getUser() {
+  /**
+   * Devuelve el usuario actual desde el estado reactivo.
+   * @returns {User | boolean} Usuario autenticado o false si no hay sesión
+   */
+  getUser(): User | boolean {
     return this.user();
   }
 
+  /**
+   * Registra un nuevo usuario y guarda sus datos adicionales en la tabla 'users'.
+   * Luego intenta iniciar sesión automáticamente.
+   * 
+   * @param {string} email - Correo electrónico del nuevo usuario
+   * @param {string} password - Contraseña del nuevo usuario
+   * @param {{ firstName: string; lastName: string; age: number }} extraData - Datos adicionales
+   * @returns {Promise<{ success: boolean; message: string }>} Resultado de la operación
+   */
   async register(
     email: string,
     password: string,
@@ -123,6 +159,13 @@ export class AuthService {
     };
   }
 
+  /**
+   * Inicia sesión con email y contraseña, y carga los datos del usuario desde la tabla 'users'.
+   * 
+   * @param {string} email - Correo electrónico del usuario
+   * @param {string} password - Contraseña del usuario
+   * @returns {Promise<{ success: boolean; message: string }>} Resultado de la operación
+   */
   async login(email: string, password: string): Promise<{ success: boolean; message: string }> {
     const { data, error } = await this.supabase.auth.signInWithPassword({
       email: email,
@@ -153,6 +196,11 @@ export class AuthService {
     return { success: true, message: 'Inicio de sesión exitoso.' };
   }
 
+  /**
+   * Cierra la sesión del usuario actual, limpia el almacenamiento local y redirige al home.
+   * 
+   * @returns {Promise<{ success: boolean; message: string }>} Resultado de la operación
+   */
   async logout(): Promise<{ success: boolean; message: string }> {
     const { error } = await this.supabase.auth.signOut();
 
