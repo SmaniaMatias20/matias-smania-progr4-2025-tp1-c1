@@ -15,15 +15,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./preguntados-page.component.css']
 })
 export class PreguntadosPageComponent implements OnInit, OnDestroy {
-
   selectedOptions: string[] = [];
   showConfirmExit = signal(false);
+
+  /**
+   * Constructor del componente.
+   *
+   * @param {PreguntadosService} preguntadosService Servicio que maneja la lógica del juego.
+   * @param {Router} router Servicio de enrutamiento para navegar entre páginas.
+   */
   constructor(public preguntadosService: PreguntadosService, private router: Router) { }
 
+  /**
+   * Inicializa el juego al cargar el componente.
+   * @returns {void}
+   */
   ngOnInit(): void {
     this.preguntadosService.newGame();
   }
 
+  /**
+   * Detiene el temporizador al destruir el componente.
+   * @returns {void}
+   */
   ngOnDestroy(): void {
     this.preguntadosService.stopTimer();
   }
@@ -42,6 +56,12 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
   get finished(): boolean { return this.preguntadosService.getFinished(); }
   get progressBarWidth(): string { return this.preguntadosService.progressBarWidth; }
 
+  /**
+   * Procesa la respuesta seleccionada por el usuario.
+   * 
+   * @param option La opción de respuesta seleccionada por el usuario.
+   * @returns {void}
+   */
   answer(option: string) {
     const isCorrect = this.preguntadosService.answer(option);
 
@@ -55,37 +75,54 @@ export class PreguntadosPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  /**
+   * Pausa el juego.
+   * @returns {void}
+   */
   pause(): void {
     this.preguntadosService.pause();
   }
 
+  /**
+   * Reanuda el juego.
+   * @returns {void}
+   */
   resume(): void {
     this.preguntadosService.resume();
   }
 
+  /**
+   * Solicita la confirmación del usuario para salir del juego.
+   * @returns {void}
+   */
   requestExit(): void {
     this.showConfirmExit.set(true);
   }
 
+  /**
+   * Confirma la salida del juego y navega al inicio.
+   * @returns {void}
+   */
   confirmExit(): void {
     this.showConfirmExit.set(false);
     this.exit();
   }
 
+  /**
+   * Cancela la solicitud de salida del juego.
+   * @returns {void}
+   */
   cancelExit(): void {
     this.showConfirmExit.set(false);
   }
 
+  /**
+   * Sale del juego y redirige al usuario a la página de inicio.
+   * @returns {void}
+   */
   exit(): void {
     this.preguntadosService.stopTimer();
     this.router.navigate(['/home']);
-  }
-
-  playAgain(): void {
-    this.preguntadosService.setFinished(false);
-    this.preguntadosService.setVictory(false);
-    this.preguntadosService.newGame();
   }
 
 }

@@ -13,6 +13,7 @@ export class ResultsComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 4;
   loading: boolean = true;
+  resultsByGame: { [key: string]: any[] } = {};
 
   columns = [
     { field: 'name', label: 'Nombre Completo' },
@@ -21,11 +22,20 @@ export class ResultsComponent implements OnInit {
     { field: 'date', label: 'Fecha' }
   ];
 
-  resultsByGame: { [key: string]: any[] } = {};
-
+  /**
+   * Constructor del componente.
+   *
+   * @param {DatabaseService} database Servicio que proporciona acceso a los datos almacenados.
+   */
   constructor(private database: DatabaseService) { }
 
-  async ngOnInit() {
+  /**
+   * Método del ciclo de vida que se ejecuta al inicializar el componente.
+   * Carga y agrupa los resultados desde la base de datos.
+   *
+   * @returns {Promise<void>}
+   */
+  async ngOnInit(): Promise<void> {
     const data = await this.database.getFormattedResults();
     if (data) {
       this.groupResultsByGame(data);
@@ -33,7 +43,13 @@ export class ResultsComponent implements OnInit {
     this.loading = false;
   }
 
-  groupResultsByGame(data: any[]) {
+  /**
+   * Agrupa los resultados obtenidos por nombre de juego.
+   *
+   * @param {any[]} data Lista de resultados sin agrupar.
+   * @returns {void}
+   */
+  groupResultsByGame(data: any[]): void {
     this.resultsByGame = {};
     data.forEach(result => {
       const gameName = result.gameName ?? 'Desconocido';
@@ -44,6 +60,12 @@ export class ResultsComponent implements OnInit {
     });
   }
 
+  /**
+   * Cambia de página en la vista de resultados.
+   *
+   * @param {number} direction Dirección del cambio de página (1 para siguiente, -1 para anterior).
+   * @returns {void}
+   */
   changePage(direction: number): void {
     this.currentPage += direction;
 

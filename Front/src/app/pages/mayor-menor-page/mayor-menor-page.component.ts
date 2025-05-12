@@ -17,28 +17,28 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   showGameResult: boolean = false;
 
   /**
- * Constructor del componente MayorMenorPageComponent.
- * 
- * @param {MayorMenorService} mayorMenorService - Servicio que maneja la lógica del juego.
- * @param {Router} router - Servicio de enrutamiento para navegar entre páginas.
- */
+   * Constructor del componente MayorMenorPageComponent.
+   * 
+   * @param {MayorMenorService} mayorMenorService - Servicio que maneja la lógica del juego.
+   * @param {Router} router - Servicio de enrutamiento para navegar entre páginas.
+   */
   constructor(public mayorMenorService: MayorMenorService, private router: Router) { }
 
   /**
- * Método ngOnInit que se ejecuta cuando se inicializa el componente.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método ngOnInit que se ejecuta cuando se inicializa el componente.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   ngOnInit(): void {
     this.mayorMenorService.newGame();
     this.currentCard = this.mayorMenorService.getCurrentCard();
   }
 
   /**
- * Método ngOnDestroy que se ejecuta cuando el componente es destruido.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método ngOnDestroy que se ejecuta cuando el componente es destruido.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   ngOnDestroy(): void {
     this.mayorMenorService.stopTimer();
   }
@@ -54,11 +54,11 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   get roundVictory(): boolean { return this.mayorMenorService.isRoundWon(); }
 
   /**
- * Método para hacer una adivinanza en el juego.
- * 
- * @param {boolean} higher - Si 'true' adivina si la siguiente carta es mayor, si 'false' adivina si es menor.
- * @returns {void} - No retorna ningún valor.
- */
+   * Método para hacer una adivinanza en el juego.
+   * 
+   * @param {boolean} higher - Si 'true' adivina si la siguiente carta es mayor, si 'false' adivina si es menor.
+   * @returns {void} - No retorna ningún valor.
+   */
   guess(higher: boolean): void {
     const result = this.mayorMenorService.guess(higher);
     this.currentCard = result.newCard;
@@ -74,19 +74,19 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Método para pausar el juego.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método para pausar el juego.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   pause(): void {
     this.mayorMenorService.pause();
   }
 
   /**
- * Método para reanudar el juego.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método para reanudar el juego.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   resume(): void {
     this.mayorMenorService.resume();
   }
@@ -101,10 +101,10 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Método para confirmar la salida del juego.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método para confirmar la salida del juego.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   confirmExit(): void {
     this.showConfirmExit.set(false);
     this.exit();
@@ -120,20 +120,20 @@ export class MayorMenorPageComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Método para salir del juego y redirigir al usuario a la página de inicio.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método para salir del juego y redirigir al usuario a la página de inicio.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   exit(): void {
     this.mayorMenorService.stopTimer();
     this.router.navigate(['/home']);
   }
 
   /**
- * Método que se ejecuta al continuar el juego después de ver el resultado.
- * 
- * @returns {void} - No retorna ningún valor.
- */
+   * Método que se ejecuta al continuar el juego después de ver el resultado.
+   * 
+   * @returns {void} - No retorna ningún valor.
+   */
   onContinueGame(): void {
     this.showGameResult = false;
   }
