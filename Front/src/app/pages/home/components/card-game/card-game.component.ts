@@ -25,8 +25,18 @@ export class CardGameComponent {
   @Input() time!: string;
   @Input() user!: string;
 
+  /**
+   * Constructor del componente.
+   *
+   * @param {MatDialog} dialog Servicio de Angular Material para abrir diálogos.
+   */
   constructor(private dialog: MatDialog) { }
 
+  /**
+   * Abre un diálogo modal para mostrar las reglas del juego.
+   *
+   * @returns {void}
+   */
   openRules(): void {
     this.dialog.open(RulesDialogComponent, {
       data: {
